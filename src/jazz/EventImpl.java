@@ -24,8 +24,8 @@ class EventImpl implements Event {
 		this.window = window;
 		this.type = type;
 
-		this.x = x - window.getMainWindow().mainPanel.getWidth() / 2;
-		this.y = -(y - window.getMainWindow().mainPanel.getHeight() / 2);
+		this.x = x - window.width() / 2;
+		this.y = -(y - window.height() / 2);
 		this.keyCode = keyCode;
 		this.keyChar = keyChar;
 	}

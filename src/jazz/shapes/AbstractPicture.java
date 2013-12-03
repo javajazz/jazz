@@ -26,7 +26,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P remove() {
+	public P remove() {
 		if (!transforms.isEmpty()) {
 			transforms.removeFirst();
 		}
@@ -35,21 +35,21 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P reset() {
+	public P reset() {
 		transforms.clear();
 		return (P) this;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P translate(double x, double y) {
+	public P translate(double x, double y) {
 		transforms.addFirst(AffineTransform.getTranslateInstance(x, y));
 		return (P) this;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P rotate(double angle) {
+	public P rotate(double angle) {
 		transforms.addFirst(AffineTransform.getRotateInstance(angle / 180
 				* Math.PI, 0, 0));
 		return (P) this;
@@ -57,21 +57,21 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P scale(double x, double y) {
+	public P scale(double x, double y) {
 		transforms.addFirst(AffineTransform.getScaleInstance(x, y));
 		return (P) this;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P transform(AffineTransform transform) {
+	public P transform(AffineTransform transform) {
 		transforms.addFirst(transform);
 		return (P) this;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P transform(double m00, double m10, double m01,
+	public P transform(double m00, double m10, double m01,
 			double m11,
 			double m02, double m12) {
 		transforms.addFirst(new AffineTransform(m00, m10, m01, m11, m02, m12));
@@ -79,32 +79,32 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 	}
 
 	@Override
-	final public P flipX() {
+	public P flipX() {
 		return scale(-1, 1);
 	}
 
 	@Override
-	final public P flipY() {
+	public P flipY() {
 		return scale(1, -1);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P filled(boolean filled) {
+	public P filled(boolean filled) {
 		this.filled = filled;
 		return (P) this;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P color(Color color) {
+	public P color(Color color) {
 
 		if (color instanceof RgbColor) {
 			RgbColor rgb = (RgbColor) color;
-			color(rgb.getR(), rgb.getG(), rgb.getB());
+			color_(rgb.getR(), rgb.getG(), rgb.getB());
 		} else if (color instanceof HsvColor) {
 			HsvColor hsv = (HsvColor) color;
-			color(hsv.getH(), hsv.getS(), hsv.getV());
+			color_(hsv.getH(), hsv.getS(), hsv.getV());
 		} else {
 			this.color = null;
 		}
@@ -113,18 +113,26 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P color(int r, int g, int b) {
+	public P color(int r, int g, int b) {
+		color_(r,g,b);
+		return (P) this;
+	}
+	
+	private void color_(int r, int g, int b) {
 		float[] hsb = new float[3];
 		java.awt.Color.RGBtoHSB(r, g, b, hsb);
-		color(hsb[0], hsb[1], hsb[2]);
-		return (P) this;
+		color_(hsb[0], hsb[1], hsb[2]);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	final public P color(float h, float s, float v) {
-		this.color = java.awt.Color.getHSBColor(h, s, v);
+	public P color(float h, float s, float v) {
+		color_(h, s, v);
 		return (P) this;
+	}
+	
+	private void color_(float h, float s, float v) {
+		this.color = java.awt.Color.getHSBColor(h, s, v);
 	}
 
 	final AffineTransform getTransform() {

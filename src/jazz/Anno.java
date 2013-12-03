@@ -96,7 +96,7 @@ public class Anno {
 	}
 
 	public static void main(String... args) {
-		Jazz.play("Hello World", new MyModel()).onClose(new Runnable() {
+		Jazz.play("Hello World", 1000, 600, new MyModel()).onClose(new Runnable() {
 			public void run() {
 				System.exit(0);
 			}

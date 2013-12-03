@@ -33,17 +33,20 @@ class MainPanel extends JPanel {
 	double pausedTime;
 
 	volatile boolean isPainting = false;
-	volatile long startUpdate;	
+	volatile long startUpdate;
 	volatile int mouseX = 0;
 	volatile int mouseY = 0;
+	volatile int offsetX = 0;
+	volatile int offsetY = 0;
 
-	MainPanel(final MainWindow mainWindow, final Model theModel, final WindowImpl window) {
+	MainPanel(final MainWindow mainWindow, final Model theModel,
+			final WindowImpl window, final int a, final int b) {
 		this.model = theModel;
 		this.window = window;
 		this.startTime = System.nanoTime() / 1000000000.0;
 
-		setPreferredSize(new Dimension(1000, 600));
-		setSize(1280, 960);
+		setPreferredSize(new Dimension(a, b));
+		setSize(a, b);
 
 		this.timer = new Thread(new Runnable() {
 			public void run() {
@@ -126,17 +129,20 @@ class MainPanel extends JPanel {
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				model.on(new EventImpl(window, Event.Type.KEY_TYPED, e, mouseX, mouseY));
+				model.on(new EventImpl(window, Event.Type.KEY_TYPED, e, mouseX,
+						mouseY));
 			}
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				model.on(new EventImpl(window, Event.Type.KEY_DOWN, e, mouseX, mouseY));
+				model.on(new EventImpl(window, Event.Type.KEY_DOWN, e, mouseX,
+						mouseY));
 			}
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				model.on(new EventImpl(window, Event.Type.KEY_UP, e, mouseX, mouseY));
+				model.on(new EventImpl(window, Event.Type.KEY_UP, e, mouseX,
+						mouseY));
 			}
 		});
 	}
@@ -172,9 +178,9 @@ class MainPanel extends JPanel {
 
 		g2d.setColor(Color.WHITE);
 		g2d.fillRect(0, 0, getWidth(), getHeight());
-		
+
 		g2d.setColor(Color.BLACK);
-		g2d.translate(getWidth() / 2, getHeight() / 2);
+		g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 + offsetY);
 		g2d.scale(1, -1);
 		model.getPicture().draw(g2d);
 

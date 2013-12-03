@@ -15,4 +15,16 @@ public interface Window {
 	Window onActivate(Runnable runnable);
 
 	Window onDeactivate(Runnable runnable);
+
+	int width();
+
+	int height();
+	
+	int originX();
+	
+	int originY();
+	
+	Window originX(int originX);
+	
+	Window originY(int originY);
 }

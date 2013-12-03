@@ -14,6 +14,10 @@ class WindowImpl implements Window {
 	private List<Runnable> onFocus = new ArrayList<>();
 	private List<Runnable> onBlur = new ArrayList<>();
 
+	WindowImpl() {
+		
+	}
+
 	void setMainWindow(MainWindow mainWindow) {
 		this.mainWindow = mainWindow;
 	}
@@ -23,7 +27,7 @@ class WindowImpl implements Window {
 	}
 
 	@Override
-	public Window close() {
+	public WindowImpl close() {
 		if (mainWindow != null) {
 			SwingUtilities.invokeLater(new Runnable() {
 				public void run() {
@@ -35,37 +39,37 @@ class WindowImpl implements Window {
 	}
 
 	@Override
-	public Window onClose(Runnable runnable) {
+	public WindowImpl onClose(Runnable runnable) {
 		onClose.add(runnable);
 		return this;
 	}
 
 	@Override
-	public Window onShow(Runnable runnable) {
+	public WindowImpl onShow(Runnable runnable) {
 		onShow.add(runnable);
 		return this;
 	}
 
 	@Override
-	public Window onHide(Runnable runnable) {
+	public WindowImpl onHide(Runnable runnable) {
 		onHide.add(runnable);
 		return this;
 	}
 
 	@Override
-	public Window onActivate(Runnable runnable) {
+	public WindowImpl onActivate(Runnable runnable) {
 		onFocus.add(runnable);
 		return this;
 	}
 
 	@Override
-	public Window onDeactivate(Runnable runnable) {
+	public WindowImpl onDeactivate(Runnable runnable) {
 		onBlur.add(runnable);
 		return this;
 	}
 
 	@Override
-	public Window title(final String title) {
+	public WindowImpl title(final String title) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				mainWindow.setTitle(title);
@@ -104,4 +108,35 @@ class WindowImpl implements Window {
 		}
 	}
 
+	@Override
+	public int height() {
+		return mainWindow.mainPanel.getWidth();
+	}
+
+	@Override
+	public int width() {
+		return mainWindow.mainPanel.getHeight();
+	}
+
+	@Override
+	public int originX() {
+		return mainWindow.mainPanel.offsetX;
+	}
+
+	@Override
+	public int originY() {
+		return mainWindow.mainPanel.offsetX;
+	}
+
+	@Override
+	public WindowImpl originX(int originX) {
+		mainWindow.mainPanel.offsetX = originX;
+		return this;
+	}
+
+	@Override
+	public WindowImpl originY(int originY) {
+		mainWindow.mainPanel.offsetY = originY;
+		return this;
+	}
 }

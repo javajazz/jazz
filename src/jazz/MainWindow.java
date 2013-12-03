@@ -10,14 +10,16 @@ class MainWindow extends JFrame {
 
 	final MainPanel mainPanel;
 
-	MainWindow(final String title, final Model model, final WindowImpl window) {
+	MainWindow(final String title, final Model model, final WindowImpl window,
+			final int a, final int b) {
 		super(title);
-		
-		mainPanel = new MainPanel(this, model, window);
+
+		mainPanel = new MainPanel(this, model, window, a, b);
 
 		setContentPane(mainPanel);
 		pack();
 		setResizable(false);
+		setLocationRelativeTo(null);
 
 		addWindowListener(new WindowListener() {
 			@Override

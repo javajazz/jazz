@@ -1,11 +1,10 @@
 package jazz;
 
-import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-public interface Picture extends Cloneable {
+import jazz.util.Drawable;
 
-	void draw(Graphics2D g);
+public interface Picture extends Cloneable, Drawable {
 
 	Picture color(Color color);
 	

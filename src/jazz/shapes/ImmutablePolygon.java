@@ -4,7 +4,7 @@ import java.awt.Shape;
 
 import jazz.Point;
 
-public class Polygon extends MutableAbstractPicture<Polygon> {
+public class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
 
 	static int[] getXCoords(Point[] points) {
 		int[] coords = new int[points.length];
@@ -22,20 +22,20 @@ public class Polygon extends MutableAbstractPicture<Polygon> {
 		return coords;
 	}
 
-	public Polygon(Point... points) {
+	public ImmutablePolygon(Point... points) {
 		super(new java.awt.Polygon(
 				getXCoords(points),
 				getYCoords(points),
 				points.length));
 	}
 
-	private Polygon(Shape shape) {
+	private ImmutablePolygon(Shape shape) {
 		super(shape);
 	}
 
 	@Override
-	public Polygon clone() {
-		return doClone(new Polygon(shape));
+	public ImmutablePolygon clone() {
+		return doClone(new ImmutablePolygon(shape));
 	}
 
 }
