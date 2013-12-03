@@ -4,7 +4,7 @@ import jazz.shapes.Pictures;
 
 public abstract class World implements Model {
 
-	protected Pictures picture = new Pictures();
+	protected Pictures pictures = new Pictures();
 	
 	@Override
 	public void update(double time) {
@@ -18,6 +18,6 @@ public abstract class World implements Model {
 
 	@Override
 	public Picture getPicture() {
-		return picture;
+		return pictures;
 	}
 }

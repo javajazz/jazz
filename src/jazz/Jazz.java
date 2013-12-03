@@ -1,21 +1,57 @@
 package jazz;
 
+import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.SwingUtilities;
 
 public class Jazz {
 
 	public static Window display(final String title, int a, int b,
 			final Picture picture) {
-		return play(title, a, b, new Model() {
+		return play(title, a, b, new World() {
 
-			@Override
-			public void update(double time) {
-				// do nothing
-			}
+			int startDragX = 0;
+			int startDragY = 0;
+			int initialOffsetX = 0;
+			int initialOffsetY = 0;
+			boolean mouseDown = false;
 
 			@Override
 			public void on(Event e) {
-				// do nothing
+				switch (e.getType()) {
+
+				case MOUSE_DOWN: {
+					initialOffsetX = e.getWindow().originX();
+					initialOffsetY = e.getWindow().originY();
+					startDragX = e.getWindowX();
+					startDragY = e.getWindowY();
+					System.out.printf("%d %d\n", startDragX, startDragY);
+					mouseDown = true;
+					break;
+				}
+
+				case MOUSE_UP: {
+					mouseDown = false;
+					int deltaX = e.getWindowX() - startDragX;
+					int deltaY = e.getWindowY() - startDragY;
+					e.getWindow().originX(initialOffsetX + deltaX);
+					e.getWindow().originY(initialOffsetY + deltaY);
+					break;
+				}
+
+				case MOUSE_MOVE: {
+					if (mouseDown) {
+						int deltaX = e.getWindowX() - startDragX;
+						int deltaY = e.getWindowY() - startDragY;
+						e.getWindow().originX(initialOffsetX + deltaX);
+						e.getWindow().originY(initialOffsetY + deltaY);
+					}
+					break;
+				}
+
+				default:
+					break;
+				}
 			}
 
 			@Override
@@ -35,18 +71,22 @@ public class Jazz {
 		return play(title, a, b, (Model) world);
 	}
 
-	static WindowImpl play(final String title, final int a, final int b,
+	public static WindowImpl play(final String title, final int a, final int b,
 			final Model model) {
 		final WindowImpl window = new WindowImpl();
 
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				MainWindow mainWindow = new MainWindow(
-						title, model, window, a, b);
-				mainWindow.setVisible(true);
-			}
-		});
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					MainWindow mainWindow = new MainWindow(
+							title, model, window, a, b);
+					mainWindow.setVisible(true);
+				}
+			});
+		} catch (InvocationTargetException | InterruptedException exc) {
+
+		}
 
 		return window;
 	};

@@ -30,6 +30,7 @@ class MainWindow extends JFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				mainPanel.stop();
+				window.setMainWindow(null);
 				MainWindow.this.dispose();
 			}
 

@@ -27,4 +27,6 @@ public interface Window {
 	Window originX(int originX);
 	
 	Window originY(int originY);
+	
+	Window antialias(boolean antialias);
 }

@@ -35,4 +35,8 @@ public interface Event {
 	boolean isSuperPressed();
 
 	Window getWindow();
+
+	int getWindowY();
+
+	int getWindowX();
 }

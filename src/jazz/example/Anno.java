@@ -1,5 +1,10 @@
-package jazz;
+package jazz.example;
 
+import jazz.Color;
+import jazz.Event;
+import jazz.Jazz;
+import jazz.Picture;
+import jazz.World;
 import jazz.shapes.Circle;
 import jazz.shapes.Ellipse;
 import jazz.shapes.Pictures;
@@ -7,7 +12,7 @@ import jazz.shapes.Rectangle;
 
 public class Anno {
 
-	static class MyModel implements Model {
+	static class MyModel extends World {
 
 		private final Pictures pictures = new Pictures();
 

@@ -9,31 +9,37 @@ class EventImpl implements Event {
 
 	final private WindowImpl window;
 	final private Event.Type type;
-	
+
 	final private int x;
 	final private int y;
+	final private int wx;
+	final private int wy;
 	final private int keyCode;
 	final private char keyChar;
-	
+
 	private boolean isShiftPressed = false;
 	private boolean isAltPressed = false;
 	private boolean isCtrlPressed = false;
 	private boolean isMetaPressed = false;
 
-	private EventImpl(WindowImpl window, Event.Type type, int x, int y, int keyCode, char keyChar) {
+	private EventImpl(WindowImpl window, Event.Type type, int x, int y,
+			int keyCode, char keyChar) {
 		this.window = window;
 		this.type = type;
 
-		this.x = x - window.width() / 2;
-		this.y = -(y - window.height() / 2);
+		this.x = x - window.width() / 2 + window.originX();
+		this.y = -(y - window.height() / 2 + window.originY());
+		this.wx = x;
+		this.wy = getWindow().height() - y;
 		this.keyCode = keyCode;
 		this.keyChar = keyChar;
 	}
-	
-	private EventImpl(WindowImpl window, Event.Type type, InputEvent e, int x, int y, int keyCode,
+
+	private EventImpl(WindowImpl window, Event.Type type, InputEvent e, int x,
+			int y, int keyCode,
 			char keyChar) {
 		this(window, type, x, y, keyCode, keyChar);
-		
+
 		isAltPressed = e.isAltDown();
 		isShiftPressed = e.isShiftDown();
 		isCtrlPressed = e.isControlDown();
@@ -45,7 +51,8 @@ class EventImpl implements Event {
 	}
 
 	EventImpl(WindowImpl window, Event.Type type, MouseEvent e) {
-		this(window, type, (InputEvent) e, e.getX(), e.getY(), e.getButton(), '\0');
+		this(window, type, (InputEvent) e, e.getX(), e.getY(), e.getButton(),
+				'\0');
 	}
 
 	EventImpl(WindowImpl window, jazz.Event.Type type, WindowEvent e) {
@@ -65,6 +72,16 @@ class EventImpl implements Event {
 	@Override
 	public int getY() {
 		return y;
+	}
+
+	@Override
+	public int getWindowX() {
+		return wx;
+	}
+
+	@Override
+	public int getWindowY() {
+		return wy;
 	}
 
 	@Override
@@ -114,7 +131,7 @@ class EventImpl implements Event {
 	public WindowImpl getWindow() {
 		return window;
 	}
-	
+
 	public String toString() {
 		return String.format("%s (x=%d,y=%d,%s,#%d,'%s')",
 				type, x, y, getButton(), keyCode, keyChar);

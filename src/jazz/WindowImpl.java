@@ -15,7 +15,7 @@ class WindowImpl implements Window {
 	private List<Runnable> onBlur = new ArrayList<>();
 
 	WindowImpl() {
-		
+
 	}
 
 	void setMainWindow(MainWindow mainWindow) {
@@ -110,33 +110,57 @@ class WindowImpl implements Window {
 
 	@Override
 	public int height() {
-		return mainWindow.mainPanel.getWidth();
+		if (mainWindow != null) {
+			return mainWindow.mainPanel.getHeight();
+		}
+		return 0;
 	}
 
 	@Override
 	public int width() {
-		return mainWindow.mainPanel.getHeight();
+		if (mainWindow != null) {
+			return mainWindow.mainPanel.getWidth();
+		}
+		return 0;
 	}
 
 	@Override
 	public int originX() {
-		return mainWindow.mainPanel.offsetX;
+		if (mainWindow != null) {
+			return mainWindow.mainPanel.offsetX;
+		}
+		return 0;
 	}
 
 	@Override
 	public int originY() {
-		return mainWindow.mainPanel.offsetX;
+		if (mainWindow != null) {
+			return mainWindow.mainPanel.offsetY;
+		}
+		return 0;
 	}
 
 	@Override
-	public WindowImpl originX(int originX) {
-		mainWindow.mainPanel.offsetX = originX;
+	public WindowImpl originX(final int originX) {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.offsetX = originX;
+		}
 		return this;
 	}
 
 	@Override
-	public WindowImpl originY(int originY) {
-		mainWindow.mainPanel.offsetY = originY;
+	public WindowImpl originY(final int originY) {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.offsetY = originY;
+		}
+		return this;
+	}
+
+	@Override
+	public WindowImpl antialias(final boolean antialias) {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.antialias = antialias;
+		}
 		return this;
 	}
 }

@@ -32,6 +32,7 @@ class MainPanel extends JPanel {
 	double currentTime;
 	double pausedTime;
 
+	volatile boolean antialias = true;
 	volatile boolean isPainting = false;
 	volatile long startUpdate;
 	volatile int mouseX = 0;
@@ -86,7 +87,9 @@ class MainPanel extends JPanel {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-
+				mouseX = e.getX();
+				mouseY = e.getY();
+				model.on(new EventImpl(window, Event.Type.MOUSE_MOVE, e));
 			}
 
 			@Override
@@ -171,8 +174,9 @@ class MainPanel extends JPanel {
 
 		Graphics2D g2d = (Graphics2D) g;
 
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antialias
+				? RenderingHints.VALUE_ANTIALIAS_ON
+				: RenderingHints.VALUE_ANTIALIAS_OFF);
 
 		super.paintComponent(g);
 
@@ -180,7 +184,7 @@ class MainPanel extends JPanel {
 		g2d.fillRect(0, 0, getWidth(), getHeight());
 
 		g2d.setColor(Color.BLACK);
-		g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 + offsetY);
+		g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 - offsetY);
 		g2d.scale(1, -1);
 		model.getPicture().draw(g2d);
 
