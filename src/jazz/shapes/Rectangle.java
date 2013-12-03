@@ -1,0 +1,11 @@
+package jazz.shapes;
+
+import java.awt.geom.Rectangle2D;
+
+public class Rectangle extends AbstractPicture<Rectangle> {
+
+	public Rectangle(double width, double height) {
+		super(new Rectangle2D.Double(0, 0, width, height));
+	}
+
+}
