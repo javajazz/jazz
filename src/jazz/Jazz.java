@@ -4,7 +4,7 @@ import javax.swing.SwingUtilities;
 
 public class Jazz {
 	
-	public static Window display(final String title, final Picture<?> picture) {
+	public static Window display(final String title, final Picture picture) {
 		return play(title, new Model() {
 
 			@Override
@@ -18,7 +18,7 @@ public class Jazz {
 			}
 
 			@Override
-			public Picture<?> getPicture() {
+			public Picture getPicture() {
 				return picture;
 			}
 		});
@@ -29,7 +29,7 @@ public class Jazz {
 	}
 
 	public static Window play(final String title, final World world) {
-		return play(title, world);
+		return play(title, (Model) world);
 	}
 	
 	static WindowImpl play(final String title, final Model model) {

@@ -7,5 +7,5 @@ public interface Model {
 
 	void on(Event e);
 
-	Picture<?> getPicture();
+	Picture getPicture();
 }

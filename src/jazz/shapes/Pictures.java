@@ -6,11 +6,12 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import jazz.Picture;
 
-public class Pictures extends AbstractPicture {
+public class Pictures extends AbstractPicture<Pictures> implements Iterable<Picture> {
 
 	private final List<Picture> pictures = new ArrayList<>();
 
@@ -83,5 +84,16 @@ public class Pictures extends AbstractPicture {
 
 	public String toString() {
 		return pictures.toString();
+	}
+
+	@Override
+	public Pictures clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterator<Picture> iterator() {
+		return pictures.iterator();
 	}
 }

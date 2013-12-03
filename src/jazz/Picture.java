@@ -3,7 +3,7 @@ package jazz;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-public interface Picture {
+public interface Picture extends Cloneable {
 
 	void draw(Graphics2D g);
 
@@ -33,4 +33,5 @@ public interface Picture {
 	
 	Picture transform(double m00, double m10, double m01, double m11, double m02, double m12);
 
+	Picture clone() throws CloneNotSupportedException;
 }

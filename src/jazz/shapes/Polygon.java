@@ -22,4 +22,10 @@ public class Polygon extends AbstractPicture<Polygon> {
 		super(new java.awt.Polygon(getXCoords(points), getYCoords(points), points.length));
 	}
 
+	@Override
+	public Polygon clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

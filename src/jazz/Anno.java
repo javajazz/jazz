@@ -1,6 +1,9 @@
 package jazz;
 
-import jazz.shapes.*;
+import jazz.shapes.Circle;
+import jazz.shapes.Ellipse;
+import jazz.shapes.Pictures;
+import jazz.shapes.Rectangle;
 
 public class Anno {
 
@@ -8,10 +11,11 @@ public class Anno {
 
 		private final Pictures pictures = new Pictures();
 
-		Pictures human = new Pictures()
-				.color(Color.RED);
+		Pictures human = new Pictures();
 
 		public MyModel() {
+			human.color(Color.RED);
+			
 			pictures.add(new Ellipse(200, 100)
 					.color(0, 0, 255));
 			pictures.add(new Circle(50)
@@ -85,7 +89,7 @@ public class Anno {
 		}
 
 		@Override
-		public Picture<?> getPicture() {
+		public Picture getPicture() {
 			return pictures;
 		}
 
