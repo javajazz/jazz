@@ -1,5 +1,6 @@
 package jazz.shapes;
 
+import java.awt.Graphics2D;
 import java.awt.Shape;
 
 import jazz.Point;
@@ -31,6 +32,11 @@ public class Polygon extends MutableAbstractPicture<Polygon> {
 
 	private Polygon(Shape shape) {
 		super(shape);
+	}
+
+	void doDraw(Graphics2D g2d) {
+		g2d.setTransform(getTransform(g2d.getTransform()));
+		doRender(g2d);
 	}
 
 	@Override

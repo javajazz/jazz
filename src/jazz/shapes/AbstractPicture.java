@@ -169,7 +169,11 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		transform.concatenate(AffineTransform.getTranslateInstance(
 				bounds.getWidth() / -2, bounds.getHeight() / -2));
 		g2d.setTransform(transform);
+		
+		doRender(g2d);
+	}
 
+	void doRender(Graphics2D g2d) {
 		if (color != null) {
 			g2d.setColor(color);
 		}

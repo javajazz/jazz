@@ -1,10 +1,12 @@
 package jazz.shapes;
 
+import java.awt.Graphics2D;
 import java.awt.Shape;
 
 import jazz.Point;
 
-public class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
+public class ImmutablePolygon extends
+		ImmutableAbstractPicture<ImmutablePolygon> {
 
 	static int[] getXCoords(Point[] points) {
 		int[] coords = new int[points.length];
@@ -31,6 +33,11 @@ public class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon>
 
 	private ImmutablePolygon(Shape shape) {
 		super(shape);
+	}
+
+	void doDraw(Graphics2D g2d) {
+		g2d.setTransform(getTransform(g2d.getTransform()));
+		doRender(g2d);
 	}
 
 	@Override

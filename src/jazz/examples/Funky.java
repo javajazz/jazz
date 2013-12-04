@@ -10,7 +10,7 @@ import jazz.shapes.Rectangle;
 public class Funky extends Animation {
 
 	public static void main(String... args) {
-		Jazz.display("Funky town", 1000, 600, new Funky());
+		Jazz.animate("Funky town", 1000, 600, new Funky());
 	}
 	
 	private Pictures pictures = new Pictures(); 

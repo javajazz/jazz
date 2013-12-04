@@ -31,4 +31,14 @@ public interface Window {
 	Window antialias(boolean antialias);
 	
 	Window maxFps(int maxFps);
+	
+	Window speed(double acceleration);
+
+	double speed();
+	
+	Window pause();
+	
+	Window resume();
+
+	Window pauseOrUnpause();
 }

@@ -39,9 +39,19 @@ public abstract class Animation implements Model {
 			}
 			break;
 		}
-		
+
 		case MOUSE_WHEEL: {
-			
+			e.getWindow().speed(Math.max(0.1, e.getWindow().speed() + e.getWheelRotation() / 10.0));
+			break;
+		}
+
+		case KEY_TYPED: {
+			switch (e.getChar()) {
+			case '0':
+				e.getWindow().originX(0).originY(0);
+				break;
+			}
+			break;
 		}
 
 		default:

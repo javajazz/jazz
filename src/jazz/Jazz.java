@@ -27,17 +27,29 @@ public class Jazz {
 		});
 	}
 
-	public static Window display(final String title, int a, int b,
+	public static Window displayFullscreen(String title, Picture picture) {
+		return display(title, 0, 0, picture);
+	}
+	
+	public static Window animate(final String title, int a, int b,
 			final Animation animation) {
 		return play(title, a, b, animation);
+	}
+	
+	public static Window animateFullscreen(String title, Animation animation) {
+		return play(title, 0, 0, animation);
 	}
 
 	public static Window play(final String title, int a, int b,
 			final World world) {
 		return play(title, a, b, (Model) world);
 	}
+	
+	public static Window playFullscreen(String title, World world) {
+		return play(title, 0, 0, (Model) world);
+	}
 
-	public static WindowImpl play(final String title, final int a, final int b,
+	static Window play(final String title, final int a, final int b,
 			final Model model) {
 		final WindowImpl window = new WindowImpl();
 
@@ -59,7 +71,6 @@ public class Jazz {
 		} catch (InvocationTargetException | InterruptedException exc) {
 
 		}
-
 		return window;
 	};
 }

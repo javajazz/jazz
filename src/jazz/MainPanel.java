@@ -32,8 +32,8 @@ class MainPanel extends JPanel {
 	long maxRefreshRate = 1000000000L / maxFramesPerSecond;
 	boolean doShowDebugOutput = true;
 	long currentRefreshRate = maxRefreshRate;
-	double startTime;
 	double currentTime;
+	double lastUpdate;
 	double pausedTime;
 
 	volatile boolean antialias = true;
@@ -43,19 +43,23 @@ class MainPanel extends JPanel {
 	volatile int mouseY = 0;
 	volatile int offsetX = 0;
 	volatile int offsetY = 0;
+	volatile double acceleration = 1;
+	
+	private volatile boolean paused = false;
 
 	MainPanel(final MainWindow mainWindow, final Model theModel,
 			final WindowImpl window, final int a, final int b) {
 		this.model = theModel;
 		this.window = window;
-		this.startTime = System.nanoTime() / 1000000000.0;
 
 		setPreferredSize(new Dimension(a, b));
 		setSize(a, b);
 
+		setDoubleBuffered(true);
+		
 		this.timer = new Thread(new Runnable() {
 			public void run() {
-
+				lastUpdate = System.nanoTime();
 				for (; !Thread.interrupted();) {
 					try {
 						lock.lockInterruptibly();
@@ -163,18 +167,26 @@ class MainPanel extends JPanel {
 	}
 
 	void updateModel() {
-		currentTime = System.nanoTime() / 1000000000.0 - startTime;
+		long currentUpdate = System.nanoTime();
+		double delta = (currentUpdate - lastUpdate) / 1000000000.0 * acceleration;
+		currentTime += delta;
+		lastUpdate = currentUpdate;
 		model.update(currentTime);
 	}
 
 	void pause() {
 		lock.lock();
-		pausedTime = System.nanoTime();
+		paused = true;
 	}
 
 	void resume() {
-		startTime += (System.nanoTime() - pausedTime) / 1000000000.0;
+		lastUpdate = System.nanoTime();
+		paused = false;
 		lock.unlock();
+	}
+	
+	boolean isPaused() {
+		return paused;
 	}
 
 	void stop() {

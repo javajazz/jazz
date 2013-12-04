@@ -171,4 +171,48 @@ class WindowImpl implements Window {
 		}
 		return this;
 	}
+
+	@Override
+	public Window speed(double acceleration) {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.acceleration = acceleration;
+		}
+		return this;
+	}
+
+	@Override
+	public double speed() {
+		if (mainWindow != null) {
+			return mainWindow.mainPanel.acceleration;
+		}
+		return 0;
+	}
+
+	@Override
+	public WindowImpl pauseOrUnpause() {
+		if (mainWindow != null) {
+			if (mainWindow.mainPanel.isPaused()) {
+				mainWindow.mainPanel.resume();
+			} else {
+				mainWindow.mainPanel.pause();
+			}
+		}
+		return this;
+	}
+	
+	@Override
+	public WindowImpl pause() {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.pause();
+		}
+		return this;
+	}
+
+	@Override
+	public WindowImpl resume() {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.resume();
+		}
+		return this;
+	}
 }

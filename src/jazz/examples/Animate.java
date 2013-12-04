@@ -10,7 +10,7 @@ public class Animate {
 
 	public static void main(String... args) {
 		Jazz
-				.display(
+				.animate(
 						"Simple Animation",
 						1000, 600,
 						new Animation() {
