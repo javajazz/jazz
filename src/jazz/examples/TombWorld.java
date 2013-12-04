@@ -32,7 +32,8 @@ public class TombWorld extends World {
 		pictures.reset()
 				.scale(4 + 3 * Math.sin(time * 1.5),
 						4 + 3 * Math.sin(time * 1.5))
-				.rotate(Math.cos(time * 0.5) * 360);
+				.rotate(Math.cos(time * 0.5) * 360)
+				.shear(3 * Math.sin(time), 3 * Math.cos(time));
 	}
 
 }
