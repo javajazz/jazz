@@ -7,7 +7,7 @@ public interface Event {
 	}
 
 	enum Type {
-		MOUSE_DOWN, MOUSE_UP, CLICK, MOUSE_MOVE,
+		MOUSE_DOWN, MOUSE_UP, CLICK, MOUSE_MOVE, MOUSE_WHEEL,
 		KEY_DOWN, KEY_UP, KEY_TYPED,
 		WINDOW_CLOSED,
 		WINDOW_HIDDEN, WINDOW_SHOWN,
@@ -39,4 +39,6 @@ public interface Event {
 	int getWindowY();
 
 	int getWindowX();
+
+	double getWheelRotation();
 }

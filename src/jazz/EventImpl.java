@@ -3,6 +3,7 @@ package jazz;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.event.WindowEvent;
 
 class EventImpl implements Event {
@@ -16,6 +17,7 @@ class EventImpl implements Event {
 	final private int wy;
 	final private int keyCode;
 	final private char keyChar;
+	final private double wheelRotation;
 
 	private boolean isShiftPressed = false;
 	private boolean isAltPressed = false;
@@ -23,22 +25,22 @@ class EventImpl implements Event {
 	private boolean isMetaPressed = false;
 
 	private EventImpl(WindowImpl window, Event.Type type, int x, int y,
-			int keyCode, char keyChar) {
+			int keyCode, char keyChar, double z) {
 		this.window = window;
 		this.type = type;
 
 		this.x = x - window.width() / 2 + window.originX();
 		this.y = -(y - window.height() / 2 + window.originY());
+		this.wheelRotation = z;
 		this.wx = x;
 		this.wy = getWindow().height() - y;
 		this.keyCode = keyCode;
 		this.keyChar = keyChar;
 	}
 
-	private EventImpl(WindowImpl window, Event.Type type, InputEvent e, int x,
-			int y, int keyCode,
-			char keyChar) {
-		this(window, type, x, y, keyCode, keyChar);
+	private EventImpl(WindowImpl window, Event.Type type, InputEvent e,
+			int x, int y, int keyCode, char keyChar, double z) {
+		this(window, type, x, y, keyCode, keyChar, z);
 
 		isAltPressed = e.isAltDown();
 		isShiftPressed = e.isShiftDown();
@@ -47,16 +49,22 @@ class EventImpl implements Event {
 	}
 
 	EventImpl(WindowImpl window, Event.Type type, KeyEvent e, int x, int y) {
-		this(window, type, (InputEvent) e, x, y, e.getKeyCode(), e.getKeyChar());
+		this(window, type, (InputEvent) e, x, y, e.getKeyCode(),
+				e.getKeyChar(), 0.0);
 	}
 
 	EventImpl(WindowImpl window, Event.Type type, MouseEvent e) {
-		this(window, type, (InputEvent) e, e.getX(), e.getY(), e.getButton(),
-				'\0');
+		this(window, type, (InputEvent) e, e.getX(), e.getY(),
+				e.getButton(), '\0', 0.0);
 	}
 
-	EventImpl(WindowImpl window, jazz.Event.Type type, WindowEvent e) {
-		this(window, type, 0, 0, 0, '\0');
+	EventImpl(WindowImpl window, Event.Type type, WindowEvent e) {
+		this(window, type, 0, 0, 0, '\0', 0.0);
+	}
+
+	EventImpl(WindowImpl window, Event.Type type, MouseWheelEvent e) {
+		this(window, type, (InputEvent) e, e.getX(), e.getY(), 0, '\0',
+				e.getPreciseWheelRotation());
 	}
 
 	@Override
@@ -107,6 +115,11 @@ class EventImpl implements Event {
 		return keyChar;
 	}
 
+	@Override
+	public double getWheelRotation() {
+		return wheelRotation;
+	}
+	
 	@Override
 	public boolean isShiftPressed() {
 		return isShiftPressed;

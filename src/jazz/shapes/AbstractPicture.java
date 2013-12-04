@@ -61,6 +61,13 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		transforms.addFirst(AffineTransform.getScaleInstance(x, y));
 		return (P) this;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public P shear(double x, double y) {
+		transforms.addFirst(AffineTransform.getShearInstance(x, y));
+		return (P) this;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -98,41 +105,43 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 	@SuppressWarnings("unchecked")
 	@Override
 	public P color(Color color) {
-
+		
 		if (color instanceof RgbColor) {
 			RgbColor rgb = (RgbColor) color;
-			color_(rgb.getR(), rgb.getG(), rgb.getB());
+			this.color = new java.awt.Color(
+					rgb.getRed(), rgb.getGreen(), rgb.getBlue());
+			
 		} else if (color instanceof HsvColor) {
 			HsvColor hsv = (HsvColor) color;
-			color_(hsv.getH(), hsv.getS(), hsv.getV());
+			this.color = java.awt.Color.getHSBColor(
+					hsv.getH(), hsv.getS(), hsv.getV());
+			
 		} else {
 			this.color = null;
 		}
+		
 		return (P) this;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public P color(int r, int g, int b) {
-		color_(r,g,b);
+		this.color = new java.awt.Color(r, g, b);
 		return (P) this;
-	}
-	
-	private void color_(int r, int g, int b) {
-		float[] hsb = new float[3];
-		java.awt.Color.RGBtoHSB(r, g, b, hsb);
-		color_(hsb[0], hsb[1], hsb[2]);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public P color(float h, float s, float v) {
-		color_(h, s, v);
+	public P color(int r, int g, int b, double alpha) {
+		this.color = new java.awt.Color(r, g, b, (int) Math.floor(alpha * 255));
 		return (P) this;
 	}
 	
-	private void color_(float h, float s, float v) {
+	@SuppressWarnings("unchecked")
+	@Override
+	public P color(float h, float s, float v) {
 		this.color = java.awt.Color.getHSBColor(h, s, v);
+		return (P) this;
 	}
 
 	final AffineTransform getTransform() {
@@ -182,13 +191,13 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 				.getSimpleName(), pos.x, pos.y, bounds.getWidth(), bounds
 				.getHeight());
 	}
-	
+
 	P doClone(P object) {
 		object.transforms.addAll(transforms);
 		object.color = color;
 		object.filled = filled;
 		return object;
 	}
-	
+
 	abstract public P clone();
 }

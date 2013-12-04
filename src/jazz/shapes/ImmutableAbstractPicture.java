@@ -68,6 +68,16 @@ abstract class ImmutableAbstractPicture<P extends ImmutableAbstractPicture<P>>
 		super.scale(x, y);
 	}
 
+	final public P shear(double x, double y) {
+		P picture = clone();
+		picture._shear(x, y);
+		return picture;
+	}
+	
+	final void _shear(double x, double y) {
+		super.shear(x, y);
+	}
+	
 	@Override
 	final public P transform(AffineTransform transform) {
 		P picture = clone();

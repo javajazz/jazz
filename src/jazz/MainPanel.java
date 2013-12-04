@@ -10,6 +10,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -83,6 +85,14 @@ class MainPanel extends JPanel {
 		});
 		this.timer.start();
 
+		addMouseWheelListener(new MouseWheelListener() {
+			
+			@Override
+			public void mouseWheelMoved(MouseWheelEvent e) {
+				model.on(new EventImpl(window, Event.Type.MOUSE_WHEEL, e));
+			}
+		});
+		
 		addMouseMotionListener(new MouseMotionListener() {
 
 			@Override

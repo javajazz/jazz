@@ -39,6 +39,11 @@ abstract class MutableAbstractPicture<P extends MutableAbstractPicture<P>>
 	}
 
 	@Override
+	final public P shear(double x, double y) {
+		return super.shear(x, y);
+	}
+	
+	@Override
 	final public P transform(AffineTransform transform) {
 		return super.transform(transform);
 	}
