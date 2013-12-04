@@ -1,10 +1,15 @@
 package jazz;
 
+import java.awt.GraphicsEnvironment;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
 public class Jazz {
+
+	static {
+		System.setProperty("sun.java2d.opengl", "true");
+	}
 
 	public static Window display(final String title, int a, int b,
 			final Picture picture) {
@@ -17,7 +22,7 @@ public class Jazz {
 
 			@Override
 			public void update(double time) {
-				
+
 			}
 		});
 	}
@@ -43,6 +48,12 @@ public class Jazz {
 					MainWindow mainWindow = new MainWindow(
 							title, model, window, a, b);
 					mainWindow.setVisible(true);
+
+					if (a <= 0 || b<= 0) {
+						GraphicsEnvironment.getLocalGraphicsEnvironment()
+								.getDefaultScreenDevice()
+								.setFullScreenWindow(mainWindow);
+					}
 				}
 			});
 		} catch (InvocationTargetException | InterruptedException exc) {

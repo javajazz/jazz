@@ -29,4 +29,6 @@ public interface Window {
 	Window originY(int originY);
 	
 	Window antialias(boolean antialias);
+	
+	Window maxFps(int maxFps);
 }

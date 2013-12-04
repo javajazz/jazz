@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.geom.AffineTransform;
 import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -21,15 +22,16 @@ import javax.swing.SwingUtilities;
 @SuppressWarnings("serial")
 class MainPanel extends JPanel {
 
-	final long maxFrameRate = 1000000000L / 33;
 	final Model model;
 	final Random rand = new Random();
 	final ReentrantLock lock = new ReentrantLock();
 	final Thread timer;
 	final WindowImpl window;
 
-	boolean doShowDebugOutput = false;
-	long currentFrameRate = maxFrameRate;
+	int maxFramesPerSecond = 100;
+	long maxRefreshRate = 1000000000L / maxFramesPerSecond;
+	boolean doShowDebugOutput = true;
+	long currentRefreshRate = maxRefreshRate;
 	double startTime;
 	double currentTime;
 	double pausedTime;
@@ -76,7 +78,7 @@ class MainPanel extends JPanel {
 						} else {
 							//
 						}
-						Thread.sleep(currentFrameRate / 1000000);
+						Thread.sleep(currentRefreshRate / 1000000);
 					} catch (InterruptedException e) {
 						break;
 					}
@@ -199,14 +201,15 @@ class MainPanel extends JPanel {
 		model.getPicture().draw(g2d);
 
 		if (doShowDebugOutput) {
-			g2d.setColor(Color.BLACK);
+			g2d.setTransform(new AffineTransform());
+			g2d.setColor(Color.WHITE);
 			g2d.drawString(
-					Long.toString((long) (currentFrameRate / 1000000.0)), 10,
+					Long.toString(Math.round (1000 / (currentRefreshRate / 1000000.0))), 10,
 					20);
 		}
 
 		long delta = System.nanoTime() - startUpdate;
-		currentFrameRate = Math.max(maxFrameRate, delta);
+		currentRefreshRate = Math.max(maxRefreshRate, delta);
 
 		isPainting = false;
 	}

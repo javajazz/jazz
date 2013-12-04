@@ -1,4 +1,4 @@
-package jazz.example;
+package jazz.examples;
 
 import jazz.Color;
 import jazz.Event;

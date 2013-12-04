@@ -163,4 +163,12 @@ class WindowImpl implements Window {
 		}
 		return this;
 	}
+
+	@Override
+	public WindowImpl maxFps(int maxFps) {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.maxFramesPerSecond = maxFps;
+		}
+		return this;
+	}
 }
