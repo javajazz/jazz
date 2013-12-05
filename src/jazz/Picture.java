@@ -39,4 +39,6 @@ public interface Picture extends Cloneable, Drawable {
 
 	Picture clone() throws CloneNotSupportedException;
 
+	AffineTransform getTransform();
+
 }

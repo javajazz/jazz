@@ -1,5 +1,6 @@
 package jazz;
 
+import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.lang.reflect.InvocationTargetException;
 
@@ -30,12 +31,12 @@ public class Jazz {
 	public static Window displayFullscreen(String title, Picture picture) {
 		return display(title, 0, 0, picture);
 	}
-	
+
 	public static Window animate(final String title, int a, int b,
 			final Animation animation) {
 		return play(title, a, b, animation);
 	}
-	
+
 	public static Window animateFullscreen(String title, Animation animation) {
 		return play(title, 0, 0, animation);
 	}
@@ -44,7 +45,7 @@ public class Jazz {
 			final World world) {
 		return play(title, a, b, (Model) world);
 	}
-	
+
 	public static Window playFullscreen(String title, World world) {
 		return play(title, 0, 0, (Model) world);
 	}
@@ -57,15 +58,16 @@ public class Jazz {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				@Override
 				public void run() {
-					MainWindow mainWindow = new MainWindow(
+					final MainWindow mainWindow = new MainWindow(
 							title, model, window, a, b);
-					mainWindow.setVisible(true);
-
-					if (a <= 0 || b<= 0) {
-						GraphicsEnvironment.getLocalGraphicsEnvironment()
-								.getDefaultScreenDevice()
-								.setFullScreenWindow(mainWindow);
+					final GraphicsDevice device = GraphicsEnvironment
+							.getLocalGraphicsEnvironment()
+							.getDefaultScreenDevice();
+					if ((a <= 0 || b <= 0) && device.isFullScreenSupported()) {
+						device.setFullScreenWindow(mainWindow);
+						mainWindow.setVisible(false);
 					}
+					mainWindow.setVisible(true);
 				}
 			});
 		} catch (InvocationTargetException | InterruptedException exc) {

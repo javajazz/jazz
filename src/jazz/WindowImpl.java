@@ -165,10 +165,14 @@ class WindowImpl implements Window {
 	}
 
 	@Override
-	public WindowImpl maxFps(int maxFps) {
-		if (mainWindow != null) {
-			mainWindow.mainPanel.maxFramesPerSecond = maxFps;
-		}
+	public WindowImpl maxFps(final int maxFps) {
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				if (mainWindow != null) {
+					mainWindow.mainPanel.maxFramesPerSecond = maxFps;
+				}
+			}
+		});
 		return this;
 	}
 
@@ -199,7 +203,7 @@ class WindowImpl implements Window {
 		}
 		return this;
 	}
-	
+
 	@Override
 	public WindowImpl pause() {
 		if (mainWindow != null) {

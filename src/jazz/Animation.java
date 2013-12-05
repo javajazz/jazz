@@ -1,5 +1,6 @@
 package jazz;
 
+
 public abstract class Animation implements Model {
 
 	private int startDragX = 0;
@@ -41,7 +42,9 @@ public abstract class Animation implements Model {
 		}
 
 		case MOUSE_WHEEL: {
-			e.getWindow().speed(Math.max(0.1, e.getWindow().speed() + e.getWheelRotation() / 10.0));
+			e.getWindow().speed(
+					Math.max(0.1, e.getWindow().speed() + e.getWheelRotation()
+							/ 10.0));
 			break;
 		}
 

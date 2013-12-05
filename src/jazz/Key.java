@@ -1,0 +1,102 @@
+package jazz;
+
+public enum Key {
+
+	SHIFT,
+	TAB,
+	SPACE,
+	ENTER,
+	BACKSPACE,
+	DELETE,
+	
+	ARROW_UP,
+	ARROW_DOWN,
+	ARROW_LEFT,
+	ARROW_RIGHT,
+	
+	HOME,
+	END,
+	PAGE_UP,
+	PAGE_DOWN,
+	
+	ALNUM_A,
+	ALNUM_B,
+	ALNUM_C,
+	ALNUM_D,
+	ALNUM_E,
+	ALNUM_F,
+	ALNUM_G,
+	ALNUM_H,
+	ALNUM_I,
+	ALNUM_J,
+	ALNUM_K,
+	ALNUM_L,
+	ALNUM_M,
+	ALNUM_N,
+	ALNUM_O,
+	ALNUM_P,
+	ALNUM_Q,
+	ALNUM_R,
+	ALNUM_S,
+	ALNUM_T,
+	ALNUM_U,
+	ALNUM_V,
+	ALNUM_W,
+	ALNUM_X,
+	ALNUM_Y,
+	ALNUM_Z,
+	
+	ALNUM_0,
+	ALNUM_1,
+	ALNUM_2,
+	ALNUM_3,
+	ALNUM_4,
+	ALNUM_5,
+	ALNUM_6,
+	ALNUM_7,
+	ALNUM_8,
+	ALNUM_9,
+	
+	NUMPAD_0,
+	NUMPAD_1,
+	NUMPAD_2,
+	NUMPAD_3,
+	NUMPAD_4,
+	NUMPAD_5,
+	NUMPAD_6,
+	NUMPAD_7,
+	NUMPAD_8,
+	NUMPAD_9,
+	
+	F1,
+	F2,
+	F3,
+	F4,
+	F5,
+	F6,
+	F7,
+	F8,
+	F9,
+	F10,
+	F11,
+	F12,
+	F13,
+	F14,
+	F15,
+	F16,
+	F17,
+	F18,
+	F19,
+	F20,
+	F21,
+	F22,
+	F23,
+	F24
+	
+	;
+	
+	public enum Location {
+		LEFT, RIGHT, NUMPAD, UNKNOWN, STANDARD
+	}
+	
+}

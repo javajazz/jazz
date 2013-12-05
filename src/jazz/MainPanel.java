@@ -44,7 +44,7 @@ class MainPanel extends JPanel {
 	volatile int offsetX = 0;
 	volatile int offsetY = 0;
 	volatile double acceleration = 1;
-	
+
 	private volatile boolean paused = false;
 
 	MainPanel(final MainWindow mainWindow, final Model theModel,
@@ -56,7 +56,7 @@ class MainPanel extends JPanel {
 		setSize(a, b);
 
 		setDoubleBuffered(true);
-		
+
 		this.timer = new Thread(new Runnable() {
 			public void run() {
 				lastUpdate = System.nanoTime();
@@ -92,13 +92,13 @@ class MainPanel extends JPanel {
 		this.timer.start();
 
 		addMouseWheelListener(new MouseWheelListener() {
-			
+
 			@Override
 			public void mouseWheelMoved(MouseWheelEvent e) {
 				model.on(new EventImpl(window, Event.Type.MOUSE_WHEEL, e));
 			}
 		});
-		
+
 		addMouseMotionListener(new MouseMotionListener() {
 
 			@Override
@@ -168,7 +168,8 @@ class MainPanel extends JPanel {
 
 	void updateModel() {
 		long currentUpdate = System.nanoTime();
-		double delta = (currentUpdate - lastUpdate) / 1000000000.0 * acceleration;
+		double delta = (currentUpdate - lastUpdate) / 1000000000.0
+				* acceleration;
 		currentTime += delta;
 		lastUpdate = currentUpdate;
 		model.update(currentTime);
@@ -184,7 +185,7 @@ class MainPanel extends JPanel {
 		paused = false;
 		lock.unlock();
 	}
-	
+
 	boolean isPaused() {
 		return paused;
 	}
@@ -201,7 +202,11 @@ class MainPanel extends JPanel {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antialias
 				? RenderingHints.VALUE_ANTIALIAS_ON
 				: RenderingHints.VALUE_ANTIALIAS_OFF);
-
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+				RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+		
 		super.paintComponent(g);
 
 		g2d.setColor(Color.WHITE);
@@ -216,7 +221,9 @@ class MainPanel extends JPanel {
 			g2d.setTransform(new AffineTransform());
 			g2d.setColor(Color.WHITE);
 			g2d.drawString(
-					Long.toString(Math.round (1000 / (currentRefreshRate / 1000000.0))), 10,
+					Long.toString(Math
+							.round(1000 / (currentRefreshRate / 1000000.0))),
+					10,
 					20);
 		}
 

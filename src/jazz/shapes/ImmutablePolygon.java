@@ -2,37 +2,28 @@ package jazz.shapes;
 
 import java.awt.Graphics2D;
 import java.awt.Shape;
+import java.awt.geom.GeneralPath;
 
 import jazz.Point;
 
-public class ImmutablePolygon extends
-		ImmutableAbstractPicture<ImmutablePolygon> {
-
-	static int[] getXCoords(Point[] points) {
-		int[] coords = new int[points.length];
-		for (int i = 0; i < points.length; i++) {
-			coords[i] = (int) points[i].x;
-		}
-		return coords;
-	}
-
-	static int[] getYCoords(Point[] points) {
-		int[] coords = new int[points.length];
-		for (int i = 0; i < points.length; i++) {
-			coords[i] = (int) points[i].y;
-		}
-		return coords;
-	}
+public class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
 
 	public ImmutablePolygon(Point... points) {
-		super(new java.awt.Polygon(
-				getXCoords(points),
-				getYCoords(points),
-				points.length));
+		super(makePath(points));
 	}
 
-	private ImmutablePolygon(Shape shape) {
-		super(shape);
+	private static Shape makePath(Point[] points) {
+		GeneralPath path = new GeneralPath();
+		path.moveTo(points[0].x, points[0].y);
+		for (int i = 0; i < points.length; i++) {
+			int ix = (i + 1) % points.length;
+			path.lineTo(points[ix].x, points[ix].y);
+		}
+		return path;
+	}
+
+	private ImmutablePolygon(GeneralPath path) {
+		super((GeneralPath) path.clone());
 	}
 
 	void doDraw(Graphics2D g2d) {
@@ -42,7 +33,7 @@ public class ImmutablePolygon extends
 
 	@Override
 	public ImmutablePolygon clone() {
-		return doClone(new ImmutablePolygon(shape));
+		return doClone(new ImmutablePolygon((GeneralPath) shape));
 	}
 
 }

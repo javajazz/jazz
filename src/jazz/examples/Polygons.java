@@ -12,7 +12,7 @@ public class Polygons {
 
 	public static void main(String... args) {
 		Jazz.animate(
-				"Woohoo", 500, 500, new Animation() {
+				"Woohoo", 640, 480, new Animation() {
 
 					Pictures pictures = new Pictures(
 							new Circle(25).filled(true),
@@ -39,7 +39,12 @@ public class Polygons {
 					public Picture getPicture() {
 						return pictures;
 					}
-				});
+				}).onClose(new Runnable() {
+					@Override
+					public void run() {
+						System.exit(0);
+					}
+				}).maxFps(120);
 	}
 
 }

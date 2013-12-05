@@ -144,7 +144,8 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		return (P) this;
 	}
 
-	final AffineTransform getTransform() {
+	@Override
+	final public AffineTransform getTransform() {
 		return getTransform(new AffineTransform());
 	}
 
