@@ -9,7 +9,7 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
-public class Bitmap extends MutableAbstractPicture<Bitmap> {
+public final class Bitmap extends AbstractPicture<Bitmap> {
 
 	private final BufferedImage bufferedImage;
 

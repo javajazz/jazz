@@ -11,7 +11,7 @@ import java.util.List;
 
 import jazz.Picture;
 
-public class Pictures extends MutableAbstractPicture<Pictures> implements
+public final class Pictures extends MutableAbstractPicture<Pictures> implements
 		Iterable<Picture> {
 
 	private final List<Picture> pictures = new ArrayList<>();

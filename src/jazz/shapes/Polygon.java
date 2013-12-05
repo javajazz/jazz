@@ -6,7 +6,7 @@ import java.awt.geom.GeneralPath;
 
 import jazz.Point;
 
-public class Polygon extends MutableAbstractPicture<Polygon> {
+public final class Polygon extends MutableAbstractPicture<Polygon> {
 
 	public Polygon(Point... points) {
 		super(makePath(points));

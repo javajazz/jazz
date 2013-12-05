@@ -3,7 +3,7 @@ package jazz.shapes;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-public class Text extends MutableAbstractPicture<Text> {
+public final class Text extends MutableAbstractPicture<Text> {
 	
 	public Text(double radius) {
 		super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));

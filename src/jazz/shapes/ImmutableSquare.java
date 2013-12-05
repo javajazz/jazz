@@ -3,7 +3,7 @@ package jazz.shapes;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-public class ImmutableSquare extends ImmutableAbstractPicture<ImmutableSquare> {
+public final class ImmutableSquare extends ImmutableAbstractPicture<ImmutableSquare> {
 
 	public ImmutableSquare(double side) {
 		super(new Rectangle2D.Double(0, 0, side, side));

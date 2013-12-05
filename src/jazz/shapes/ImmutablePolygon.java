@@ -6,7 +6,7 @@ import java.awt.geom.GeneralPath;
 
 import jazz.Point;
 
-public class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
+public final class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
 
 	public ImmutablePolygon(Point... points) {
 		super(makePath(points));

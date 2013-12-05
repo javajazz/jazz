@@ -6,10 +6,14 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
 
-public class Jazz {
+public final class Jazz {
 
 	static {
 		System.setProperty("sun.java2d.opengl", "true");
+	}
+
+	private Jazz() {
+
 	}
 
 	public static Window display(final String title, int a, int b,
@@ -50,7 +54,7 @@ public class Jazz {
 		return play(title, 0, 0, (Model) world);
 	}
 
-	static Window play(final String title, final int a, final int b,
+	static WindowImpl play(final String title, final int a, final int b,
 			final Model model) {
 		final WindowImpl window = new WindowImpl();
 
