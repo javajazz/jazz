@@ -1,6 +1,5 @@
 package jazz;
 
-import jazz.shapes.Pictures;
 
 public abstract class World implements Model {
 

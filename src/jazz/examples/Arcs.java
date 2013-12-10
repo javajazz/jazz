@@ -1,7 +1,5 @@
 package jazz.examples;
 
-import java.awt.event.KeyEvent;
-
 import jazz.Event;
 import jazz.Jazz;
 import jazz.Picture;
@@ -45,28 +43,32 @@ public class Arcs {
 					public void on(Event e) {
 						switch (e.getType()) {
 						case KEY_DOWN:
-							switch (e.getKeyCode()) {
-							case KeyEvent.VK_DOWN:
+							switch (e.getKey()) {
+							case DOWN:
 								speedX = 0;
 								speedY = -1;
 								pacManRotate = -90;
 								break;
-							case KeyEvent.VK_UP:
+							case UP:
 								speedX = 0;
 								speedY = 1;
 								pacManRotate = 90;
 								break;
-							case KeyEvent.VK_LEFT:
+							case LEFT:
 								speedX = -1;
 								speedY = 0;
 								pacManRotate = 180;
 								break;
-							case KeyEvent.VK_RIGHT:
+							case RIGHT:
 								speedX = 1;
 								speedY = 0;
 								pacManRotate = 0;
 								break;
+							default:
+								break;
 							}
+							break;
+						default:
 							break;
 						}
 					}
