@@ -29,6 +29,8 @@ public interface Event {
 	MouseButton getButton();
 
 	int getKeyCode();
+	
+	Key getKey();
 
 	char getChar();
 
