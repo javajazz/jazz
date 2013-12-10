@@ -1,12 +1,16 @@
 package jazz.examples;
 
 import jazz.Event;
+import jazz.Picture;
 import jazz.RandomColor;
 import jazz.World;
+import jazz.shapes.Pictures;
 import jazz.shapes.Rectangle;
 
 public class TombWorld extends World {
 
+	private Pictures pictures = new Pictures();
+	
 	public TombWorld() {
 		final int size = 10;
 
@@ -28,12 +32,17 @@ public class TombWorld extends World {
 	}
 
 	@Override
-	public void update(double time) {
+	public void update(double time, double delta) {
 		pictures.reset()
 				.scale(4 + 3 * Math.sin(time * 1.5),
 						4 + 3 * Math.sin(time * 1.5))
 				.rotate(Math.cos(time * 0.5) * 360)
 				.shear(3 * Math.sin(time), 3 * Math.cos(time));
+	}
+
+	@Override
+	public Picture getPicture() {
+		return pictures;
 	}
 
 }

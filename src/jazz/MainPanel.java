@@ -172,7 +172,7 @@ class MainPanel extends JPanel {
 				* acceleration;
 		currentTime += delta;
 		lastUpdate = currentUpdate;
-		model.update(currentTime);
+		model.update(currentTime, delta);
 	}
 
 	void pause() {

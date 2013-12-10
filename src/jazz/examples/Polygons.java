@@ -30,7 +30,7 @@ public class Polygons {
 									0, 0.5).translate(-100, -100).rotate(0));
 					
 					@Override
-					public void update(double time) {
+					public void update(double time, double delta) {
 						pictures.get(1).remove().rotate(time * 45);
 						pictures.get(2).remove().rotate(time * -90);
 					}

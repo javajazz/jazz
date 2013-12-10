@@ -3,7 +3,7 @@ package jazz;
 
 public interface Model {
 
-	void update(double time);
+	void update(double time, double delta);
 
 	void on(Event e);
 

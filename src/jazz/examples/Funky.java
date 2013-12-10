@@ -26,7 +26,7 @@ public class Funky extends Animation {
 	}
 
 	@Override
-	public void update(double time) {
+	public void update(double time, double delta) {
 		for (Picture p : pictures) {
 			p.color(new RandomColor(-1, 0, 0));
 		}

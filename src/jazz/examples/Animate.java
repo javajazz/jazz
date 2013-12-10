@@ -23,7 +23,7 @@ public class Animate {
 							);
 							
 							@Override
-							public void update(double time) {
+							public void update(double time, double delta) {
 								pictures.get(0).remove().rotate(time * 40);
 								pictures.get(1).remove().rotate(time * -40);
 							}

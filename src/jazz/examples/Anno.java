@@ -66,7 +66,7 @@ public class Anno {
 		}
 
 		@Override
-		public void update(double time) {
+		public void update(double time, double delta) {
 			
 			int c = (int) Math.floor(Math.abs(Math.sin(time) * 255));
 			pictures.get(0)

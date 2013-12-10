@@ -26,7 +26,7 @@ public final class Jazz {
 			}
 
 			@Override
-			public void update(double time) {
+			public void update(double time, double delta) {
 
 			}
 		});
