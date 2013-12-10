@@ -1,7 +1,7 @@
 package jazz;
 
 
-public interface Model {
+interface Model {
 
 	void update(double time, double delta);
 
