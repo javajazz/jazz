@@ -75,11 +75,13 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 		}
 		g2d.setTransform(getTransform(g2d.getTransform()));
 		for (Picture picture : pictures) {
-			AffineTransform savedTransform = g2d.getTransform();
-			Color savedColor = g2d.getColor();
-			picture.draw(g2d);
-			g2d.setColor(savedColor);
-			g2d.setTransform(savedTransform);
+			if (picture != null) {
+				AffineTransform savedTransform = g2d.getTransform();
+				Color savedColor = g2d.getColor();
+				picture.draw(g2d);
+				g2d.setColor(savedColor);
+				g2d.setTransform(savedTransform);
+			}
 		}
 	}
 

@@ -24,7 +24,7 @@ class MainWindow extends JFrame {
 		addWindowListener(new WindowListener() {
 			@Override
 			public void windowOpened(WindowEvent e) {
-				// do nothing
+				model.on(new EventImpl(window, Event.Type.WINDOW_OPENED, e));
 			}
 
 			@Override

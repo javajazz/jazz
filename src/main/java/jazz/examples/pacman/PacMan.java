@@ -1,13 +1,15 @@
 package jazz.examples.pacman;
 
+import java.io.IOException;
+
 import jazz.DelegatingWorld;
 import jazz.Jazz;
 
 public class PacMan {
 
-	public static void main(String... args) {
+	public static void main(String... args) throws IOException {
 		Jazz.play(
-				"PacMan", 800, 600,
+				"PacMan", 0, 0,
 				new DelegatingWorld<PacManWorld>(
 						new PacManWorld(),
 						new PacManRenderer(),
@@ -18,7 +20,7 @@ public class PacMan {
 					public void run() {
 						System.exit(0);
 					}
-				}).maxFps(120);
+				}).maxFps(120).antialias(false);
 	}
 
 }

@@ -10,6 +10,12 @@ public class PacManEventHandler implements EventHandler<PacManWorld> {
 	public void on(PacManWorld w, Event e) {
 		switch (e.getType()) {
 		
+		case WINDOW_OPENED:
+			w.width = e.getWindow().width();
+			w.height = e.getWindow().height();
+			w.levelP = PacManRenderer.renderLevel(w);
+			break;
+		
 		case KEY_DOWN:
 			switch (e.getKey()) {
 			case UP:
