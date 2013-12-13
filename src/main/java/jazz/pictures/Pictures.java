@@ -1,4 +1,4 @@
-package jazz.shapes;
+package jazz.pictures;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

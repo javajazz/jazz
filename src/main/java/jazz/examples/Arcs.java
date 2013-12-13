@@ -4,8 +4,8 @@ import jazz.Event;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.World;
-import jazz.shapes.Pictures;
-import jazz.shapes.Pie;
+import jazz.pictures.Pictures;
+import jazz.pictures.Pie;
 
 public class Arcs {
 

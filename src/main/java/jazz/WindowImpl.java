@@ -157,7 +157,7 @@ class WindowImpl implements Window {
 	}
 
 	@Override
-	public WindowImpl antialias(final boolean antialias) {
+	public WindowImpl antiAlias(final boolean antialias) {
 		if (mainWindow != null) {
 			mainWindow.mainPanel.antialias = antialias;
 		}

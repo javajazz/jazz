@@ -3,8 +3,8 @@ package jazz.examples;
 import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.shapes.Pictures;
-import jazz.shapes.Rectangle;
+import jazz.pictures.Pictures;
+import jazz.pictures.Rectangle;
 
 public class Animate {
 
@@ -38,7 +38,7 @@ public class Animate {
 						System.exit(0);
 					}
 				})
-				.antialias(true);
+				.antiAlias(true);
 		;
 	}
 }

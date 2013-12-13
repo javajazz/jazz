@@ -1,4 +1,4 @@
-package jazz.shapes;
+package jazz.pictures;
 
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;

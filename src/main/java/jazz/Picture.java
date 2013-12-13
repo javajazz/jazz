@@ -21,6 +21,8 @@ public interface Picture extends Cloneable, Drawable {
 	Picture scale(double x, double y);
 	
 	Picture shear(double x, double y);
+	
+	Picture stroke(double width);
 
 	Picture flipX();
 

@@ -1,4 +1,4 @@
-package jazz.shapes;
+package jazz.pictures;
 
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -6,9 +6,9 @@ import java.awt.geom.GeneralPath;
 
 import jazz.Point;
 
-public final class Polygon extends MutableAbstractPicture<Polygon> {
+public final class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
 
-	public Polygon(Point... points) {
+	public ImmutablePolygon(Point... points) {
 		super(makePath(points));
 	}
 
@@ -22,7 +22,7 @@ public final class Polygon extends MutableAbstractPicture<Polygon> {
 		return path;
 	}
 
-	private Polygon(GeneralPath path) {
+	private ImmutablePolygon(GeneralPath path) {
 		super((GeneralPath) path.clone());
 	}
 
@@ -32,8 +32,8 @@ public final class Polygon extends MutableAbstractPicture<Polygon> {
 	}
 
 	@Override
-	public Polygon clone() {
-		return doClone(new Polygon((GeneralPath) shape));
+	public ImmutablePolygon clone() {
+		return doClone(new ImmutablePolygon((GeneralPath) shape));
 	}
 
 }

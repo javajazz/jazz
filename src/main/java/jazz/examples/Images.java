@@ -7,9 +7,9 @@ import jazz.Animation;
 import jazz.Color;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.shapes.Bitmap;
-import jazz.shapes.Pictures;
-import jazz.shapes.Rectangle;
+import jazz.pictures.Bitmap;
+import jazz.pictures.Pictures;
+import jazz.pictures.Rectangle;
 
 public class Images {
 

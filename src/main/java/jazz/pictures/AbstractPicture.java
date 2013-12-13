@@ -1,5 +1,6 @@
-package jazz.shapes;
+package jazz.pictures;
 
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
@@ -18,6 +19,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 	final Deque<AffineTransform> transforms = new ArrayDeque<>();
 
 	java.awt.Color color = null;
+	java.awt.Stroke stroke = null;
 	boolean filled = false;
 
 	public AbstractPicture(java.awt.Shape shape) {
@@ -101,6 +103,13 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		this.filled = filled;
 		return (P) this;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public P stroke(double width) {
+		this.stroke = new BasicStroke((float) width);
+		return (P) this;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -177,6 +186,9 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 	void doRender(Graphics2D g2d) {
 		if (color != null) {
 			g2d.setColor(color);
+		}
+		if (stroke != null) {
+			g2d.setStroke(stroke);
 		}
 		if (filled) {
 			g2d.fill(shape);

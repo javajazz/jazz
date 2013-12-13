@@ -1,4 +1,4 @@
-package jazz.shapes;
+package jazz.pictures;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;

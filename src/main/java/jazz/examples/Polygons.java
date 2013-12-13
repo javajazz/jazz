@@ -4,9 +4,9 @@ import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.Point;
-import jazz.shapes.Circle;
-import jazz.shapes.Pictures;
-import jazz.shapes.Polygon;
+import jazz.pictures.Circle;
+import jazz.pictures.Pictures;
+import jazz.pictures.Polygon;
 
 public class Polygons {
 

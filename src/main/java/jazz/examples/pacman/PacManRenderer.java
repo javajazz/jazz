@@ -3,9 +3,9 @@ package jazz.examples.pacman;
 import jazz.Color;
 import jazz.Picture;
 import jazz.Renderer;
-import jazz.shapes.Pictures;
-import jazz.shapes.Pie;
-import jazz.shapes.Square;
+import jazz.pictures.Pictures;
+import jazz.pictures.Pie;
+import jazz.pictures.Square;
 
 public class PacManRenderer implements Renderer<PacManWorld> {
 

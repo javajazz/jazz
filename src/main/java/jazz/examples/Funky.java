@@ -4,8 +4,8 @@ import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.RandomColor;
-import jazz.shapes.Pictures;
-import jazz.shapes.Rectangle;
+import jazz.pictures.Pictures;
+import jazz.pictures.Rectangle;
 
 public class Funky extends Animation {
 

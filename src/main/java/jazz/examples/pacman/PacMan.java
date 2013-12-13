@@ -20,7 +20,7 @@ public class PacMan {
 					public void run() {
 						System.exit(0);
 					}
-				}).maxFps(120).antialias(false);
+				}).maxFps(120).antiAlias(false);
 	}
 
 }
