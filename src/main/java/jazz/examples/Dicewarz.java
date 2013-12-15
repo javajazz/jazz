@@ -1,9 +1,12 @@
 package jazz.examples;
 
-import java.util.*;
-
-import jazz.*;
-import jazz.pictures.*;
+import jazz.Color;
+import jazz.IntPair;
+import jazz.Jazz;
+import jazz.Point;
+import jazz.RandomColor;
+import jazz.pictures.Pictures;
+import jazz.pictures.Polygon;
 
 public class Dicewarz {
 
@@ -76,8 +79,8 @@ public class Dicewarz {
 
 	public static void main(String... args) {
 
-		Random r = new Random();
-
+		// Jazz.seed();
+		
 		Color[] playerColors = {
 				Color.MAGENTA,
 				Color.BLUE,
@@ -89,27 +92,24 @@ public class Dicewarz {
 				Color.YELLOW
 		};
 
-		ArrayList<Color> cFields = new ArrayList<Color>(F);
-		for (int i = 0; i < F; i++) {
-			cFields.add(Color.WHITE);
-		}
+		Color[] cFields = new Color[F];
 		int c = 0;
 		for (int s = 0; s < S; s++) {
 			for (int t = 0; t < T; t++) {
-				cFields.set(c++, playerColors[s]);
+				cFields[c++] = playerColors[s];
 			}
 		}
-		Collections.shuffle(cFields);
+		Jazz.shuffle(cFields);
 
 		Color[][] fields = new Color[N][M];
 
 		for (int x = 0; x < X; x++) {
 			for (int y = 0; y < Y; y++) {
 
-				int a = r.nextInt(W) + x * W;
-				int b = r.nextInt(H) + y * H;
+				int a = Jazz.randomInt(W - 2) + x * W + 1;
+				int b = Jazz.randomInt(H - 2) + y * H + 1;
 
-				Color fc = cFields.get(x + y * X);
+				Color fc = cFields[x + y * X];
 
 				fields[topLeft(a, b, N, M).a][topLeft(a, b, N, M).b] = fc;
 				fields[topRight(a, b, N, M).a][topRight(a, b, N, M).b] = fc;
@@ -117,22 +117,9 @@ public class Dicewarz {
 				fields[bottomRight(a, b, N, M).a][bottomRight(a, b, N, M).b] = fc;
 				fields[left(a, b, N, M).a][left(a, b, N, M).b] = fc;
 				fields[right(a, b, N, M).a][right(a, b, N, M).b] = fc;
-
-				fields[a][b] = Color.BLACK;
+				fields[a][b] = fc;
 			}
 		}
-
-		// (x,y) -> (a,b)
-		// mit
-		// |x-a| <= 1
-		// und |y-b| <= 1
-		// und a != x
-		// und b != y
-		// und nicht (a - x == -1 und b - y == 1)
-		// und nicht (a - x == 1 und b - y == -1)
-
-		// Alle sechs angrenzenden Felder
-		// (x-1,y) (x,y-1) (x+1,y) (x,y+1) (x+1,y+1) (x-1,y-1)
 
 		Pictures p = new Pictures();
 
@@ -149,7 +136,8 @@ public class Dicewarz {
 				p.add(hexagon(a)
 						.translate(tx, ty)
 						.color(fields[x + y % 2][y])
-						.filled(fields[x + y % 2][y] != null));
+						//.color(new RandomColor())
+						.filled(true));
 			}
 		}
 

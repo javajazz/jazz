@@ -3,10 +3,16 @@ package jazz;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
 public final class Jazz {
+
+	static private final Random r = new Random(4711337);
 
 	static {
 		System.setProperty("sun.java2d.opengl", "true");
@@ -14,6 +20,50 @@ public final class Jazz {
 
 	private Jazz() {
 
+	}
+
+	public static void seed(long seed) {
+		synchronized (r) {
+			r.setSeed(seed);
+		}
+	}
+
+	public static void seed() {
+		seed(System.nanoTime());
+	}
+
+	public static int randomInt() {
+		synchronized (r) {
+			return r.nextInt();
+		}
+	}
+	
+	public static int randomInt(int upto) {
+		synchronized (r) {
+			return r.nextInt(upto);
+		}
+	}
+
+	public static int randomInt(int from, int upto) {
+		synchronized (r) {
+			return r.nextInt(upto - from) + from;
+		}
+	}
+	
+	public static void shuffle(List<?> c) {
+		Collections.shuffle(c, r);
+	}
+	
+	public static void shuffle(Object[] a) {
+		Collections.shuffle(Arrays.asList(a), r);
+	}
+
+	public static void shuffle(int[] a) {
+		Collections.shuffle(Arrays.asList(a), r);
+	}
+	
+	public static void shuffle(double[] a) {
+		Collections.shuffle(Arrays.asList(a), r);
 	}
 
 	public static Window display(final String title, int a, int b,
@@ -78,6 +128,7 @@ public final class Jazz {
 			final EventHandler<M> e) {
 		return play(title, 0, 0, new DelegatingWorld<M>(world, r, u, e));
 	}
+
 	public static Window playFullscreen(String title, World world) {
 		return play(title, 0, 0, (Model) world);
 	}
