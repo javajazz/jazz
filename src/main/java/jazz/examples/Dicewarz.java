@@ -15,9 +15,13 @@ public class Dicewarz {
 		double x = Math.cos(30.0 / 180.0 * Math.PI);
 		double y = Math.sin(30.0 / 180.0 * Math.PI);
 
-		return new Polygon(new Point(0, a), new Point(x * a, y * a), new Point(
-				x * a, -y * a), new Point(0, -a), new Point(-x * a, -y * a),
-				new Point(-x * a, y * a));
+		return new Polygon(
+				new Point(x * a, 2 * a),
+				new Point(2 * x * a, y * a + a),
+				new Point(2 * x * a, y * a),
+				new Point(x * a, 0),
+				new Point(0, y * a),
+				new Point(0, y * a + a));
 	}
 
 	public static IntPair topLeft(int x, int y, int X, int Y) {
@@ -56,18 +60,18 @@ public class Dicewarz {
 				y);
 	}
 
-	static int height = 800;
-	static int width = 1000;
+	static int width = 800;
+	static int height = 600;
 
-	static int N = 50;
+	static int N = 45;
 
 	static double a = width / N / Math.sqrt(3);
 	static double dx = Math.sqrt(3) * a;
 
 	static int M = (int) (height / (1.5 * a) - 1);
 
-	static int W = 5;
-	static int H = 4;
+	static int W = 6;
+	static int H = 5;
 
 	static int X = N / W;
 	static int Y = M / H;
@@ -75,12 +79,12 @@ public class Dicewarz {
 	static int F = X * Y;
 
 	static int S = 8;
-	static int T = 10;
+	static int T = 5;
 
 	public static void main(String... args) {
 
-		// Jazz.seed();
-		
+		//Jazz.seed();
+
 		Color[] playerColors = {
 				Color.MAGENTA,
 				Color.BLUE,
@@ -93,57 +97,80 @@ public class Dicewarz {
 		};
 
 		Color[] cFields = new Color[F];
-		int c = 0;
+		int k = 0;
 		for (int s = 0; s < S; s++) {
 			for (int t = 0; t < T; t++) {
-				cFields[c++] = playerColors[s];
+				cFields[k++] = new RandomColor();// playerColors[s];
 			}
 		}
 		Jazz.shuffle(cFields);
 
+		int[] cursors = new int[F];
+		int[] paths = new int[F];
 		Color[][] fields = new Color[N][M];
 
 		for (int x = 0; x < X; x++) {
 			for (int y = 0; y < Y; y++) {
 
 				int a = Jazz.randomInt(W - 2) + x * W + 1;
-				int b = Jazz.randomInt(H - 2) + y * H + 1;
+				int b = Jazz.randomInt(H - 1) + y * H + 1;
 
-				Color fc = cFields[x + y * X];
+				Color c = cFields[x + y * X];
 
-				fields[topLeft(a, b, N, M).a][topLeft(a, b, N, M).b] = fc;
-				fields[topRight(a, b, N, M).a][topRight(a, b, N, M).b] = fc;
-				fields[bottomLeft(a, b, N, M).a][bottomLeft(a, b, N, M).b] = fc;
-				fields[bottomRight(a, b, N, M).a][bottomRight(a, b, N, M).b] = fc;
-				fields[left(a, b, N, M).a][left(a, b, N, M).b] = fc;
-				fields[right(a, b, N, M).a][right(a, b, N, M).b] = fc;
-				fields[a][b] = fc;
+				fields[a][b] = c;
+				cursors[y + x * Y] = a + b * N;
+			}
+		}
+
+		k = 1;
+		while (k > 0) {
+			for (int i = 0; i < F; i++) {
+
+				k = 0;
+
+				int x = cursors[i] % N;
+				int y = cursors[i] / N;
+
+				Color c = fields[x][y];
+
+				int nx = x;
+				int ny = y;
+				IntPair pos = bottomRight(x, y, N, M);
+				if (fields[pos.a][pos.b] == null && paths[i] < 5) {
+					nx = pos.a;
+					ny = pos.b;
+					k++;
+					paths[i]++;
+				} else {
+					paths[i] = 0;
+				}
+				cursors[i] = nx + ny * N;
+				fields[nx][ny] = c;
 			}
 		}
 
 		Pictures p = new Pictures();
 
 		for (int y = 0; y < M; y++) {
-
 			for (int x = 0; x < N - y % 2; x++) {
+				if (fields[x + y % 2][y] != null) {
+					double tx = x * dx;
+					if (y % 2 == 1) {
+						tx += dx / 2;
+					}
+					double ty = y * 1.5 * a;
 
-				double tx = x * dx;
-				if (y % 2 == 1) {
-					tx += dx / 2;
+					p.add(hexagon(a + 0.5)
+							.translate(tx, ty)
+							.color(fields[x + y % 2][y])
+							.filled(true));
 				}
-				double ty = y * 1.5 * a;
-
-				p.add(hexagon(a)
-						.translate(tx, ty)
-						.color(fields[x + y % 2][y])
-						//.color(new RandomColor())
-						.filled(true));
 			}
 		}
 
-		p.translate(-500 + dx / 2, -400 + a);
+		p.translate(-500, -300);
 
-		Jazz.display("Dicewarz", width, height, p);
+		Jazz.display("Dicewarz", width + 200, height, p);
 	}
 
 }

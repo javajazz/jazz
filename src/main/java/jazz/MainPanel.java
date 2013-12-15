@@ -30,7 +30,7 @@ class MainPanel extends JPanel {
 
 	int maxFramesPerSecond = 100;
 	long maxRefreshRate = 1000000000L / maxFramesPerSecond;
-	boolean doShowDebugOutput = true;
+	boolean doShowDebugOutput = false;
 	long currentRefreshRate = maxRefreshRate;
 	double currentTime;
 	double lastUpdate;
