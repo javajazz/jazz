@@ -1,7 +1,9 @@
 package jazz.pictures;
 
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -77,9 +79,13 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 		for (Picture picture : pictures) {
 			if (picture != null) {
 				AffineTransform savedTransform = g2d.getTransform();
+				Composite alpha = g2d.getComposite();
+				Stroke stroke = g2d.getStroke();
 				Color savedColor = g2d.getColor();
 				picture.draw(g2d);
 				g2d.setColor(savedColor);
+				g2d.setStroke(stroke);
+				g2d.setComposite(alpha);
 				g2d.setTransform(savedTransform);
 			}
 		}

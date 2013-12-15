@@ -29,7 +29,9 @@ public final class Bitmap extends AbstractPicture<Bitmap> {
 
 	@Override
 	void doRender(Graphics2D g2d) {
-
+		if (alpha != null) {
+			g2d.setComposite(alpha);
+		}
 		g2d.drawImage(bufferedImage, new AffineTransform(),
 				new ImageObserver() {
 					@Override

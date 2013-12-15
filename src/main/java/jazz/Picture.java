@@ -6,6 +6,8 @@ import jazz.util.Drawable;
 
 public interface Picture extends Cloneable, Drawable {
 
+	Picture alpha(double alpha);
+	
 	Picture color(Color color);
 
 	Picture color(int r, int g, int b);

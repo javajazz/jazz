@@ -25,7 +25,8 @@ public class Images {
 					double x[] = { 400, 400, -400, -400, 400, -400, 0, 0, 0 };
 					double y[] = { 300, -300, 300, -300, 0, 0, 300, -300, 0 };
 					AffineTransform t[] = new AffineTransform[x.length];
-					Pictures pictures = new Pictures(new Rectangle(1400, 900).color(Color.BLACK).filled(true));
+					Pictures pictures = new Pictures(new Rectangle(1400, 900)
+							.color(Color.BLACK).filled(true));
 
 					{
 						for (int i = 0; i < t.length; i++) {
@@ -39,8 +40,10 @@ public class Images {
 					@Override
 					public void update(double time, double delta) {
 						for (int i = 0; i < t.length; i++) {
-							pictures.get(i+1).reset().transform(s)
-									.rotate(time * (i + 1) * Math.pow(-1, i)).transform(t[i]);
+							pictures.get(i + 1).reset().transform(s)
+									.alpha(50)
+									.rotate(time * (i + 1) * Math.pow(-1, i))
+									.transform(t[i]);
 						}
 					}
 

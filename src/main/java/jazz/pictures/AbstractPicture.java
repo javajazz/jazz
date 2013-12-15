@@ -1,5 +1,6 @@
 package jazz.pictures;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -20,6 +21,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 
 	java.awt.Color color = null;
 	java.awt.Stroke stroke = null;
+	java.awt.Composite alpha = null;
 	boolean filled = false;
 
 	public AbstractPicture(java.awt.Shape shape) {
@@ -63,7 +65,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		transforms.addFirst(AffineTransform.getScaleInstance(x, y));
 		return (P) this;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public P shear(double x, double y) {
@@ -103,7 +105,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		this.filled = filled;
 		return (P) this;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public P stroke(double width) {
@@ -113,22 +115,30 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 
 	@SuppressWarnings("unchecked")
 	@Override
+	public P alpha(double alpha) {
+		this.alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
+				(float) alpha);
+		return (P) this;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
 	public P color(Color color) {
-		
+
 		if (color instanceof RgbColor) {
 			RgbColor rgb = (RgbColor) color;
 			this.color = new java.awt.Color(
 					rgb.getRed(), rgb.getGreen(), rgb.getBlue());
-			
+
 		} else if (color instanceof HsvColor) {
 			HsvColor hsv = (HsvColor) color;
 			this.color = java.awt.Color.getHSBColor(
 					hsv.getH(), hsv.getS(), hsv.getV());
-			
+
 		} else {
 			this.color = null;
 		}
-		
+
 		return (P) this;
 	}
 
@@ -145,7 +155,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		this.color = new java.awt.Color(r, g, b, (int) Math.floor(alpha * 255));
 		return (P) this;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public P color(float h, float s, float v) {
@@ -179,7 +189,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		transform.concatenate(AffineTransform.getTranslateInstance(
 				bounds.getWidth() / -2, bounds.getHeight() / -2));
 		g2d.setTransform(transform);
-		
+
 		doRender(g2d);
 	}
 
@@ -189,6 +199,9 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
 		}
 		if (stroke != null) {
 			g2d.setStroke(stroke);
+		}
+		if (alpha != null) {
+			g2d.setComposite(alpha);
 		}
 		if (filled) {
 			g2d.fill(shape);
