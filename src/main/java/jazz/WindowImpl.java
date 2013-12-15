@@ -177,7 +177,7 @@ class WindowImpl implements Window {
 	}
 
 	@Override
-	public Window speed(double acceleration) {
+	public WindowImpl speed(double acceleration) {
 		if (mainWindow != null) {
 			mainWindow.mainPanel.acceleration = acceleration;
 		}
@@ -190,6 +190,22 @@ class WindowImpl implements Window {
 			return mainWindow.mainPanel.acceleration;
 		}
 		return 0;
+	}
+
+	@Override
+	public WindowImpl scale(double scale) {
+		if (mainWindow != null) {
+			mainWindow.mainPanel.scale = scale;
+		}
+		return this;
+	}
+	
+	@Override
+	public double scale() {
+		if (mainWindow != null) {
+			return mainWindow.mainPanel.scale;
+		}
+		return 1.0;
 	}
 
 	@Override

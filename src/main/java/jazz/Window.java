@@ -41,4 +41,8 @@ public interface Window {
 	Window resume();
 
 	Window pauseOrUnpause();
+
+	double scale();
+
+	WindowImpl scale(double scale);
 }

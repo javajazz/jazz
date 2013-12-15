@@ -44,6 +44,7 @@ class MainPanel extends JPanel {
 	volatile int offsetX = 0;
 	volatile int offsetY = 0;
 	volatile double acceleration = 1;
+	volatile double scale = 1;
 
 	private volatile boolean paused = false;
 
@@ -214,7 +215,7 @@ class MainPanel extends JPanel {
 
 		g2d.setColor(Color.BLACK);
 		g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 - offsetY);
-		g2d.scale(1, -1);
+		g2d.scale(1 * scale, -1 * scale);
 		model.getPicture().draw(g2d);
 
 		if (doShowDebugOutput) {
