@@ -27,6 +27,10 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 		this.pictures.addAll(pictures);
 	}
 
+	public ImmutablePictures getImmutable() {
+		return new ImmutablePictures(this);
+	}
+	
 	public Pictures add(Picture pic) {
 		this.pictures.add(pic);
 		return this;

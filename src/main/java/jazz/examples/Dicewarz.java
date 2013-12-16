@@ -135,8 +135,8 @@ public class Dicewarz {
 
 				int nx = x;
 				int ny = y;
-				IntPair pos = bottomRight(x, y, N, M);
-				if (fields[pos.a][pos.b] == null && paths[i] < 5) {
+				IntPair pos = topRight(x, y, N, M);
+				if (fields[pos.a][pos.b] == null && paths[i] < 10) {
 					nx = pos.a;
 					ny = pos.b;
 					k++;
