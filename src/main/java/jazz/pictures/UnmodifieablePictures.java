@@ -7,11 +7,11 @@ import java.util.Iterator;
 import jazz.Color;
 import jazz.Picture;
 
-public class ImmutablePictures implements Picture {
+public class UnmodifieablePictures implements Picture {
 
 	private final Pictures p;
 	
-	ImmutablePictures(Pictures p) {
+	UnmodifieablePictures(Pictures p) {
 		this.p = p;
 	}
 
@@ -47,92 +47,92 @@ public class ImmutablePictures implements Picture {
 		p.draw(g2d);
 	}
 
-	public ImmutablePictures clone() {
-		return new ImmutablePictures(p);
+	public UnmodifieablePictures clone() {
+		return new UnmodifieablePictures(p);
 	}
 
 	@Override
-	public ImmutablePictures alpha(double alpha) {
+	public UnmodifieablePictures alpha(double alpha) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures color(Color color) {
+	public UnmodifieablePictures color(Color color) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures color(int r, int g, int b) {
+	public UnmodifieablePictures color(int r, int g, int b) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures color(float h, float s, float v) {
+	public UnmodifieablePictures color(float h, float s, float v) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures color(int r, int g, int b, double alpha) {
+	public UnmodifieablePictures color(int r, int g, int b, double alpha) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures translate(double x, double y) {
+	public UnmodifieablePictures translate(double x, double y) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures rotate(double angle) {
+	public UnmodifieablePictures rotate(double angle) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures scale(double x, double y) {
+	public UnmodifieablePictures scale(double x, double y) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures shear(double x, double y) {
+	public UnmodifieablePictures shear(double x, double y) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures stroke(double width) {
+	public UnmodifieablePictures stroke(double width) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures flipX() {
+	public UnmodifieablePictures flipX() {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures flipY() {
+	public UnmodifieablePictures flipY() {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures filled(boolean filled) {
+	public UnmodifieablePictures filled(boolean filled) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures remove() {
+	public UnmodifieablePictures remove() {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures reset() {
+	public UnmodifieablePictures reset() {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures transform(AffineTransform transform) {
+	public UnmodifieablePictures transform(AffineTransform transform) {
 		return this;
 	}
 
 	@Override
-	public ImmutablePictures transform(double m00, double m10, double m01, double m11,
+	public UnmodifieablePictures transform(double m00, double m10, double m01, double m11,
 			double m02, double m12) {
 		return this;
 	}

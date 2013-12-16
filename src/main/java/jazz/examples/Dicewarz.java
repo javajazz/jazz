@@ -1,12 +1,11 @@
 package jazz.examples;
 
 import jazz.Color;
-import jazz.IntPair;
 import jazz.Jazz;
 import jazz.Point;
-import jazz.RandomColor;
 import jazz.pictures.Pictures;
 import jazz.pictures.Polygon;
+import jazz.util.GridCoords;
 
 public class Dicewarz {
 
@@ -24,38 +23,38 @@ public class Dicewarz {
 				new Point(0, y * a + a));
 	}
 
-	public static IntPair topLeft(int x, int y, int X, int Y) {
-		return new IntPair(
+	public static GridCoords topLeft(int x, int y, int X, int Y) {
+		return new GridCoords(
 				y % 2 == 1 ? Math.max(0, x - 1) : x,
 				Math.min(Y - 1, y + 1));
 	}
 
-	public static IntPair topRight(int x, int y, int X, int Y) {
-		return new IntPair(
+	public static GridCoords topRight(int x, int y, int X, int Y) {
+		return new GridCoords(
 				y % 2 == 1 ? x : Math.min(X - 1, x + 1),
 				Math.min(Y - 1, y + 1));
 	}
 
-	public static IntPair bottomLeft(int x, int y, int X, int Y) {
-		return new IntPair(
+	public static GridCoords bottomLeft(int x, int y, int X, int Y) {
+		return new GridCoords(
 				y % 2 == 1 ? Math.max(0, x - 1) : x,
 				Math.max(0, y - 1));
 	}
 
-	public static IntPair bottomRight(int x, int y, int X, int Y) {
-		return new IntPair(
+	public static GridCoords bottomRight(int x, int y, int X, int Y) {
+		return new GridCoords(
 				y % 2 == 1 ? x : Math.min(X - 1, x + 1),
 				Math.max(0, y - 1));
 	}
 
-	public static IntPair left(int x, int y, int X, int Y) {
-		return new IntPair(
+	public static GridCoords left(int x, int y, int X, int Y) {
+		return new GridCoords(
 				Math.max(0, x - 1),
 				y);
 	}
 
-	public static IntPair right(int x, int y, int X, int Y) {
-		return new IntPair(
+	public static GridCoords right(int x, int y, int X, int Y) {
+		return new GridCoords(
 				Math.min(X - 1, x + 1),
 				y);
 	}
@@ -100,7 +99,7 @@ public class Dicewarz {
 		int k = 0;
 		for (int s = 0; s < S; s++) {
 			for (int t = 0; t < T; t++) {
-				cFields[k++] = new RandomColor();// playerColors[s];
+				cFields[k++] = playerColors[s];
 			}
 		}
 		Jazz.shuffle(cFields);
@@ -135,10 +134,10 @@ public class Dicewarz {
 
 				int nx = x;
 				int ny = y;
-				IntPair pos = topRight(x, y, N, M);
-				if (fields[pos.a][pos.b] == null && paths[i] < 10) {
-					nx = pos.a;
-					ny = pos.b;
+				GridCoords pos = topRight(x, y, N, M);
+				if (fields[pos.x][pos.y] == null && paths[i] < 10) {
+					nx = pos.x;
+					ny = pos.y;
 					k++;
 					paths[i]++;
 				} else {

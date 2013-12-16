@@ -41,7 +41,6 @@ public class Images {
 					public void update(double time, double delta) {
 						for (int i = 0; i < t.length; i++) {
 							pictures.get(i + 1).reset().transform(s)
-									.alpha(50)
 									.rotate(time * (i + 1) * Math.pow(-1, i))
 									.transform(t[i]);
 						}
