@@ -11,7 +11,25 @@ public final class Polygon extends MutableAbstractPicture<Polygon> {
 	public Polygon(Point... points) {
 		super(makePath(points));
 	}
+	
+	public Polygon(int n, double r) {
+		super(makePath(n, r));
+	}
 
+	private static Shape makePath(int n, double r) {
+		if (n < 3) {
+			throw new IllegalArgumentException();
+		}
+		GeneralPath path = new GeneralPath();
+		path.moveTo(0, r);
+		for (int i = 1; i < n; i++) {
+			double rad = 2*Math.PI*i/n + Math.PI/2;
+			path.lineTo(Math.cos(rad) * r, Math.sin(rad) * r);
+		}
+		path.lineTo(0, r);
+		return path;
+	}
+	
 	private static Shape makePath(Point[] points) {
 		GeneralPath path = new GeneralPath();
 		path.moveTo(points[0].x, points[0].y);

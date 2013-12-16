@@ -1,21 +1,45 @@
 package jazz.pictures;
 
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 
 public final class Text extends MutableAbstractPicture<Text> {
 	
-	public Text(double radius) {
-		super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));
+	final String text;
+	Rectangle2D bounds = null;
+	
+	public Text(String text) {
+		super(null);
+		this.text = text;
+	}
+
+	void doDraw(Graphics2D g2d) {
+		if (bounds == null) {
+			bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
+		}
+		AffineTransform transform = getTransform(g2d.getTransform());
+
+		transform.concatenate(AffineTransform.getTranslateInstance(
+				bounds.getWidth() / -2, bounds.getHeight() / -2));
+		transform.concatenate(AffineTransform.getScaleInstance(1, -1));
+		g2d.setTransform(transform);
+
+		doRender(g2d);
 	}
 	
-	private Text(Shape shape) {
-		super(shape);
+	@Override
+	void doRender(Graphics2D g2d) {
+		if (color != null) {
+			g2d.setColor(color);
+		}
+		g2d.drawString(text, 0, 0);
 	}
 
 	@Override
 	public Text clone() {
-		return doClone(new Text(shape));
+		return doClone(new Text(text));
 	}
 
 }
