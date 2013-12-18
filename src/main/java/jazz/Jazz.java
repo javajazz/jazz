@@ -37,7 +37,7 @@ public final class Jazz {
 			return r.nextInt();
 		}
 	}
-	
+
 	public static int randomInt(int upto) {
 		synchronized (r) {
 			return r.nextInt(upto);
@@ -49,11 +49,11 @@ public final class Jazz {
 			return r.nextInt(upto - from) + from;
 		}
 	}
-	
+
 	public static void shuffle(List<?> c) {
 		Collections.shuffle(c, r);
 	}
-	
+
 	public static void shuffle(Object[] a) {
 		Collections.shuffle(Arrays.asList(a), r);
 	}
@@ -61,7 +61,7 @@ public final class Jazz {
 	public static void shuffle(int[] a) {
 		Collections.shuffle(Arrays.asList(a), r);
 	}
-	
+
 	public static void shuffle(double[] a) {
 		Collections.shuffle(Arrays.asList(a), r);
 	}
@@ -141,16 +141,16 @@ public final class Jazz {
 			SwingUtilities.invokeAndWait(new Runnable() {
 				@Override
 				public void run() {
-					final MainWindow mainWindow = new MainWindow(
-							title, model, window, a, b);
+					final MainWindow mainWindow = new MainWindow(title, model,
+							window, a, b);
 					final GraphicsDevice device = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()
 							.getDefaultScreenDevice();
 					if ((a <= 0 || b <= 0) && device.isFullScreenSupported()) {
 						device.setFullScreenWindow(mainWindow);
-						mainWindow.setVisible(false);
+					} else {
+						mainWindow.setVisible(true);
 					}
-					mainWindow.setVisible(true);
 				}
 			});
 		} catch (InvocationTargetException | InterruptedException exc) {

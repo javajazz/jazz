@@ -10,7 +10,7 @@ public class Polygons2 {
 
 	public static void main(String... args) {
 		Jazz.animate(
-				"Woohoo", 0, 480, new Animation() {
+				"Woohoo", 800, 600, new Animation() {
 
 					Pictures pictures = new Pictures();
 					
