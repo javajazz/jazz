@@ -2,7 +2,6 @@ package jazz.examples.pong;
 
 import jazz.Event;
 import jazz.EventHandler;
-import jazz.Key;
 
 public class PongEventHandler implements EventHandler<PongWorld> {
 
