@@ -1,4 +1,4 @@
-package jazz.examples;
+package jazz.examples.basic;
 
 import java.awt.geom.AffineTransform;
 import java.io.IOException;

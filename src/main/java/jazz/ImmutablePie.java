@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
 
-public class ImmutablePie extends ImmutableAbstractPicture<ImmutablePie> {
+class ImmutablePie extends ImmutableAbstractPicture<ImmutablePie> {
 
 	public ImmutablePie(double w, double h, double start, double extent) {
 		super(new Arc2D.Double(-w / 4, -h / 4, w / 2, h / 2,

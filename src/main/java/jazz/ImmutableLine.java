@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 
-public final class ImmutableLine extends ImmutableAbstractPicture<ImmutableLine> {
+final class ImmutableLine extends ImmutableAbstractPicture<ImmutableLine> {
 	
 	public ImmutableLine(Point from, Point to) {
 		super(new Line2D.Double(from.x, from.y, to.x, to.y));

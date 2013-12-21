@@ -1,4 +1,4 @@
-package jazz.examples;
+package jazz.examples.basic;
 
 import jazz.Event;
 import jazz.Jazz;

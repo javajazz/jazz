@@ -3,7 +3,7 @@ package jazz;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-public final class ImmutableCircle extends ImmutableAbstractPicture<ImmutableCircle> {
+final class ImmutableCircle extends ImmutableAbstractPicture<ImmutableCircle> {
 	
 	public ImmutableCircle(double radius) {
 		super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));

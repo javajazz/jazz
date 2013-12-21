@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-public final class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
+final class ImmutablePolygon extends ImmutableAbstractPicture<ImmutablePolygon> {
 
 	public ImmutablePolygon(Point... points) {
 		super(makePath(points));

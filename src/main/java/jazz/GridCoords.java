@@ -1,4 +1,4 @@
-package jazz.util;
+package jazz;
 
 public final class GridCoords {
 
