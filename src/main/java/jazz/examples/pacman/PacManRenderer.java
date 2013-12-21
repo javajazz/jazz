@@ -2,10 +2,10 @@ package jazz.examples.pacman;
 
 import jazz.Color;
 import jazz.Picture;
+import jazz.Pictures;
+import jazz.Pie;
 import jazz.Renderer;
-import jazz.pictures.Pictures;
-import jazz.pictures.Pie;
-import jazz.pictures.Square;
+import jazz.Square;
 
 public class PacManRenderer implements Renderer<PacManWorld> {
 

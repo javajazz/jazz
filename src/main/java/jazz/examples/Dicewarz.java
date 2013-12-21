@@ -2,9 +2,9 @@ package jazz.examples;
 
 import jazz.Color;
 import jazz.Jazz;
+import jazz.Pictures;
 import jazz.Point;
-import jazz.pictures.Pictures;
-import jazz.pictures.Polygon;
+import jazz.Polygon;
 import jazz.util.GridCoords;
 
 public class Dicewarz {

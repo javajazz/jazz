@@ -1,4 +1,4 @@
-package jazz.pictures;
+package jazz;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -8,11 +8,6 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
 import java.util.Deque;
-
-import jazz.Color;
-import jazz.HsvColor;
-import jazz.Picture;
-import jazz.RgbColor;
 
 abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture {
 

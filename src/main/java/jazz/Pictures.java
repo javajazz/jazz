@@ -1,4 +1,4 @@
-package jazz.pictures;
+package jazz;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -10,8 +10,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import jazz.Picture;
 
 public final class Pictures extends MutableAbstractPicture<Pictures> implements
 		Iterable<Picture> {

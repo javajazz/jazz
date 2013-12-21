@@ -3,9 +3,9 @@ package jazz.examples;
 import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
+import jazz.Pictures;
 import jazz.RandomColor;
-import jazz.pictures.Pictures;
-import jazz.pictures.Rectangle;
+import jazz.Rectangle;
 
 public class Funky extends Animation {
 

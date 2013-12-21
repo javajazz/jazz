@@ -2,11 +2,11 @@ package jazz.examples.pong;
 
 import jazz.Color;
 import jazz.Picture;
+import jazz.Pictures;
+import jazz.Rectangle;
 import jazz.Renderer;
-import jazz.pictures.Pictures;
-import jazz.pictures.Rectangle;
-import jazz.pictures.Square;
-import jazz.pictures.Text;
+import jazz.Square;
+import jazz.Text;
 
 public class PongRenderer implements Renderer<PongWorld> {
 

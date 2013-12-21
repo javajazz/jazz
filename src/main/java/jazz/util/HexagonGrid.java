@@ -1,8 +1,8 @@
 package jazz.util;
 
+import jazz.Pictures;
 import jazz.Point;
-import jazz.pictures.UnmodifieablePictures;
-import jazz.pictures.Pictures;
+import jazz.UnmodifieablePictures;
 
 public class HexagonGrid<T> {
 

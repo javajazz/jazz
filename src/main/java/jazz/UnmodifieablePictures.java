@@ -1,11 +1,8 @@
-package jazz.pictures;
+package jazz;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.Iterator;
-
-import jazz.Color;
-import jazz.Picture;
 
 public class UnmodifieablePictures implements Picture {
 
