@@ -1,127 +1,126 @@
 package jazz;
 
-
 public class HexagonGrid<T> {
 
-	public static enum Mode {
-		A, B, C, D
-	}
+  public static enum Mode {
+    A, B, C, D
+  }
 
-	private final int gridWidth;
-	private final int gridHeight;
-	private final T[][] grid;
-	private final int size;
-	private final Pictures pictures = new Pictures();
-	private final boolean orientation;
-	private final double side;
+  private final int gridWidth;
+  private final int gridHeight;
+  private final T[][] grid;
+  private final int size;
+  private final Pictures pictures = new Pictures();
+  private final boolean orientation;
+  private final double side;
 
-	private double height = 0;
-	private double width = 0;
-	private double posX = 0;
-	private double posY = 0;
+  private double height = 0;
+  private double width = 0;
+  private double posX = 0;
+  private double posY = 0;
 
-	public HexagonGrid(int gridWidth, int gridHeight,
-			double side, boolean orientation) {
-		
-		this.orientation = orientation;
-		this.gridWidth = gridWidth;
-		this.gridHeight = gridHeight;
-		this.side = side;
+  public HexagonGrid(int gridWidth, int gridHeight,
+      double side, boolean orientation) {
 
-		@SuppressWarnings("unchecked")
-		T[][] grid = (T[][]) new Object[gridWidth][gridHeight];
+    this.orientation = orientation;
+    this.gridWidth = gridWidth;
+    this.gridHeight = gridHeight;
+    this.side = side;
 
-		this.grid = grid;
-		this.size = gridWidth * gridHeight;
+    @SuppressWarnings("unchecked")
+    T[][] grid = (T[][]) new Object[gridWidth][gridHeight];
 
-		if (this.orientation) {
-			this.width = gridWidth * Math.sqrt(3) * this.side;
-			this.height = gridHeight * 2 * this.side;
-		} else {
-			this.width = gridWidth * 2 * this.side;
-			this.height = gridHeight * Math.sqrt(3) * this.side;
-		}
-	}
-	
-	void makePictures() {
-		for (int y = 0; y < gridHeight; y++) {
-			for (int x = 0; x < gridWidth; x++) {
-				
-			}
-		}
-	}
+    this.grid = grid;
+    this.size = gridWidth * gridHeight;
 
-	public int getSize() {
-		return size;
-	}
+    if (this.orientation) {
+      this.width = gridWidth * Math.sqrt(3) * this.side;
+      this.height = gridHeight * 2 * this.side;
+    } else {
+      this.width = gridWidth * 2 * this.side;
+      this.height = gridHeight * Math.sqrt(3) * this.side;
+    }
+  }
 
-	public HexagonGrid<T> setTile(int x, int y, T tile) {
-		grid[x][y] = tile;
-		return this;
-	}
+  void makePictures() {
+    for (int y = 0; y < gridHeight; y++) {
+      for (int x = 0; x < gridWidth; x++) {
 
-	public T getTile(int x, int y) {
-		return grid[x][y];
-	}
+      }
+    }
+  }
 
-	public T getTileAt(double x, double y) {
-		return null;
-	}
+  public int getSize() {
+    return size;
+  }
 
-	public T getCoordsFor(double x, double y) {
-		return null;
-	}
+  public HexagonGrid<T> setTile(int x, int y, T tile) {
+    grid[x][y] = tile;
+    return this;
+  }
 
-	public T getCoordsFor(Point p) {
-		return getCoordsFor(p.x, p.y);
-	}
+  public T getTile(int x, int y) {
+    return grid[x][y];
+  }
 
-	public double getWidth() {
-		return width;
-	}
+  public T getTileAt(double x, double y) {
+    return null;
+  }
 
-	public double getHeight() {
-		return height;
-	}
+  public T getCoordsFor(double x, double y) {
+    return null;
+  }
 
-	public HexagonGrid<T> setCenterX(double x) {
-		posX = x;
-		return this;
-	}
+  public T getCoordsFor(Point p) {
+    return getCoordsFor(p.x, p.y);
+  }
 
-	public HexagonGrid<T> setCenterY(double y) {
-		posY = y;
-		return this;
-	}
+  public double getWidth() {
+    return width;
+  }
 
-	public HexagonGrid<T> setCenter(double x, double y) {
-		setCenterX(x);
-		setCenterY(y);
-		return this;
-	}
+  public double getHeight() {
+    return height;
+  }
 
-	public HexagonGrid<T> setCenter(Point p) {
-		setCenter(p.x, p.y);
-		return this;
-	}
+  public HexagonGrid<T> setCenterX(double x) {
+    posX = x;
+    return this;
+  }
 
-	public double getX() {
-		return posX;
-	}
+  public HexagonGrid<T> setCenterY(double y) {
+    posY = y;
+    return this;
+  }
 
-	public double getY() {
-		return posY;
-	}
+  public HexagonGrid<T> setCenter(double x, double y) {
+    setCenterX(x);
+    setCenterY(y);
+    return this;
+  }
 
-	public UnmodifieablePictures getPicture() {
-		return pictures.getImmutable();
-	}
+  public HexagonGrid<T> setCenter(Point p) {
+    setCenter(p.x, p.y);
+    return this;
+  }
 
-	public int getGridWidth() {
-		return gridWidth;
-	}
+  public double getX() {
+    return posX;
+  }
 
-	public int getGridHeight() {
-		return gridHeight;
-	}
+  public double getY() {
+    return posY;
+  }
+
+  public UnmodifieablePictures getPicture() {
+    return pictures.getImmutable();
+  }
+
+  public int getGridWidth() {
+    return gridWidth;
+  }
+
+  public int getGridHeight() {
+    return gridHeight;
+  }
 }

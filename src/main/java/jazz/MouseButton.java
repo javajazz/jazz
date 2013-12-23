@@ -1,11 +1,11 @@
 package jazz;
 
 public enum MouseButton {
-	LEFT,
-	MIDDLE,
-	RIGHT,
-	FOURTH,
-	FIFTH,
-	SIXTH,
-	NONE
+  LEFT,
+  MIDDLE,
+  RIGHT,
+  FOURTH,
+  FIFTH,
+  SIXTH,
+  NONE
 }

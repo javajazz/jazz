@@ -12,99 +12,99 @@ import java.util.Iterator;
 import java.util.List;
 
 public final class Pictures extends MutableAbstractPicture<Pictures> implements
-		Iterable<Picture> {
+    Iterable<Picture> {
 
-	private final List<Picture> pictures = new ArrayList<>();
+  private final List<Picture> pictures = new ArrayList<>();
 
-	private Pictures() {
-		super(null);
-	}
+  private Pictures() {
+    super(null);
+  }
 
-	public Pictures(Collection<? extends Picture> pictures) {
-		this();
-		this.pictures.addAll(pictures);
-	}
+  public Pictures(Collection<? extends Picture> pictures) {
+    this();
+    this.pictures.addAll(pictures);
+  }
 
-	public UnmodifieablePictures getImmutable() {
-		return new UnmodifieablePictures(this);
-	}
-	
-	public Pictures add(Picture pic) {
-		this.pictures.add(pic);
-		return this;
-	}
+  public UnmodifieablePictures getImmutable() {
+    return new UnmodifieablePictures(this);
+  }
 
-	public Pictures remove(int index) {
-		try {
-			this.pictures.remove(index);
-		} catch (IndexOutOfBoundsException exc) {
-			// do nothing
-		}
-		return this;
-	}
+  public Pictures add(Picture pic) {
+    this.pictures.add(pic);
+    return this;
+  }
 
-	@SuppressWarnings("unchecked")
-	public <P extends Picture> P get(int index, Class<P> clazz) {
-		try {
-			Picture p = pictures.get(index);
-			if (p == null) {
-				return null;
-			}
-			if (clazz.isAssignableFrom(p.getClass())) {
-				return (P) p;
-			}
-			return null;
-		} catch (IndexOutOfBoundsException exc) {
-			return null;
-		}
-	}
+  public Pictures remove(int index) {
+    try {
+      this.pictures.remove(index);
+    } catch (IndexOutOfBoundsException exc) {
+      // do nothing
+    }
+    return this;
+  }
 
-	public Picture get(int index) {
-		try {
-			return pictures.get(index);
-		} catch (IndexOutOfBoundsException exc) {
-			return null;
-		}
-	}
+  @SuppressWarnings("unchecked")
+  public <P extends Picture> P get(int index, Class<P> clazz) {
+    try {
+      Picture p = pictures.get(index);
+      if (p == null) {
+        return null;
+      }
+      if (clazz.isAssignableFrom(p.getClass())) {
+        return (P) p;
+      }
+      return null;
+    } catch (IndexOutOfBoundsException exc) {
+      return null;
+    }
+  }
 
-	@SafeVarargs
-	public Pictures(Picture... pictures) {
-		this(Arrays.asList(pictures));
-	}
+  public Picture get(int index) {
+    try {
+      return pictures.get(index);
+    } catch (IndexOutOfBoundsException exc) {
+      return null;
+    }
+  }
 
-	@Override
-	void doDraw(Graphics2D g2d) {
-		if (color != null) {
-			g2d.setColor(color);
-		}
-		g2d.setTransform(getTransform(g2d.getTransform()));
-		for (Picture picture : pictures) {
-			if (picture != null) {
-				AffineTransform savedTransform = g2d.getTransform();
-				Composite alpha = g2d.getComposite();
-				Stroke stroke = g2d.getStroke();
-				Color savedColor = g2d.getColor();
-				picture.draw(g2d);
-				g2d.setColor(savedColor);
-				g2d.setStroke(stroke);
-				g2d.setComposite(alpha);
-				g2d.setTransform(savedTransform);
-			}
-		}
-	}
+  @SafeVarargs
+  public Pictures(Picture... pictures) {
+    this(Arrays.asList(pictures));
+  }
 
-	public String toString() {
-		return pictures.toString();
-	}
+  @Override
+  void doDraw(Graphics2D g2d) {
+    if (color != null) {
+      g2d.setColor(color);
+    }
+    g2d.setTransform(getTransform(g2d.getTransform()));
+    for (Picture picture : pictures) {
+      if (picture != null) {
+        AffineTransform savedTransform = g2d.getTransform();
+        Composite alpha = g2d.getComposite();
+        Stroke stroke = g2d.getStroke();
+        Color savedColor = g2d.getColor();
+        picture.draw(g2d);
+        g2d.setColor(savedColor);
+        g2d.setStroke(stroke);
+        g2d.setComposite(alpha);
+        g2d.setTransform(savedTransform);
+      }
+    }
+  }
 
-	@Override
-	public Pictures clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  public String toString() {
+    return pictures.toString();
+  }
 
-	@Override
-	public Iterator<Picture> iterator() {
-		return pictures.iterator();
-	}
+  @Override
+  public Pictures clone() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Iterator<Picture> iterator() {
+    return pictures.iterator();
+  }
 }

@@ -4,51 +4,51 @@ import jazz.Key.Location;
 
 public interface Event {
 
-	enum Type {
-		MOUSE_DOWN,
-		MOUSE_UP,
-		CLICK,
-		MOUSE_MOVE,
-		MOUSE_WHEEL,
-		KEY_DOWN,
-		KEY_UP,
-		KEY_TYPED,
-		WINDOW_CLOSED,
-		WINDOW_HIDDEN,
-		WINDOW_SHOWN,
-		WINDOW_ACTIVATED,
-		WINDOW_DEACTIVATED, WINDOW_OPENED
-	}
+  enum Type {
+    MOUSE_DOWN,
+    MOUSE_UP,
+    CLICK,
+    MOUSE_MOVE,
+    MOUSE_WHEEL,
+    KEY_DOWN,
+    KEY_UP,
+    KEY_TYPED,
+    WINDOW_CLOSED,
+    WINDOW_HIDDEN,
+    WINDOW_SHOWN,
+    WINDOW_ACTIVATED,
+    WINDOW_DEACTIVATED, WINDOW_OPENED
+  }
 
-	Type getType();
+  Type getType();
 
-	int getX();
+  int getX();
 
-	int getY();
+  int getY();
 
-	MouseButton getButton();
+  MouseButton getButton();
 
-	int getKeyCode();
-	
-	Key getKey();
+  int getKeyCode();
 
-	char getChar();
+  Key getKey();
 
-	boolean isShiftPressed();
+  char getChar();
 
-	boolean isAltPressed();
+  boolean isShiftPressed();
 
-	boolean isCtrlPressed();
+  boolean isAltPressed();
 
-	boolean isSuperPressed();
+  boolean isCtrlPressed();
 
-	Window getWindow();
+  boolean isSuperPressed();
 
-	int getWindowY();
+  Window getWindow();
 
-	int getWindowX();
+  int getWindowY();
 
-	double getWheelRotation();
+  int getWindowX();
 
-	Location getKeyLocation();
+  double getWheelRotation();
+
+  Location getKeyLocation();
 }

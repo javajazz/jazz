@@ -1,6 +1,6 @@
 package jazz;
 
 public interface Renderer<M> {
-	
-	Picture render(M model);
+
+  Picture render(M model);
 }
