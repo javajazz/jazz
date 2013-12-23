@@ -72,14 +72,43 @@ public class Point implements Serializable {
     return translate(p.x, p.y);
   }
 
+  /**
+   * Translate this point by the given coordinates.
+   * 
+   * @param x
+   *          The horizontal translation.
+   * @param y
+   *          The vertical translation.
+   * @return A new point, a copy of this point translated by x and y.
+   */
   public Point translate(double x, double y) {
     return new Point(this.x + x, this.y + y);
   }
 
+  /**
+   * Scales the point as if it was a vector or as if the underlying plane was
+   * scaled.
+   * 
+   * @param x
+   *          The horizontal scale.
+   * @param y
+   *          The vertical scale.
+   * @return A new point, a copy of this point slaced by the given x and y
+   *         values, as if it was a vector.
+   */
   public Point scale(double x, double y) {
     return new Point(this.x * x, this.y * y);
   }
 
+  /**
+   * Rotates the underlying plane around the origin.
+   * 
+   * @param angle
+   *          The number of degrees (0 to 360, values are taken modulo 360,
+   *          negative values are allowed).
+   * @return A new point, a copy of this point rotated around the origin by the
+   *         given angle.
+   */
   public Point rotate(double angle) {
     return rotate(ORIGIN, angle);
   }
