@@ -9,7 +9,7 @@ import java.util.List;
 
 import jazz.Direction;
 import jazz.Picture;
-import jazz.Pictures;
+import jazz.pictures.mutable.Pictures;
 
 public class PacManWorld {
 

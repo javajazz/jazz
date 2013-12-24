@@ -4,12 +4,12 @@ import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
 import jazz.Animation;
-import jazz.Bitmap;
 import jazz.Color;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Pictures;
-import jazz.Rectangle;
+import jazz.pictures.mutable.Bitmap;
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Rectangle;
 
 public class Images {
 

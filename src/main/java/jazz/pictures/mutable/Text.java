@@ -1,8 +1,10 @@
-package jazz;
+package jazz.pictures.mutable;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
+
+import jazz.pictures.MutableAbstractPicture;
 
 public final class Text extends MutableAbstractPicture<Text> {
 
@@ -14,7 +16,7 @@ public final class Text extends MutableAbstractPicture<Text> {
     this.text = text;
   }
 
-  void doDraw(Graphics2D g2d) {
+  protected void doDraw(Graphics2D g2d) {
     if (bounds == null) {
       bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
     }
@@ -29,7 +31,7 @@ public final class Text extends MutableAbstractPicture<Text> {
   }
 
   @Override
-  void doRender(Graphics2D g2d) {
+  protected void doRender(Graphics2D g2d) {
     if (color != null) {
       g2d.setColor(color);
     }

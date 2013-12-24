@@ -1,4 +1,4 @@
-package jazz;
+package jazz.pictures;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -9,15 +9,20 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture {
+import jazz.Color;
+import jazz.HsvColor;
+import jazz.Picture;
+import jazz.RgbColor;
 
-  final java.awt.Shape shape;
-  final Deque<AffineTransform> transforms = new ArrayDeque<>();
+public abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture {
 
-  java.awt.Color color = null;
-  java.awt.Stroke stroke = null;
-  java.awt.Composite alpha = null;
-  boolean filled = false;
+  protected final java.awt.Shape shape;
+  protected final Deque<AffineTransform> transforms = new ArrayDeque<>();
+
+  protected java.awt.Color color = null;
+  protected java.awt.Stroke stroke = null;
+  protected java.awt.Composite alpha = null;
+  protected boolean filled = false;
 
   public AbstractPicture(java.awt.Shape shape) {
     this.shape = shape;
@@ -163,7 +168,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
     return getTransform(new AffineTransform());
   }
 
-  final AffineTransform getTransform(AffineTransform finalTransform) {
+  protected final AffineTransform getTransform(AffineTransform finalTransform) {
     AffineTransform transform = new AffineTransform(finalTransform);
     for (AffineTransform t : transforms) {
       transform.concatenate(t);
@@ -171,13 +176,13 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
     return transform;
   }
 
-  final Point2D.Double getCenter() {
+  protected final Point2D.Double getCenter() {
     Point2D.Double pos = new Point2D.Double();
     getTransform().transform(new Point2D.Double(), pos);
     return pos;
   }
 
-  void doDraw(Graphics2D g2d) {
+  protected void doDraw(Graphics2D g2d) {
     Rectangle2D bounds = shape.getBounds2D();
     AffineTransform transform = getTransform(g2d.getTransform());
 
@@ -188,7 +193,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
     doRender(g2d);
   }
 
-  void doRender(Graphics2D g2d) {
+  protected void doRender(Graphics2D g2d) {
     if (color != null) {
       g2d.setColor(color);
     }
@@ -217,7 +222,7 @@ abstract class AbstractPicture<P extends AbstractPicture<P>> implements Picture 
         .getHeight());
   }
 
-  P doClone(P object) {
+  protected P doClone(P object) {
     object.transforms.addAll(transforms);
     object.color = color;
     object.filled = filled;

@@ -1,4 +1,4 @@
-package jazz;
+package jazz.util;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -13,9 +13,9 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 
-final class ImageLoader {
+public final class ImageLoader {
 
-  static BufferedImage loadImage(final File file) throws IOException {
+  public static BufferedImage loadImage(final File file) throws IOException {
     if (file == null) {
       throw new IllegalArgumentException(
           "The `fileName` must not be null.");
@@ -33,7 +33,7 @@ final class ImageLoader {
     return loadImage(new FileInputStream(file), file.getName());
   }
 
-  static BufferedImage loadImage(
+  public static BufferedImage loadImage(
       final InputStream stream,
       final String name) throws IOException {
 

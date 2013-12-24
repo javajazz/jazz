@@ -1,4 +1,4 @@
-package jazz;
+package jazz.util;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

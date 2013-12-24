@@ -1,12 +1,12 @@
 package jazz.examples.basic;
 
 import jazz.Animation;
-import jazz.Circle;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Pictures;
 import jazz.Point;
-import jazz.Polygon;
+import jazz.pictures.mutable.Circle;
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Polygon;
 
 public class Polygons {
 

@@ -1,11 +1,11 @@
 package jazz.examples.basic;
 
 import jazz.Color;
-import jazz.GridCoords;
 import jazz.Jazz;
-import jazz.Pictures;
 import jazz.Point;
-import jazz.Polygon;
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Polygon;
+import jazz.util.GridCoords;
 
 public class Dicewarz {
 

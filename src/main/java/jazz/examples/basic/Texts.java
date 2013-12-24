@@ -4,8 +4,8 @@ import jazz.Animation;
 import jazz.Color;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Pictures;
-import jazz.Text;
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Text;
 
 public class Texts {
 

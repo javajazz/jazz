@@ -1,7 +1,9 @@
-package jazz;
+package jazz.pictures.mutable;
 
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+
+import jazz.pictures.MutableAbstractPicture;
 
 public final class Rectangle extends MutableAbstractPicture<Rectangle> {
 

@@ -1,8 +1,10 @@
-package jazz;
+package jazz.pictures.immutable;
 
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
+
+import jazz.pictures.ImmutableAbstractPicture;
 
 class ImmutablePie extends ImmutableAbstractPicture<ImmutablePie> {
 
@@ -15,7 +17,7 @@ class ImmutablePie extends ImmutableAbstractPicture<ImmutablePie> {
     super(shape);
   }
 
-  void doDraw(Graphics2D g2d) {
+  protected void doDraw(Graphics2D g2d) {
     g2d.setTransform(getTransform(g2d.getTransform()));
     doRender(g2d);
   }

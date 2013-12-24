@@ -3,12 +3,12 @@ package jazz.examples.basic;
 import java.io.IOException;
 
 import jazz.Animation;
-import jazz.Bitmap;
-import jazz.Circle;
 import jazz.Color;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Pictures;
+import jazz.pictures.mutable.Bitmap;
+import jazz.pictures.mutable.Circle;
+import jazz.pictures.mutable.Pictures;
 
 public class SingleImage {
 

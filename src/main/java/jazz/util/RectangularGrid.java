@@ -1,4 +1,4 @@
-package jazz;
+package jazz.util;
 
 public class RectangularGrid {
 

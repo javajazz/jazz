@@ -3,8 +3,8 @@ package jazz.examples.basic;
 import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Pictures;
-import jazz.Rectangle;
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Rectangle;
 
 public class Animate {
 

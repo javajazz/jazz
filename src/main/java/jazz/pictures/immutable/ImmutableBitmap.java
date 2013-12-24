@@ -1,4 +1,4 @@
-package jazz;
+package jazz.pictures.immutable;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,29 +9,30 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
-public final class Bitmap extends AbstractPicture<Bitmap> {
+import jazz.pictures.ImmutableAbstractPicture;
+import jazz.util.ImageLoader;
+
+final class ImmutableBitmap extends ImmutableAbstractPicture<ImmutableBitmap> {
 
   private final BufferedImage bufferedImage;
 
-  public Bitmap(Class<?> clazz, String resource) throws IOException {
+  public ImmutableBitmap(Class<?> clazz, String resource) throws IOException {
     this(ImageLoader.loadImage(clazz.getResourceAsStream(resource), resource));
   }
 
-  public Bitmap(final String fileName) throws IOException {
+  public ImmutableBitmap(final String fileName) throws IOException {
     this(ImageLoader.loadImage(fileName == null ? null : new File(fileName)));
   }
 
-  private Bitmap(BufferedImage bufferedImage) {
+  private ImmutableBitmap(BufferedImage bufferedImage) {
     super(new Rectangle2D.Double(0, 0, bufferedImage.getWidth(),
         bufferedImage.getHeight()));
     this.bufferedImage = bufferedImage;
   }
 
   @Override
-  void doRender(Graphics2D g2d) {
-    if (alpha != null) {
-      g2d.setComposite(alpha);
-    }
+  protected void doRender(Graphics2D g2d) {
+
     g2d.drawImage(bufferedImage, new AffineTransform(),
         new ImageObserver() {
           @Override
@@ -44,8 +45,8 @@ public final class Bitmap extends AbstractPicture<Bitmap> {
   }
 
   @Override
-  public Bitmap clone() {
-    return doClone(new Bitmap(bufferedImage));
+  public ImmutableBitmap clone() {
+    return doClone(new ImmutableBitmap(bufferedImage));
   }
 
 }

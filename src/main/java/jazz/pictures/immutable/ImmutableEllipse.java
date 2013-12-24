@@ -1,7 +1,9 @@
-package jazz;
+package jazz.pictures.immutable;
 
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+
+import jazz.pictures.ImmutableAbstractPicture;
 
 final class ImmutableEllipse extends ImmutableAbstractPicture<ImmutableEllipse> {
 

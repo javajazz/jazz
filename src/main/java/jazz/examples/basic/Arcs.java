@@ -3,9 +3,9 @@ package jazz.examples.basic;
 import jazz.Event;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Pictures;
-import jazz.Pie;
 import jazz.World;
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Pie;
 
 public class Arcs {
 

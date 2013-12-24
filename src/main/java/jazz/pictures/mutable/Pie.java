@@ -1,8 +1,10 @@
-package jazz;
+package jazz.pictures.mutable;
 
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Arc2D;
+
+import jazz.pictures.MutableAbstractPicture;
 
 public class Pie extends MutableAbstractPicture<Pie> {
 
@@ -15,7 +17,7 @@ public class Pie extends MutableAbstractPicture<Pie> {
     super(shape);
   }
 
-  void doDraw(Graphics2D g2d) {
+  protected void doDraw(Graphics2D g2d) {
     g2d.setTransform(getTransform(g2d.getTransform()));
     doRender(g2d);
   }

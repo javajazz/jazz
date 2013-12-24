@@ -1,4 +1,4 @@
-package jazz;
+package jazz.pictures.mutable;
 
 import java.awt.Color;
 import java.awt.Composite;
@@ -10,6 +10,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+
+import jazz.Picture;
+import jazz.pictures.MutableAbstractPicture;
+import jazz.pictures.UnmodifieablePictures;
 
 public final class Pictures extends MutableAbstractPicture<Pictures> implements
     Iterable<Picture> {
@@ -73,7 +77,7 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
   }
 
   @Override
-  void doDraw(Graphics2D g2d) {
+  protected void doDraw(Graphics2D g2d) {
     if (color != null) {
       g2d.setColor(color);
     }

@@ -1,7 +1,9 @@
-package jazz;
+package jazz.pictures.mutable;
 
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+
+import jazz.pictures.MutableAbstractPicture;
 
 public final class Ellipse extends MutableAbstractPicture<Ellipse> {
 

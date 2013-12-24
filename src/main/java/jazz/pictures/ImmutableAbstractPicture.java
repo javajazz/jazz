@@ -1,9 +1,12 @@
-package jazz;
+package jazz.pictures;
 
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
-abstract class ImmutableAbstractPicture<P extends ImmutableAbstractPicture<P>>
+import jazz.Color;
+import jazz.Immutable;
+
+public abstract class ImmutableAbstractPicture<P extends ImmutableAbstractPicture<P>>
     extends AbstractPicture<P> implements Immutable {
 
   public ImmutableAbstractPicture(Shape shape) {
