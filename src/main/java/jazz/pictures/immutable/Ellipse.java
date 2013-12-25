@@ -5,7 +5,7 @@ import java.awt.geom.Ellipse2D;
 
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class Ellipse extends ImmutableAbstractPicture<Ellipse> {
+public final class Ellipse extends ImmutableAbstractPicture<Ellipse> {
 
   public Ellipse(double a, double b) {
     super(new Ellipse2D.Double(0, 0, a * 2, b * 2));

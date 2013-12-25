@@ -5,7 +5,7 @@ import java.awt.geom.Rectangle2D;
 
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class Rectangle extends
+public final class Rectangle extends
     ImmutableAbstractPicture<Rectangle> {
 
   public Rectangle(double width, double height) {

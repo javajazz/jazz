@@ -5,7 +5,7 @@ import java.awt.geom.Ellipse2D;
 
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class Circle extends ImmutableAbstractPicture<Circle> {
+public final class Circle extends ImmutableAbstractPicture<Circle> {
 
   public Circle(double radius) {
     super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));

@@ -7,7 +7,7 @@ import java.awt.geom.GeneralPath;
 import jazz.Vector;
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class Polygon extends ImmutableAbstractPicture<Polygon> {
+public final class Polygon extends ImmutableAbstractPicture<Polygon> {
 
   public Polygon(Vector... points) {
     super(makePath(points));

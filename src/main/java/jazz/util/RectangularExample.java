@@ -1,6 +1,5 @@
 package jazz.util;
 
-import jazz.Color;
 import jazz.Event;
 import jazz.Jazz;
 import jazz.Picture;
@@ -10,10 +9,9 @@ import jazz.pictures.mutable.Circle;
 public class RectangularExample {
 
 	public static class Thing {
-		
 		boolean activated = false;
 	}
-	
+
 	public static void main(String... args) {
 		Jazz.play("PLAY", 800, 600, new World() {
 

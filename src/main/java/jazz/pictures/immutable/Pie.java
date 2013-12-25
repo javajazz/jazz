@@ -6,7 +6,7 @@ import java.awt.geom.Arc2D;
 
 import jazz.pictures.ImmutableAbstractPicture;
 
-class Pie extends ImmutableAbstractPicture<Pie> {
+public class Pie extends ImmutableAbstractPicture<Pie> {
 
   public Pie(double w, double h, double start, double extent) {
     super(new Arc2D.Double(-w / 4, -h / 4, w / 2, h / 2,

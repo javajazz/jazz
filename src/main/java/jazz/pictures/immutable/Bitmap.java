@@ -12,7 +12,7 @@ import java.io.IOException;
 import jazz.pictures.ImmutableAbstractPicture;
 import jazz.util.ImageLoader;
 
-final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
+public final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
 
   private final BufferedImage bufferedImage;
 

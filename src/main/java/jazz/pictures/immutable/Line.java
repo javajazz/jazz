@@ -7,7 +7,7 @@ import java.awt.geom.Line2D;
 import jazz.Vector;
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class Line extends ImmutableAbstractPicture<Line> {
+public final class Line extends ImmutableAbstractPicture<Line> {
 
   public Line(Vector from, Vector to) {
     super(new Line2D.Double(from.x, from.y, to.x, to.y));

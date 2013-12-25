@@ -4,53 +4,59 @@ import jazz.Key.Location;
 
 public interface Event {
 
-  enum Type {
-    MOUSE_DOWN,
-    MOUSE_UP,
-    CLICK,
-    MOUSE_MOVE,
-    MOUSE_WHEEL,
-    KEY_DOWN,
-    KEY_UP,
-    KEY_TYPED,
-    WINDOW_CLOSED,
-    WINDOW_HIDDEN,
-    WINDOW_SHOWN,
-    WINDOW_ACTIVATED,
-    WINDOW_DEACTIVATED, WINDOW_OPENED
-  }
+	enum Type {
+		MOUSE_DOWN,
+		MOUSE_UP,
+		CLICK,
+		MOUSE_MOVE,
+		MOUSE_WHEEL,
+		KEY_DOWN,
+		KEY_UP,
+		KEY_TYPED,
+		WINDOW_CLOSED,
+		WINDOW_HIDDEN,
+		WINDOW_SHOWN,
+		WINDOW_ACTIVATED,
+		WINDOW_DEACTIVATED, WINDOW_OPENED
+	}
 
-  Type getType();
+	Type getType();
 
-  int getX();
+	int getX();
 
-  int getY();
-  
-  Vector getPosition();
+	int getY();
 
-  MouseButton getButton();
+	/**
+	 * Return the mouse position at the time this event happened as a Vector.
+	 * 
+	 * @return The position of the mouse as a vector leading from the origin to
+	 *         the current point.
+	 */
+	Vector getPosition();
 
-  int getKeyCode();
+	MouseButton getButton();
 
-  Key getKey();
+	int getKeyCode();
 
-  char getChar();
+	Key getKey();
 
-  boolean isShiftPressed();
+	char getChar();
 
-  boolean isAltPressed();
+	boolean isShiftPressed();
 
-  boolean isCtrlPressed();
+	boolean isAltPressed();
 
-  boolean isSuperPressed();
+	boolean isCtrlPressed();
 
-  Window getWindow();
+	boolean isSuperPressed();
 
-  int getWindowY();
+	Window getWindow();
 
-  int getWindowX();
+	int getWindowY();
 
-  double getWheelRotation();
+	int getWindowX();
 
-  Location getKeyLocation();
+	double getWheelRotation();
+
+	Location getKeyLocation();
 }
