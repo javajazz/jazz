@@ -59,8 +59,12 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
 		return false;
 	}
 
+	public T getTileAt(int x, int y) {
+		return tiles[x][y];
+	}
+	
 	@Override
-	Picture getPicture() {
+	public Picture getPicture() {
 
 		Pictures pictures = new Pictures();
 		double tileWidth = getWidth() / gridWidth;

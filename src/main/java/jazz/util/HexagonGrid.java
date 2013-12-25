@@ -8,6 +8,9 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 	public static enum Mode {
 		/**
+		 * First row is offset (even rows are indented) and has one cell less
+		 * than the second (odd rows).
+		 * 
 		 * <pre>
 		 *   ^   ^
 		 *  / \ / \
@@ -23,8 +26,11 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 		 * </pre>
 		 */
 		VERT_FST_OFFSET,
-		
+
 		/**
+		 * First row is offset (even rows are indented), and all rows have the
+		 * same amount of cells.
+		 * 
 		 * <pre>
 		 *   ^   ^
 		 *  / \ / \
@@ -40,7 +46,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 		 * </pre>
 		 */
 		VERT_FST_OFFSET_FULL,
-		
+
 		/**
 		 * <pre>
 		 *     ^
@@ -74,7 +80,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 		 * </pre>
 		 */
 		VERT_SND_OFFSET_FULL,
-		
+
 		/**
 		 * <pre>
 		 *   ___       ___
@@ -113,7 +119,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 		 * </pre>
 		 */
 		HOR_SND_OFFSET,
-		
+
 		/**
 		 * <pre>
 		 *        ___       ___
@@ -127,7 +133,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 		 */
 		HOR_SND_OFFSET_FULL
 	}
-	
+
 	private final int gridWidth;
 	private final int gridHeight;
 
