@@ -42,4 +42,8 @@ public final class GridCoords {
       return false;
     return true;
   }
+  
+  public String toString() {
+	  return String.format("(%d,%d)\n", x, y);
+  }
 }

@@ -6,14 +6,14 @@ import java.awt.geom.Arc2D;
 
 import jazz.pictures.ImmutableAbstractPicture;
 
-class ImmutablePie extends ImmutableAbstractPicture<ImmutablePie> {
+class Pie extends ImmutableAbstractPicture<Pie> {
 
-  public ImmutablePie(double w, double h, double start, double extent) {
+  public Pie(double w, double h, double start, double extent) {
     super(new Arc2D.Double(-w / 4, -h / 4, w / 2, h / 2,
         360 - start, -(extent - start), Arc2D.PIE));
   }
 
-  private ImmutablePie(Shape shape) {
+  private Pie(Shape shape) {
     super(shape);
   }
 
@@ -23,8 +23,8 @@ class ImmutablePie extends ImmutableAbstractPicture<ImmutablePie> {
   }
 
   @Override
-  public ImmutablePie clone() {
-    return doClone(new ImmutablePie(shape));
+  public Pie clone() {
+    return doClone(new Pie(shape));
   }
 
 }

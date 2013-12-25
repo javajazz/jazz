@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 
-import jazz.Point;
+import jazz.Vector;
 import jazz.pictures.MutableAbstractPicture;
 
 public final class Line extends MutableAbstractPicture<Line> {
 
-  public Line(Point from, Point to) {
+  public Line(Vector from, Vector to) {
     super(new Line2D.Double(from.x, from.y, to.x, to.y));
   }
 

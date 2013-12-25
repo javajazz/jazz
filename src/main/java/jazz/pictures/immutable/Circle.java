@@ -5,19 +5,19 @@ import java.awt.geom.Ellipse2D;
 
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class ImmutableCircle extends ImmutableAbstractPicture<ImmutableCircle> {
+final class Circle extends ImmutableAbstractPicture<Circle> {
 
-  public ImmutableCircle(double radius) {
+  public Circle(double radius) {
     super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));
   }
 
-  private ImmutableCircle(Shape shape) {
+  private Circle(Shape shape) {
     super(shape);
   }
 
   @Override
-  public ImmutableCircle clone() {
-    return doClone(new ImmutableCircle(shape));
+  public Circle clone() {
+    return doClone(new Circle(shape));
   }
 
 }

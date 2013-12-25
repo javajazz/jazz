@@ -12,19 +12,19 @@ import java.io.IOException;
 import jazz.pictures.ImmutableAbstractPicture;
 import jazz.util.ImageLoader;
 
-final class ImmutableBitmap extends ImmutableAbstractPicture<ImmutableBitmap> {
+final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
 
   private final BufferedImage bufferedImage;
 
-  public ImmutableBitmap(Class<?> clazz, String resource) throws IOException {
+  public Bitmap(Class<?> clazz, String resource) throws IOException {
     this(ImageLoader.loadImage(clazz.getResourceAsStream(resource), resource));
   }
 
-  public ImmutableBitmap(final String fileName) throws IOException {
+  public Bitmap(final String fileName) throws IOException {
     this(ImageLoader.loadImage(fileName == null ? null : new File(fileName)));
   }
 
-  private ImmutableBitmap(BufferedImage bufferedImage) {
+  private Bitmap(BufferedImage bufferedImage) {
     super(new Rectangle2D.Double(0, 0, bufferedImage.getWidth(),
         bufferedImage.getHeight()));
     this.bufferedImage = bufferedImage;
@@ -45,8 +45,8 @@ final class ImmutableBitmap extends ImmutableAbstractPicture<ImmutableBitmap> {
   }
 
   @Override
-  public ImmutableBitmap clone() {
-    return doClone(new ImmutableBitmap(bufferedImage));
+  public Bitmap clone() {
+    return doClone(new Bitmap(bufferedImage));
   }
 
 }

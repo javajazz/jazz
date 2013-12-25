@@ -187,6 +187,10 @@ class EventImpl implements Event {
   public int getY() {
     return y;
   }
+  
+  public Vector getPosition() {
+	  return new Vector(x, y);
+  }
 
   @Override
   public int getWindowX() {

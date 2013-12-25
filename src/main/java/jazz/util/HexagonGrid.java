@@ -1,6 +1,6 @@
 package jazz.util;
 
-import jazz.Point;
+import jazz.Vector;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
@@ -75,7 +75,7 @@ public class HexagonGrid<T> {
     return null;
   }
 
-  public T getCoordsFor(Point p) {
+  public T getCoordsFor(Vector p) {
     return getCoordsFor(p.x, p.y);
   }
 
@@ -103,7 +103,7 @@ public class HexagonGrid<T> {
     return this;
   }
 
-  public HexagonGrid<T> setCenter(Point p) {
+  public HexagonGrid<T> setCenter(Vector p) {
     setCenter(p.x, p.y);
     return this;
   }

@@ -2,7 +2,7 @@ package jazz.examples.basic;
 
 import jazz.Color;
 import jazz.Jazz;
-import jazz.Point;
+import jazz.Vector;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Polygon;
 import jazz.util.GridCoords;
@@ -15,12 +15,12 @@ public class Dicewarz {
 		double y = Math.sin(30.0 / 180.0 * Math.PI);
 
 		return new Polygon(
-				new Point(x * a, 2 * a),
-				new Point(2 * x * a, y * a + a),
-				new Point(2 * x * a, y * a),
-				new Point(x * a, 0),
-				new Point(0, y * a),
-				new Point(0, y * a + a));
+				new Vector(x * a, 2 * a),
+				new Vector(2 * x * a, y * a + a),
+				new Vector(2 * x * a, y * a),
+				new Vector(x * a, 0),
+				new Vector(0, y * a),
+				new Vector(0, y * a + a));
 	}
 
 	public static GridCoords topLeft(int x, int y, int X, int Y) {

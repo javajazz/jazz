@@ -4,16 +4,16 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 
-import jazz.Point;
+import jazz.Vector;
 import jazz.pictures.ImmutableAbstractPicture;
 
-final class ImmutableLine extends ImmutableAbstractPicture<ImmutableLine> {
+final class Line extends ImmutableAbstractPicture<Line> {
 
-  public ImmutableLine(Point from, Point to) {
+  public Line(Vector from, Vector to) {
     super(new Line2D.Double(from.x, from.y, to.x, to.y));
   }
 
-  private ImmutableLine(Shape shape) {
+  private Line(Shape shape) {
     super(shape);
   }
 
@@ -23,8 +23,8 @@ final class ImmutableLine extends ImmutableAbstractPicture<ImmutableLine> {
   }
 
   @Override
-  public ImmutableLine clone() {
-    return doClone(new ImmutableLine(shape));
+  public Line clone() {
+    return doClone(new Line(shape));
   }
 
 }

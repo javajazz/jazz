@@ -25,6 +25,8 @@ public interface Event {
   int getX();
 
   int getY();
+  
+  Vector getPosition();
 
   MouseButton getButton();
 

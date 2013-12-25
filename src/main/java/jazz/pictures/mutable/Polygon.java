@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-import jazz.Point;
+import jazz.Vector;
 import jazz.pictures.MutableAbstractPicture;
 
 public final class Polygon extends MutableAbstractPicture<Polygon> {
 
-  public Polygon(Point... points) {
+  public Polygon(Vector... points) {
     super(makePath(points));
   }
 
@@ -31,7 +31,7 @@ public final class Polygon extends MutableAbstractPicture<Polygon> {
     return path;
   }
 
-  private static Shape makePath(Point[] points) {
+  private static Shape makePath(Vector[] points) {
     GeneralPath path = new GeneralPath();
     path.moveTo(points[0].x, points[0].y);
     for (int i = 0; i < points.length; i++) {

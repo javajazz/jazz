@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * An immutable point in the two dimensional plane.
  */
-public class Point implements Serializable {
+public class Vector implements Serializable {
 
   /**
    * Serial Version UID.
@@ -18,7 +18,7 @@ public class Point implements Serializable {
   /**
    * The origin (a point with the coordinates (0,0).
    */
-  public final static Point ORIGIN = new Point(0, 0);
+  public final static Vector ZERO = new Vector(0, 0);
 
   /**
    * The x coordinate of this point.
@@ -38,7 +38,7 @@ public class Point implements Serializable {
    * @param y
    *          The y coordinate.
    */
-  public Point(double x, double y) {
+  public Vector(double x, double y) {
     this.x = x;
     this.y = y;
   }
@@ -68,7 +68,7 @@ public class Point implements Serializable {
    *          The point to be used for translating this points location.
    * @return A new point, a copy of this point translated by p.x and p.y.
    */
-  public Point translate(Point p) {
+  public Vector translate(Vector p) {
     return translate(p.x, p.y);
   }
 
@@ -81,8 +81,8 @@ public class Point implements Serializable {
    *          The vertical translation.
    * @return A new point, a copy of this point translated by x and y.
    */
-  public Point translate(double x, double y) {
-    return new Point(this.x + x, this.y + y);
+  public Vector translate(double x, double y) {
+    return new Vector(this.x + x, this.y + y);
   }
 
   /**
@@ -96,8 +96,8 @@ public class Point implements Serializable {
    * @return A new point, a copy of this point slaced by the given x and y
    *         values, as if it was a vector.
    */
-  public Point scale(double x, double y) {
-    return new Point(this.x * x, this.y * y);
+  public Vector scale(double x, double y) {
+    return new Vector(this.x * x, this.y * y);
   }
 
   /**
@@ -109,24 +109,24 @@ public class Point implements Serializable {
    * @return A new point, a copy of this point rotated around the origin by the
    *         given angle.
    */
-  public Point rotate(double angle) {
-    return rotate(ORIGIN, angle);
+  public Vector rotate(double angle) {
+    return rotate(ZERO, angle);
   }
 
-  public Point rotate(Point origin, double angle) {
+  public Vector rotate(Vector origin, double angle) {
     Point2D.Double p = new Point2D.Double(x, y);
     Point2D.Double t = new Point2D.Double(0, 0);
     AffineTransform
         .getRotateInstance(angle / 180 * Math.PI, origin.x, origin.y)
         .transform(p, t);
-    return new Point(t.x, t.y);
+    return new Vector(t.x, t.y);
   }
 
-  public static double angleOfLine(Point start, Point end) {
+  public static double angleOfLine(Vector start, Vector end) {
     return end.translate(-start.x, -start.y).angleFromOrigin();
   }
 
-  public double distanceTo(Point p) {
+  public double distanceTo(Vector p) {
     return Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2));
   }
 
@@ -139,16 +139,16 @@ public class Point implements Serializable {
     return result < 0 ? 360 + result : result;
   }
 
-  public static double distance(Point p1, Point p2) {
+  public static double distance(Vector p1, Vector p2) {
     return p1.distanceTo(p2);
   }
 
-  public static double angleBetween(Point p1, Point p2) {
+  public static double angleBetween(Vector p1, Vector p2) {
     return p2.angleFromOrigin() - p1.angleFromOrigin();
   }
 
   public static void main(String... args) {
-    System.out.println(new Point(1, -1).angleFromOrigin());
+    System.out.println(new Vector(1, -1).angleFromOrigin());
   }
 
   @Override
@@ -158,8 +158,8 @@ public class Point implements Serializable {
 
   @Override
   public boolean equals(Object p) {
-    if (p instanceof Point) {
-      return x == ((Point) p).x && y == ((Point) p).y;
+    if (p instanceof Vector) {
+      return x == ((Vector) p).x && y == ((Vector) p).y;
     }
     return false;
   }
