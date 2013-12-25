@@ -1,130 +1,168 @@
 package jazz.util;
 
-import jazz.Vector;
+import jazz.Picture;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
-public class HexagonGrid<T> {
+public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
-  public static enum Mode {
-    A, B, C, D
-  }
+	public static enum Mode {
+		/**
+		 * <pre>
+		 *   ^   ^
+		 *  / \ / \
+		 * v   v   v
+		 * |2,1|2,2|
+		 * ^   ^   ^
+		 *  \ / \ / 
+		 *   v   v
+		 *   |1,1|
+		 *   ^   ^
+		 *    \ /
+		 *     v
+		 * </pre>
+		 */
+		VERT_FST_OFFSET,
+		
+		/**
+		 * <pre>
+		 *   ^   ^
+		 *  / \ / \
+		 * v   v   v
+		 * |2,1|2,2|
+		 * ^   ^   ^
+		 *  \ / \ / \ 
+		 *   v   v   v
+		 *   |1,1|1,2|
+		 *   ^   ^   ^
+		 *    \ / \ /
+		 *     v   v
+		 * </pre>
+		 */
+		VERT_FST_OFFSET_FULL,
+		
+		/**
+		 * <pre>
+		 *     ^
+		 *    / \
+		 *   v   v
+		 *   |2,1|
+		 *   ^   ^
+		 *  / \ / \
+		 * v   v   v
+		 * |1,1|1,2|
+		 * ^   ^   ^
+		 *  \ / \ /
+		 *   v   v
+		 * </pre>
+		 */
+		VERT_SND_OFFSET,
 
-  private final int gridWidth;
-  private final int gridHeight;
-  private final T[][] grid;
-  private final int size;
-  private final Pictures pictures = new Pictures();
-  private final boolean orientation;
-  private final double side;
+		/**
+		 * <pre>
+		 *     ^   ^
+		 *    / \ / \
+		 *   v   v   v
+		 *   |2,1|2,2|
+		 *   ^   ^   ^
+		 *  / \ / \ /
+		 * v   v   v
+		 * |1,1|1,2|
+		 * ^   ^   ^
+		 *  \ / \ /
+		 *   v   v
+		 * </pre>
+		 */
+		VERT_SND_OFFSET_FULL,
+		
+		/**
+		 * <pre>
+		 *   ___       ___
+		 *  /   \     /   \
+		 * / 2,1 \___/ 2,2 \
+		 * \     /   \     /
+		 *  \___/ 1,1 \___/
+		 *      \     /
+		 *       \___/
+		 * </pre>
+		 */
+		HOR_FST_OFFSET,
 
-  private double height = 0;
-  private double width = 0;
-  private double posX = 0;
-  private double posY = 0;
+		/**
+		 * <pre>
+		 *   ___       ___
+		 *  /   \     /   \
+		 * / 2,1 \___/ 2,2 \___
+		 * \     /   \     /   \
+		 *  \___/ 1,1 \___/ 1,2 \
+		 *      \     /   \     /
+		 *       \___/     \___/
+		 * </pre>
+		 */
+		HOR_FST_OFFSET_FULL,
 
-  public HexagonGrid(int gridWidth, int gridHeight,
-      double side, boolean orientation) {
+		/**
+		 * <pre>
+		 *        ___
+		 *       /   \
+		 *   ___/ 2,1 \___
+		 *  /   \     /   \
+		 * / 1,1 \___/ 1,2 \
+		 * \     /   \     /
+		 *  \___/     \___/
+		 * </pre>
+		 */
+		HOR_SND_OFFSET,
+		
+		/**
+		 * <pre>
+		 *        ___       ___
+		 *       /   \     /   \
+		 *   ___/ 2,1 \___/ 2,2 \
+		 *  /   \     /   \     /
+		 * / 1,1 \___/ 1,2 \___/
+		 * \     /   \     /
+		 *  \___/     \___/
+		 * </pre>
+		 */
+		HOR_SND_OFFSET_FULL
+	}
+	
+	private final int gridWidth;
+	private final int gridHeight;
 
-    this.orientation = orientation;
-    this.gridWidth = gridWidth;
-    this.gridHeight = gridHeight;
-    this.side = side;
+	private final TileEventHandler<T> tileHandler;
+	private final TileRenderer<T> tileRenderer;
 
-    @SuppressWarnings("unchecked")
-    T[][] grid = (T[][]) new Object[gridWidth][gridHeight];
+	private final T[][] tiles;
 
-    this.grid = grid;
-    this.size = gridWidth * gridHeight;
+	@SuppressWarnings("unchecked")
+	public HexagonGrid(int gridWidth, int gridHeight, double side,
+			TileFactory<T> tileFactory,
+			TileEventHandler<T> tileHandler,
+			TileRenderer<T> tileRenderer) {
 
-    if (this.orientation) {
-      this.width = gridWidth * Math.sqrt(3) * this.side;
-      this.height = gridHeight * 2 * this.side;
-    } else {
-      this.width = gridWidth * 2 * this.side;
-      this.height = gridHeight * Math.sqrt(3) * this.side;
-    }
-  }
+		super(400, 300);
 
-  void makePictures() {
-    for (int y = 0; y < gridHeight; y++) {
-      for (int x = 0; x < gridWidth; x++) {
+		this.gridWidth = gridWidth;
+		this.gridHeight = gridHeight;
 
-      }
-    }
-  }
+		this.tileHandler = tileHandler;
+		this.tileRenderer = tileRenderer;
 
-  public int getSize() {
-    return size;
-  }
+		this.tiles = (T[][]) new Object[gridWidth][gridHeight];
 
-  public HexagonGrid<T> setTile(int x, int y, T tile) {
-    grid[x][y] = tile;
-    return this;
-  }
+		for (int x = 0; x < gridWidth; x++) {
+			for (int y = 0; y < gridHeight; y++) {
+				tiles[x][y] = tileFactory.createTile(x, y);
+			}
+		}
+	}
 
-  public T getTile(int x, int y) {
-    return grid[x][y];
-  }
+	@Override
+	Picture getPicture() {
+		Pictures pictures = new Pictures();
 
-  public T getTileAt(double x, double y) {
-    return null;
-  }
-
-  public T getCoordsFor(double x, double y) {
-    return null;
-  }
-
-  public T getCoordsFor(Vector p) {
-    return getCoordsFor(p.x, p.y);
-  }
-
-  public double getWidth() {
-    return width;
-  }
-
-  public double getHeight() {
-    return height;
-  }
-
-  public HexagonGrid<T> setCenterX(double x) {
-    posX = x;
-    return this;
-  }
-
-  public HexagonGrid<T> setCenterY(double y) {
-    posY = y;
-    return this;
-  }
-
-  public HexagonGrid<T> setCenter(double x, double y) {
-    setCenterX(x);
-    setCenterY(y);
-    return this;
-  }
-
-  public HexagonGrid<T> setCenter(Vector p) {
-    setCenter(p.x, p.y);
-    return this;
-  }
-
-  public double getX() {
-    return posX;
-  }
-
-  public double getY() {
-    return posY;
-  }
-
-  public UnmodifieablePictures getPicture() {
-    return pictures.getImmutable();
-  }
-
-  public int getGridWidth() {
-    return gridWidth;
-  }
-
-  public int getGridHeight() {
-    return gridHeight;
-  }
+		return new UnmodifieablePictures(pictures);
+	}
 }

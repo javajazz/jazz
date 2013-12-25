@@ -3,6 +3,7 @@ package jazz.util;
 import jazz.Event;
 import jazz.Picture;
 import jazz.Vector;
+import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
 public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
@@ -60,10 +61,11 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
 
 	@Override
 	Picture getPicture() {
-		
+
 		Pictures pictures = new Pictures();
 		double tileWidth = getWidth() / gridWidth;
 		double tileHeight = getHeight() / gridHeight;
+
 		Vector p = getLowerLeftCorner();
 		double posX = p.x + tileWidth / 2;
 		double upperY = p.y + tileHeight / 2;
@@ -77,6 +79,6 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
 			}
 			posX += tileWidth;
 		}
-		return pictures;
+		return new UnmodifieablePictures(pictures);
 	}
 }
