@@ -6,13 +6,10 @@ import jazz.Vector;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
-public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
+public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>, T> {
 
 	private final int gridWidth;
 	private final int gridHeight;
-
-	private final TileEventHandler<T> tileHandler;
-	private final TileRenderer<T> tileRenderer;
 
 	private final T[][] tiles;
 
@@ -24,13 +21,10 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
 			TileEventHandler<T> tileHandler,
 			TileRenderer<T> tileRenderer) {
 
-		super(width * tileWidth, height * tileHeight);
+		super(tileHandler, tileRenderer, width * tileWidth, height * tileHeight);
 
 		gridWidth = width;
 		gridHeight = height;
-
-		this.tileHandler = tileHandler;
-		this.tileRenderer = tileRenderer;
 
 		this.tiles = (T[][]) new Object[gridWidth][gridHeight];
 
@@ -41,7 +35,7 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
 		}
 	}
 
-	public boolean on(Event e) {
+	public void on(Event e) {
 
 		Vector c = getLowerLeftCorner();
 		Vector p = e.getPosition();
@@ -54,9 +48,7 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>> {
 			y /= height / gridHeight;
 
 			tileHandler.on(e, tiles[x][y]);
-			return true;
 		}
-		return false;
 	}
 
 	public T getTileAt(int x, int y) {

@@ -1,57 +1,72 @@
 package jazz.util;
 
-import jazz.Picture;
 import jazz.Vector;
 
-public abstract class AbstractGrid<A> {
+public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
 	protected Vector center = Vector.ZERO;
 	protected double width;
 	protected double height;
 
-	abstract Picture getPicture();
+	protected final TileEventHandler<T> tileHandler;
+	protected final TileRenderer<T> tileRenderer;
 
-	public AbstractGrid(double width, double height) {
+	public AbstractGrid(
+			TileEventHandler<T> tileHandler,
+			TileRenderer<T> tileRenderer,
+			double width, double height) {
+
+		this.tileHandler = tileHandler;
+		this.tileRenderer = tileRenderer;
+
 		setWidth(width);
 		setHeight(height);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setCenter(Vector p) {
 		this.center = p;
 		return (A) this;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setCenter(double x, double y) {
 		this.center = new Vector(x, y);
 		return (A) this;
 	}
 
+	@Override
 	public Vector getCenter() {
 		return center;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setWidth(double width) {
 		this.width = width;
 		return (A) this;
 	}
 
+	@Override
 	public double getWidth() {
 		return width;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setHeight(double height) {
 		this.height = height;
 		return (A) this;
 	}
 
+	@Override
 	public double getHeight() {
 		return height;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setLowerLeftCorner(Vector p, boolean resize) {
 		if (resize) {
@@ -65,10 +80,12 @@ public abstract class AbstractGrid<A> {
 		return (A) this;
 	}
 
+	@Override
 	public Vector getLowerLeftCorner() {
 		return new Vector(center.x - width / 2, center.y - height / 2);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setUpperLeftCorner(Vector p, boolean resize) {
 		if (resize) {
@@ -82,10 +99,12 @@ public abstract class AbstractGrid<A> {
 		return (A) this;
 	}
 
+	@Override
 	public Vector getUpperLeftCorner() {
 		return new Vector(center.x - width / 2, center.y + height / 2);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setLowerRightCorner(Vector p, boolean resize) {
 		if (resize) {
@@ -99,10 +118,12 @@ public abstract class AbstractGrid<A> {
 		return (A) this;
 	}
 
+	@Override
 	public Vector getLowerRightCorner() {
 		return new Vector(center.x + width / 2, center.y - height / 2);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public A setUpperRightCorner(Vector p, boolean resize) {
 		if (resize) {
@@ -116,6 +137,7 @@ public abstract class AbstractGrid<A> {
 		return (A) this;
 	}
 
+	@Override
 	public Vector getUpperRightCorner() {
 		return new Vector(center.x + width / 2, center.y + height / 2);
 	}

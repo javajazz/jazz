@@ -14,6 +14,7 @@ import jazz.util.TileEventHandler;
 import jazz.util.TileFactory;
 import jazz.util.TileRenderer;
 
+
 public class TicTacToe {
 
 	public static class X extends DelegatingPicture<X> {
@@ -41,7 +42,7 @@ public class TicTacToe {
 	private static class Tile {
 		char value = '\0';
 		boolean highlight;
-		
+
 		void reset() {
 			value = '\0';
 			highlight = false;
@@ -83,17 +84,28 @@ public class TicTacToe {
 								tile.value = turn ? 'o' : 'x';
 								turn = !turn;
 
-								check(0,0,1,1,2,2);
-								check(0,2,1,1,2,0);
-								
-								check(0,0,0,1,0,2);
-								check(1,0,1,1,1,2);
-								check(2,0,2,1,2,2);
-								
-								check(0,0,1,0,2,0);
-								check(0,1,1,1,2,1);
-								check(0,2,1,2,2,2);
-								
+								check(0, 0, 1, 1, 2, 2);
+								check(0, 2, 1, 1, 2, 0);
+
+								check(0, 0, 0, 1, 0, 2);
+								check(1, 0, 1, 1, 1, 2);
+								check(2, 0, 2, 1, 2, 2);
+
+								check(0, 0, 1, 0, 2, 0);
+								check(0, 1, 1, 1, 2, 1);
+								check(0, 2, 1, 2, 2, 2);
+
+								if (grid.getTileAt(0, 0).value != '\0'
+										&& grid.getTileAt(0, 1).value != '\0'
+										&& grid.getTileAt(0, 2).value != '\0'
+										&& grid.getTileAt(1, 0).value != '\0'
+										&& grid.getTileAt(1, 1).value != '\0'
+										&& grid.getTileAt(1, 2).value != '\0'
+										&& grid.getTileAt(2, 0).value != '\0'
+										&& grid.getTileAt(2, 1).value != '\0'
+										&& grid.getTileAt(2, 2).value != '\0') {
+									gameOver = true;
+								}
 							} else if (ev.getType() == Event.Type.MOUSE_MOVE) {
 								currentTile = tile;
 							}
@@ -127,12 +139,14 @@ public class TicTacToe {
 
 			private void check(int x0, int y0, int x1, int y1, int x2, int y2) {
 				if (grid.getTileAt(x0, y0).value != '\0'
-						&& grid.getTileAt(x0, y0).value == grid.getTileAt(x1, y1).value
-						&& grid.getTileAt(x1, y1).value == grid.getTileAt(x2, y2).value) {
+						&& grid.getTileAt(x0, y0).value == grid.getTileAt(x1,
+								y1).value
+						&& grid.getTileAt(x1, y1).value == grid.getTileAt(x2,
+								y2).value) {
 					grid.getTileAt(x0, y0).highlight = true;
 					grid.getTileAt(x1, y1).highlight = true;
 					grid.getTileAt(x2, y2).highlight = true;
-					
+
 					gameOver = true;
 				}
 			}

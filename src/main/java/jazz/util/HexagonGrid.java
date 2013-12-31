@@ -1,10 +1,11 @@
 package jazz.util;
 
+import jazz.Event;
 import jazz.Picture;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
-public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
+public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>, T> {
 
 	public static enum Mode {
 		/**
@@ -32,6 +33,8 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 		 * same amount of cells.
 		 * 
 		 * <pre>
+		 * 2x2:
+		 * 
 		 *   ^   ^
 		 *  / \ / \
 		 * v   v   v
@@ -49,6 +52,8 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 		/**
 		 * <pre>
+		 * 2x2:
+		 * 
 		 *     ^
 		 *    / \
 		 *   v   v
@@ -66,6 +71,8 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 		/**
 		 * <pre>
+		 * 2x2:
+		 * 
 		 *     ^   ^
 		 *    / \ / \
 		 *   v   v   v
@@ -83,6 +90,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 		/**
 		 * <pre>
+		 * 2x2:
 		 *   ___       ___
 		 *  /   \     /   \
 		 * / 2,1 \___/ 2,2 \
@@ -96,6 +104,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 		/**
 		 * <pre>
+		 * 2x2:
 		 *   ___       ___
 		 *  /   \     /   \
 		 * / 2,1 \___/ 2,2 \___
@@ -109,6 +118,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 		/**
 		 * <pre>
+		 * 2x2:
 		 *        ___
 		 *       /   \
 		 *   ___/ 2,1 \___
@@ -122,6 +132,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 
 		/**
 		 * <pre>
+		 * 2x2:
 		 *        ___       ___
 		 *       /   \     /   \
 		 *   ___/ 2,1 \___/ 2,2 \
@@ -137,25 +148,21 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 	private final int gridWidth;
 	private final int gridHeight;
 
-	private final TileEventHandler<T> tileHandler;
-	private final TileRenderer<T> tileRenderer;
-
+	private final Mode gridMode;
 	private final T[][] tiles;
 
 	@SuppressWarnings("unchecked")
 	public HexagonGrid(int gridWidth, int gridHeight, double side,
+			Mode gridMode,
 			TileFactory<T> tileFactory,
 			TileEventHandler<T> tileHandler,
 			TileRenderer<T> tileRenderer) {
 
-		super(400, 300);
+		super(tileHandler, tileRenderer, 400, 300);
 
 		this.gridWidth = gridWidth;
 		this.gridHeight = gridHeight;
-
-		this.tileHandler = tileHandler;
-		this.tileRenderer = tileRenderer;
-
+		this.gridMode = gridMode;
 		this.tiles = (T[][]) new Object[gridWidth][gridHeight];
 
 		for (int x = 0; x < gridWidth; x++) {
@@ -166,9 +173,41 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>> {
 	}
 
 	@Override
-	Picture getPicture() {
+	public Picture getPicture() {
 		Pictures pictures = new Pictures();
 
+		switch (gridMode) {
+		case HOR_FST_OFFSET:
+			
+			break;
+		case HOR_FST_OFFSET_FULL:
+			
+			break;
+		case HOR_SND_OFFSET:
+			
+			break;
+		case HOR_SND_OFFSET_FULL:
+			
+			break;
+		case VERT_FST_OFFSET:
+			
+			break;
+		case VERT_FST_OFFSET_FULL:
+			
+			break;
+		case VERT_SND_OFFSET:
+			
+			break;
+		case VERT_SND_OFFSET_FULL:
+			
+			break;
+		}
+		
 		return new UnmodifieablePictures(pictures);
+	}
+
+	@Override
+	public void on(Event ev) {
+		
 	}
 }
