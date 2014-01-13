@@ -2,7 +2,7 @@ Jazz
 ====
 
 Jazz is a tiny drawing library for Java 7+. It is based on Java 2D and tries to offer a
-simplistic API. Have a look at the [Examples](/scravy/Jazz/tree/master/src/main/java/jazz/examples).
+simplistic API. Have a look at the [Examples](/src/main/java/jazz/examples).
 
 It is primarily aimed at beginner Java programmers.
 
