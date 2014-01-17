@@ -235,4 +235,14 @@ class WindowImpl implements Window {
     }
     return this;
   }
+
+@Override
+public Window debugOutput(boolean doShowDebugOutput) {
+	if (mainWindow != null) {
+		mainWindow.mainPanel.doShowDebugOutput = doShowDebugOutput;
+	}
+	return this;
+}
+  
+  
 }

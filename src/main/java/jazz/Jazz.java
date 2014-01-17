@@ -96,6 +96,8 @@ public final class Jazz {
 	 * 
 	 * This method will return zero if you pass it a value less than one.
 	 * 
+	 * This method is thread-safe.
+	 * 
 	 * @param upto
 	 *            The maximum number (exclusive).
 	 * @return An integer value between 0 (inclusive) and <code>upto</code>
@@ -111,6 +113,14 @@ public final class Jazz {
 		}
 	}
 
+	/**
+	 * 
+	 * This method is thread-safe.
+	 * 
+	 * @param from
+	 * @param upto
+	 * @return
+	 */
 	public static int randomInt(int from, int upto) {
 		return randomInt(upto - from) + from;
 	}
@@ -171,6 +181,8 @@ public final class Jazz {
 	/**
 	 * Displays a static picture in a single window.
 	 * 
+	 * You can open multiple windows using this method.
+	 * 
 	 * @param title
 	 *            The title of the displayed window.
 	 * @param width
@@ -199,28 +211,68 @@ public final class Jazz {
 		});
 	}
 
+	/**
+	 * @param title
+	 * @param picture
+	 * @return
+	 */
 	public static Window displayFullscreen(String title, Picture picture) {
 		return display(title, 0, 0, picture);
 	}
 
-	public static Window animate(final String title, int a, int b,
+	/**
+	 * Displays an animation in a single window.
+	 * 
+	 * You can open multiple windows using this method.
+	 * 
+	 * @param title
+	 *            The title of the displayed window.
+	 * @param width
+	 *            The width of the displayed window.
+	 * @param height
+	 *            The height of the displayed window.
+	 * @param animation
+	 *            The animation to be shown in the displayed window.
+	 * @return A reference to the newly created window.
+	 */
+	public static Window animate(final String title, int width, int height,
 			final Animation animation) {
-		return play(title, a, b, animation);
+		return play(title, width, height, animation);
 	}
 
-	public static <M> Window animate(final String title, int a, int b,
-			final M w, final Renderer<M> r, final UpdateHandler<M> u) {
-		return animate(title, a, b, new Animation() {
-			M world = w;
+	/**
+	 * Displays an animation in a single window.
+	 * 
+	 * You can open multiple windows using this method.
+	 * 
+	 * @see Renderer
+	 * @param title
+	 *            The title of the displayed window.
+	 * @param width
+	 *            The width of the displayed window.
+	 * @param height
+	 *            The height of the displayed window.
+	 * @param model
+	 *            The model (a data object that describes your world).
+	 * @param renderer
+	 *            The renderer that derives a picture from the model.
+	 * @param updateHandler
+	 *            The update handler that updates the model.
+	 * @return A reference to the newly created window.
+	 */
+	public static <M> Window animate(final String title, int width, int height,
+			final M model, final Renderer<M> renderer,
+			final UpdateHandler<M> updateHandler) {
+		return animate(title, width, height, new Animation() {
 
 			@Override
 			public void update(double time, double delta) {
-				u.update(world, time, delta);
+				updateHandler.update(model, time, delta);
 			}
 
 			@Override
 			public Picture getPicture() {
-				return r.render(world);
+				return renderer.render(model);
 			}
 		});
 	}
@@ -251,15 +303,21 @@ public final class Jazz {
 	}
 
 	/**
-	 * INTERNAL: 
+	 * INTERNAL:
 	 * 
 	 * @param title
+	 *            The title of the window to be created.
 	 * @param width
+	 *            The width of the canvas (not the window).
 	 * @param height
+	 *            The height of the canvas (not the window).
 	 * @param model
-	 * @return
+	 *            The model which is used for rendering (includes a renderer,
+	 *            update handler, and event handler).
+	 * @return A reference to the newly created window.
 	 */
-	static WindowImpl play(final String title, final int width, final int height,
+	static WindowImpl play(final String title, final int width,
+			final int height,
 			final Model model) {
 		final WindowImpl window = new WindowImpl();
 
@@ -272,7 +330,8 @@ public final class Jazz {
 					final GraphicsDevice device = GraphicsEnvironment
 							.getLocalGraphicsEnvironment()
 							.getDefaultScreenDevice();
-					if ((width <= 0 || height <= 0) && device.isFullScreenSupported()) {
+					if ((width <= 0 || height <= 0)
+							&& device.isFullScreenSupported()) {
 						device.setFullScreenWindow(mainWindow);
 					} else {
 						mainWindow.setVisible(true);

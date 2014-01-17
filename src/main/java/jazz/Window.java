@@ -1,48 +1,154 @@
 package jazz;
 
+/**
+ * A Jazz Window - a drawing canvas with a window border, or a fullscreen
+ * canvas.
+ * 
+ * The canvas in a Jazz window can be accessed via a coordinate system just like
+ * in mathematics.
+ * 
+ * <pre>
+ *                (+)
+ *               y ^
+ *                 |
+ *                 |
+ *                 |
+ * (-) ------------+------------> x (+)
+ *                 |
+ *                 |
+ *                 |
+ *                (-)
+ * </pre>
+ * 
+ * @author Julian Fleischer
+ */
 public interface Window {
 
-  Window close();
+	/**
+	 * @return
+	 */
+	Window close();
 
-  Window title(String title);
+	/**
+	 * @param title
+	 * @return
+	 */
+	Window title(String title);
 
-  Window onClose(Runnable runnable);
+	/**
+	 * @param runnable
+	 * @return
+	 */
+	Window onClose(Runnable runnable);
 
-  Window onShow(Runnable runnable);
+	/**
+	 * @param runnable
+	 * @return
+	 */
+	Window onShow(Runnable runnable);
 
-  Window onHide(Runnable runnable);
+	/**
+	 * @param runnable
+	 * @return
+	 */
+	Window onHide(Runnable runnable);
 
-  Window onActivate(Runnable runnable);
+	/**
+	 * @param runnable
+	 * @return
+	 */
+	Window onActivate(Runnable runnable);
 
-  Window onDeactivate(Runnable runnable);
+	/**
+	 * @param runnable
+	 * @return
+	 */
+	Window onDeactivate(Runnable runnable);
 
-  int width();
+	/**
+	 * @return
+	 */
+	int width();
 
-  int height();
+	/**
+	 * @return
+	 */
+	int height();
 
-  int originX();
+	/**
+	 * @return
+	 */
+	int originX();
 
-  int originY();
+	/**
+	 * @return
+	 */
+	int originY();
 
-  Window originX(int originX);
+	/**
+	 * @param originX
+	 * @return this.
+	 */
+	Window originX(int originX);
 
-  Window originY(int originY);
+	/**
+	 * @param originY
+	 * @return this.
+	 */
+	Window originY(int originY);
 
-  Window antiAlias(boolean antialias);
+	/**
+	 * @param antialias
+	 * @return this.
+	 */
+	Window antiAlias(boolean antialias);
 
-  Window maxFps(int maxFps);
+	/**
+	 * @param maxFps
+	 * @return this.
+	 */
+	Window maxFps(int maxFps);
 
-  Window speed(double acceleration);
+	/**
+	 * @param doShowDebugOutput
+	 * @return this.
+	 */
+	Window debugOutput(boolean doShowDebugOutput);
 
-  double speed();
+	/**
+	 * @param acceleration
+	 * @return this.
+	 */
+	Window speed(double acceleration);
 
-  Window pause();
+	/**
+	 * @return
+	 */
+	double speed();
 
-  Window resume();
+	/**
+	 * @return this.
+	 */
+	Window pause();
 
-  Window pauseOrUnpause();
+	/**
+	 * @return this.
+	 */
+	Window resume();
 
-  double scale();
+	/**
+	 * @return this.
+	 */
+	Window pauseOrUnpause();
 
-  WindowImpl scale(double scale);
+	/**
+	 * @return
+	 */
+	double scale();
+
+	/**
+	 * @param scale
+	 * @return this.
+	 */
+	Window scale(double scale);
 }
