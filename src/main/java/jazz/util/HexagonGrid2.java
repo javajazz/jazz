@@ -5,7 +5,7 @@ import jazz.Picture;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
-public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>, T> {
+public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
 
 	public static enum Mode {
 		/**
@@ -152,7 +152,7 @@ public class HexagonGrid<T> extends AbstractGrid<HexagonGrid<T>, T> {
 	private final T[][] tiles;
 
 	@SuppressWarnings("unchecked")
-	public HexagonGrid(int gridWidth, int gridHeight, double side,
+	public HexagonGrid2(int gridWidth, int gridHeight, double side,
 			Mode gridMode,
 			TileFactory<T> tileFactory,
 			TileEventHandler<T> tileHandler,
