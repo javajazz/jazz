@@ -5,6 +5,15 @@ import jazz.Picture;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
 
+/**
+ * EXPERIMENTAL: A hexagonal grid that allows different orientations of the
+ * hexagons.
+ * 
+ * @author Julian Fleischer
+ * 
+ * @param <T>
+ *            The type of the tiles.
+ */
 public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
 
 	public static enum Mode {
@@ -178,36 +187,36 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
 
 		switch (gridMode) {
 		case HOR_FST_OFFSET:
-			
+
 			break;
 		case HOR_FST_OFFSET_FULL:
-			
+
 			break;
 		case HOR_SND_OFFSET:
-			
+
 			break;
 		case HOR_SND_OFFSET_FULL:
-			
+
 			break;
 		case VERT_FST_OFFSET:
-			
+
 			break;
 		case VERT_FST_OFFSET_FULL:
-			
+
 			break;
 		case VERT_SND_OFFSET:
-			
+
 			break;
 		case VERT_SND_OFFSET_FULL:
-			
+
 			break;
 		}
-		
+
 		return new UnmodifieablePictures(pictures);
 	}
 
 	@Override
 	public void on(Event ev) {
-		
+
 	}
 }

@@ -4,7 +4,6 @@ import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.RandomColor;
-import jazz.pictures.immutable.Circle;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Rectangle;
 

@@ -9,6 +9,7 @@ import jazz.pictures.mutable.Polygon;
 public class SimpleHexagonGrid<T> {
 
 	private final TileEventHandler<T> tileHandler;
+	private final TileDecorator <T> tileDecorator;
 
 	private final int height;
 	private final int width;
@@ -19,9 +20,12 @@ public class SimpleHexagonGrid<T> {
 
 	@SuppressWarnings("unchecked")
 	public SimpleHexagonGrid(
+			TileFactory<T> tileFactory,
+			TileDecorator<T> tileDecorator,
 			TileEventHandler<T> tileHandler,
 			double a, int width, int height) {
 
+		this.tileDecorator = tileDecorator;
 		this.tileHandler = tileHandler;
 
 		this.width = width;
@@ -38,7 +42,7 @@ public class SimpleHexagonGrid<T> {
 		h2 = h1 * 3;
 
 		w = width * w1 + w2;
-		h = height * h2;
+		h = height * h2 + h1;
 	}
 
 	public Picture getPicture() {
@@ -64,7 +68,7 @@ public class SimpleHexagonGrid<T> {
 						new Vector(x, y + h1)
 						);
 
-				pictures.add(p);
+				pictures.add(tileDecorator.decorate(tiles[i][j], p));
 			}
 		}
 		return pictures;
@@ -82,19 +86,19 @@ public class SimpleHexagonGrid<T> {
 		tiles[p.x][p.y] = tile;
 	}
 
-	public T tileAt(int x, int y) {
+	public T getTileAt(int x, int y) {
 		return tiles[x][y];
 	}
 
-	public T tileAt(TilePos p) {
+	public T getTileAt(TilePos p) {
 		return tiles[p.x][p.y];
 	}
 
 	public TilePos topLeft(TilePos p) {
 		if (p.y + 1 >= height) {
 			return null;
-		} else if (p.y % 0 == 0) {
-			return p.x + 1 == 0 ? null : new TilePos(p.x - 1, p.y + 1);
+		} else if (p.y % 2 == 0) {
+			return p.x == 0 ? null : new TilePos(p.x - 1, p.y + 1);
 		} else {
 			return new TilePos(p.x, p.y + 1);
 		}
@@ -103,7 +107,7 @@ public class SimpleHexagonGrid<T> {
 	public TilePos topRight(TilePos p) {
 		if (p.y + 1 >= height) {
 			return null;
-		} else if (p.y % 0 == 0) {
+		} else if (p.y % 2 == 0) {
 			return new TilePos(p.x, p.y + 1);
 		} else {
 			return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y + 1);
@@ -111,30 +115,38 @@ public class SimpleHexagonGrid<T> {
 	}
 
 	public TilePos bottomLeft(TilePos p) {
-		if (p.y - 1 < 0) {
+		if (p.y == 0) {
 			return null;
-		} else if (p.y % 0 == 0) {
-			return p.x - 1 <= 0 ? null : new TilePos(p.x - 1, p.y - 1);
+		} else if (p.y % 2 == 0) {
+			return p.x == 0 ? null : new TilePos(p.x - 1, p.y - 1);
 		} else {
 			return new TilePos(p.x, p.y - 1);
 		}
 	}
 
 	public TilePos bottomRight(TilePos p) {
-		if (p.y - 1 < 0) {
+		if (p.y == 0) {
 			return null;
-		} else if (p.y % 0 == 0) {
+		} else if (p.y % 2 == 0) {
 			return new TilePos(p.x, p.y - 1);
 		} else {
-			return p.x - 1 <= 0 ? null : new TilePos(p.x - 1, p.y - 1);
+			return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y - 1);
 		}
 	}
 
 	public TilePos left(TilePos p) {
-		return p.x - 1 <= 0 ? null : new TilePos(p.x - 1, p.y);
+		return p.x == 0 ? null : new TilePos(p.x - 1, p.y);
 	}
 
 	public TilePos right(TilePos p) {
 		return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y);
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public int getWidth() {
+		return width;
 	}
 }
