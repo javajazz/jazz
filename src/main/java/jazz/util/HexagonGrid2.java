@@ -154,7 +154,10 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
 		HOR_SND_OFFSET_FULL
 	}
 
+	@SuppressWarnings("unused")
 	private final int gridWidth;
+	
+	@SuppressWarnings("unused")
 	private final int gridHeight;
 
 	private final Mode gridMode;

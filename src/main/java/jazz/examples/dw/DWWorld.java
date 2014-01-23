@@ -187,13 +187,13 @@ public class DWWorld extends World {
 
 	@Override
 	public void update(double time, double delta) {
-
+		
 	}
 
 	@Override
 	public void on(Event ev) {
 		if (ev.getType() == Type.CLICK) {
-			init();
+			init(8, 4);
 		}
 	}
 }
