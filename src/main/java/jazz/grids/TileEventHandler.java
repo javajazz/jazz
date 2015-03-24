@@ -4,6 +4,6 @@ import jazz.Event;
 
 public interface TileEventHandler<T> {
 
-    void on(Event ev, T tile);
+    void on(final Event ev, final T tile);
 
 }

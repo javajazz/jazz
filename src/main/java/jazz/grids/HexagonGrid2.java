@@ -8,9 +8,9 @@ import jazz.pictures.mutable.Pictures;
 /**
  * EXPERIMENTAL: A hexagonal grid that allows different orientations of the
  * hexagons.
- * 
+ *
  * @author Julian Fleischer
- * 
+ *
  * @param <T>
  *            The type of the tiles.
  */
@@ -20,14 +20,14 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
         /**
          * First row is offset (even rows are indented) and has one cell less
          * than the second (odd rows).
-         * 
+         *
          * <pre>
          *   ^   ^
          *  / \ / \
          * v   v   v
          * |2,1|2,2|
          * ^   ^   ^
-         *  \ / \ / 
+         *  \ / \ /
          *   v   v
          *   |1,1|
          *   ^   ^
@@ -40,16 +40,16 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
         /**
          * First row is offset (even rows are indented), and all rows have the
          * same amount of cells.
-         * 
+         *
          * <pre>
          * 2x2:
-         * 
+         *
          *   ^   ^
          *  / \ / \
          * v   v   v
          * |2,1|2,2|
          * ^   ^   ^
-         *  \ / \ / \ 
+         *  \ / \ / \
          *   v   v   v
          *   |1,1|1,2|
          *   ^   ^   ^
@@ -62,7 +62,7 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
         /**
          * <pre>
          * 2x2:
-         * 
+         *
          *     ^
          *    / \
          *   v   v
@@ -81,7 +81,7 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
         /**
          * <pre>
          * 2x2:
-         * 
+         *
          *     ^   ^
          *    / \ / \
          *   v   v   v
@@ -164,11 +164,12 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
     private final T[][] tiles;
 
     @SuppressWarnings("unchecked")
-    public HexagonGrid2(int gridWidth, int gridHeight, double side,
-            Mode gridMode,
-            TileFactory<T> tileFactory,
-            TileEventHandler<T> tileHandler,
-            TileRenderer<T> tileRenderer) {
+    public HexagonGrid2(final int gridWidth, final int gridHeight,
+            final double side,
+            final Mode gridMode,
+            final TileFactory<T> tileFactory,
+            final TileEventHandler<T> tileHandler,
+            final TileRenderer<T> tileRenderer) {
 
         super(tileHandler, tileRenderer, 400, 300);
 
@@ -186,7 +187,7 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
 
     @Override
     public Picture getPicture() {
-        Pictures pictures = new Pictures();
+        final Pictures pictures = new Pictures();
 
         switch (gridMode) {
         case HOR_FST_OFFSET:
@@ -219,7 +220,7 @@ public class HexagonGrid2<T> extends AbstractGrid<HexagonGrid2<T>, T> {
     }
 
     @Override
-    public void on(Event ev) {
+    public void on(final Event ev) {
 
     }
 }

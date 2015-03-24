@@ -20,20 +20,20 @@ public interface Grid<A, T> {
     /**
      * @param ev
      */
-    void on(Event ev);
+    void on(final Event ev);
 
     /**
      * @param p
      * @return
      */
-    A setCenter(Vector p);
+    A setCenter(final Vector p);
 
     /**
      * @param x
      * @param y
      * @return
      */
-    A setCenter(double x, double y);
+    A setCenter(final double x, final double y);
 
     /**
      * @return
@@ -44,7 +44,7 @@ public interface Grid<A, T> {
      * @param width
      * @return
      */
-    A setWidth(double width);
+    A setWidth(final double width);
 
     /**
      * @return
@@ -55,7 +55,7 @@ public interface Grid<A, T> {
      * @param height
      * @return
      */
-    A setHeight(double height);
+    A setHeight(final double height);
 
     /**
      * @return
@@ -67,7 +67,7 @@ public interface Grid<A, T> {
      * @param resize
      * @return
      */
-    A setLowerLeftCorner(Vector p, boolean resize);
+    A setLowerLeftCorner(final Vector p, final boolean resize);
 
     /**
      * @return
@@ -79,7 +79,7 @@ public interface Grid<A, T> {
      * @param resize
      * @return
      */
-    A setUpperLeftCorner(Vector p, boolean resize);
+    A setUpperLeftCorner(final Vector p, final boolean resize);
 
     /**
      * @return
@@ -91,7 +91,7 @@ public interface Grid<A, T> {
      * @param resize
      * @return
      */
-    A setLowerRightCorner(Vector p, boolean resize);
+    A setLowerRightCorner(final Vector p, final boolean resize);
 
     /**
      * @return
@@ -103,7 +103,7 @@ public interface Grid<A, T> {
      * @param resize
      * @return
      */
-    A setUpperRightCorner(Vector p, boolean resize);
+    A setUpperRightCorner(final Vector p, final boolean resize);
 
     /**
      * @return

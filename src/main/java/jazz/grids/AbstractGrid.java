@@ -12,9 +12,9 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
     protected final TileRenderer<T> tileRenderer;
 
     public AbstractGrid(
-            TileEventHandler<T> tileHandler,
-            TileRenderer<T> tileRenderer,
-            double width, double height) {
+            final TileEventHandler<T> tileHandler,
+            final TileRenderer<T> tileRenderer,
+            final double width, final double height) {
 
         this.tileHandler = tileHandler;
         this.tileRenderer = tileRenderer;
@@ -25,14 +25,14 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setCenter(Vector p) {
+    public A setCenter(final Vector p) {
         this.center = p;
         return (A) this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setCenter(double x, double y) {
+    public A setCenter(final double x, final double y) {
         this.center = new Vector(x, y);
         return (A) this;
     }
@@ -44,7 +44,7 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setWidth(double width) {
+    public A setWidth(final double width) {
         this.width = width;
         return (A) this;
     }
@@ -56,7 +56,7 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setHeight(double height) {
+    public A setHeight(final double height) {
         this.height = height;
         return (A) this;
     }
@@ -68,9 +68,9 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setLowerLeftCorner(Vector p, boolean resize) {
+    public A setLowerLeftCorner(final Vector p, final boolean resize) {
         if (resize) {
-            Vector c = getUpperRightCorner();
+            final Vector c = getUpperRightCorner();
             setWidth(Math.abs(p.x - c.x));
             setHeight(Math.abs(p.y - c.y));
             setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
@@ -87,9 +87,9 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setUpperLeftCorner(Vector p, boolean resize) {
+    public A setUpperLeftCorner(final Vector p, final boolean resize) {
         if (resize) {
-            Vector c = getLowerRightCorner();
+            final Vector c = getLowerRightCorner();
             setWidth(Math.abs(p.x - c.x));
             setHeight(Math.abs(p.y - c.y));
             setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
@@ -106,9 +106,9 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setLowerRightCorner(Vector p, boolean resize) {
+    public A setLowerRightCorner(final Vector p, final boolean resize) {
         if (resize) {
-            Vector c = getUpperLeftCorner();
+            final Vector c = getUpperLeftCorner();
             setWidth(Math.abs(p.x - c.x));
             setHeight(Math.abs(p.y - c.y));
             setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
@@ -125,9 +125,9 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public A setUpperRightCorner(Vector p, boolean resize) {
+    public A setUpperRightCorner(final Vector p, final boolean resize) {
         if (resize) {
-            Vector c = getLowerLeftCorner();
+            final Vector c = getLowerLeftCorner();
             setWidth(Math.abs(p.x - c.x));
             setHeight(Math.abs(p.y - c.y));
             setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);

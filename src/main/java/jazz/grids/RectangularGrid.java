@@ -15,11 +15,11 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>, T> {
 
     @SuppressWarnings("unchecked")
     public RectangularGrid(
-            int width, int height,
-            double tileWidth, double tileHeight,
-            TileFactory<T> tileFactory,
-            TileEventHandler<T> tileHandler,
-            TileRenderer<T> tileRenderer) {
+            final int width, final int height,
+            final double tileWidth, final double tileHeight,
+            final TileFactory<T> tileFactory,
+            final TileEventHandler<T> tileHandler,
+            final TileRenderer<T> tileRenderer) {
 
         super(tileHandler, tileRenderer, width * tileWidth, height * tileHeight);
 
@@ -35,10 +35,11 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>, T> {
         }
     }
 
-    public void on(Event e) {
+    @Override
+    public void on(final Event e) {
 
-        Vector c = getLowerLeftCorner();
-        Vector p = e.getPosition();
+        final Vector c = getLowerLeftCorner();
+        final Vector p = e.getPosition();
         int x = (int) (p.x - c.x);
         int y = (int) (p.y - c.y);
 
@@ -51,20 +52,20 @@ public class RectangularGrid<T> extends AbstractGrid<RectangularGrid<T>, T> {
         }
     }
 
-    public T getTileAt(int x, int y) {
+    public T getTileAt(final int x, final int y) {
         return tiles[x][y];
     }
 
     @Override
     public Picture getPicture() {
 
-        Pictures pictures = new Pictures();
-        double tileWidth = getWidth() / gridWidth;
-        double tileHeight = getHeight() / gridHeight;
+        final Pictures pictures = new Pictures();
+        final double tileWidth = getWidth() / gridWidth;
+        final double tileHeight = getHeight() / gridHeight;
 
-        Vector p = getLowerLeftCorner();
+        final Vector p = getLowerLeftCorner();
         double posX = p.x + tileWidth / 2;
-        double upperY = p.y + tileHeight / 2;
+        final double upperY = p.y + tileHeight / 2;
 
         for (int x = 0; x < gridWidth; x++) {
             double posY = upperY;

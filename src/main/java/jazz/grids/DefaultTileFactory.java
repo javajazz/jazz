@@ -2,9 +2,9 @@ package jazz.grids;
 
 /**
  * A {@link TileFactory} that always returns the same tile or null.
- * 
+ *
  * @author Julian Fleischer
- * 
+ *
  * @param <T>
  *            The type of the tile.
  */
@@ -21,16 +21,16 @@ public class DefaultTileFactory<T> implements TileFactory<T> {
 
     /**
      * Creates a tile factory that always returns the same tile.
-     * 
+     *
      * @param tile
      *            The default tile that is returned always.
      */
-    public DefaultTileFactory(T tile) {
+    public DefaultTileFactory(final T tile) {
         this.defaultTile = tile;
     }
 
     @Override
-    public T createTile(int x, int y) {
+    public T createTile(final int x, final int y) {
         return defaultTile;
     }
 

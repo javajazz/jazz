@@ -4,7 +4,7 @@ import jazz.Event;
 
 /**
  * A {@link TileEventHandler} that simply does nothing.
- * 
+ *
  * @author Julian Fleischer
  *
  * @param <T>
@@ -12,7 +12,7 @@ import jazz.Event;
 public class DefaultTileEventHandler<T> implements TileEventHandler<T> {
 
     @Override
-    public void on(Event ev, T tile) {
+    public void on(final Event ev, final T tile) {
 
     }
 }

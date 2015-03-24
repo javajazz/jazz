@@ -5,7 +5,7 @@ public class TilePos {
     public final int x;
     public final int y;
 
-    public TilePos(int x, int y) {
+    public TilePos(final int x, final int y) {
         this.x = x;
         this.y = y;
     }
@@ -18,6 +18,7 @@ public class TilePos {
         return y;
     }
 
+    @Override
     public String toString() {
         return String.format("(%d,%d)", x, y);
     }

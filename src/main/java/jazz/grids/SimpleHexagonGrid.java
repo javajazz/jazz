@@ -20,10 +20,10 @@ public class SimpleHexagonGrid<T> {
 
     @SuppressWarnings("unchecked")
     public SimpleHexagonGrid(
-            TileFactory<T> tileFactory,
-            TileDecorator<T> tileDecorator,
-            TileEventHandler<T> tileHandler,
-            double a, int width, int height) {
+            final TileFactory<T> tileFactory,
+            final TileDecorator<T> tileDecorator,
+            final TileEventHandler<T> tileHandler,
+            final double a, final int width, final int height) {
 
         this.tileDecorator = tileDecorator;
         this.tileHandler = tileHandler;
@@ -47,19 +47,19 @@ public class SimpleHexagonGrid<T> {
 
     public Picture getPicture() {
 
-        Pictures pictures = new Pictures();
+        final Pictures pictures = new Pictures();
 
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
 
                 double x = i * w1 - w / 2;
-                double y = j * h2 - h / 2;
+                final double y = j * h2 - h / 2;
 
                 if (j % 2 != 0) {
                     x += w2;
                 }
 
-                Polygon p = new Polygon(
+                final Polygon p = new Polygon(
                         new Vector(x + w2, y),
                         new Vector(x + w1, y + h1),
                         new Vector(x + w1, y + h2),
@@ -74,27 +74,27 @@ public class SimpleHexagonGrid<T> {
         return pictures;
     }
 
-    public void on(Event ev) {
+    public void on(final Event ev) {
 
     }
 
-    public void setTileAt(int x, int y, T tile) {
+    public void setTileAt(final int x, final int y, final T tile) {
         tiles[x][y] = tile;
     }
 
-    public void setTileAt(TilePos p, T tile) {
+    public void setTileAt(final TilePos p, final T tile) {
         tiles[p.x][p.y] = tile;
     }
 
-    public T getTileAt(int x, int y) {
+    public T getTileAt(final int x, final int y) {
         return tiles[x][y];
     }
 
-    public T getTileAt(TilePos p) {
+    public T getTileAt(final TilePos p) {
         return tiles[p.x][p.y];
     }
 
-    public TilePos topLeft(TilePos p) {
+    public TilePos topLeft(final TilePos p) {
         if (p.y + 1 >= height) {
             return null;
         } else if (p.y % 2 == 0) {
@@ -104,7 +104,7 @@ public class SimpleHexagonGrid<T> {
         }
     }
 
-    public TilePos topRight(TilePos p) {
+    public TilePos topRight(final TilePos p) {
         if (p.y + 1 >= height) {
             return null;
         } else if (p.y % 2 == 0) {
@@ -114,7 +114,7 @@ public class SimpleHexagonGrid<T> {
         }
     }
 
-    public TilePos bottomLeft(TilePos p) {
+    public TilePos bottomLeft(final TilePos p) {
         if (p.y == 0) {
             return null;
         } else if (p.y % 2 == 0) {
@@ -124,7 +124,7 @@ public class SimpleHexagonGrid<T> {
         }
     }
 
-    public TilePos bottomRight(TilePos p) {
+    public TilePos bottomRight(final TilePos p) {
         if (p.y == 0) {
             return null;
         } else if (p.y % 2 == 0) {
@@ -134,11 +134,11 @@ public class SimpleHexagonGrid<T> {
         }
     }
 
-    public TilePos left(TilePos p) {
+    public TilePos left(final TilePos p) {
         return p.x == 0 ? null : new TilePos(p.x - 1, p.y);
     }
 
-    public TilePos right(TilePos p) {
+    public TilePos right(final TilePos p) {
         return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y);
     }
 
