@@ -10,7 +10,7 @@ import java.util.Map;
 
 import jazz.Key.Location;
 
-class EventImpl implements Event {
+class DefaultEvent implements Event {
 
     final private static Map<Integer, Key> keys = new HashMap<Integer, Key>();
 
@@ -96,7 +96,7 @@ class EventImpl implements Event {
         keys.put(KeyEvent.VK_F24, Key.F24);
     }
 
-    final private WindowImpl window;
+    final private DefaultWorld window;
     final private Event.Type type;
 
     final private int x;
@@ -113,8 +113,10 @@ class EventImpl implements Event {
     private boolean isCtrlPressed = false;
     private boolean isMetaPressed = false;
 
-    private EventImpl(WindowImpl window, Event.Type type, int x, int y,
-            int keyCode, char keyChar, Key.Location keyLoc, double z) {
+    private DefaultEvent(final DefaultWorld window, final Event.Type type,
+            final int x, final int y,
+            final int keyCode, final char keyChar, final Key.Location keyLoc,
+            final double z) {
         this.window = window;
         this.type = type;
 
@@ -128,9 +130,11 @@ class EventImpl implements Event {
         this.keyLocation = keyLoc;
     }
 
-    private EventImpl(WindowImpl window, Event.Type type, InputEvent e,
-            int x, int y, int keyCode, char keyChar, Key.Location keyLoc,
-            double z) {
+    private DefaultEvent(final DefaultWorld window, final Event.Type type,
+            final InputEvent e,
+            final int x, final int y, final int keyCode, final char keyChar,
+            final Key.Location keyLoc,
+            final double z) {
         this(window, type, x, y, keyCode, keyChar, keyLoc, z);
 
         isAltPressed = e.isAltDown();
@@ -139,27 +143,31 @@ class EventImpl implements Event {
         isMetaPressed = e.isMetaDown();
     }
 
-    EventImpl(WindowImpl window, Event.Type type, KeyEvent e, int x, int y) {
-        this(window, type, (InputEvent) e, x, y, e.getKeyCode(),
+    DefaultEvent(final DefaultWorld window, final Event.Type type,
+            final KeyEvent e, final int x, final int y) {
+        this(window, type, e, x, y, e.getKeyCode(),
                 e.getKeyChar(), getLocation(e), 0.0);
     }
 
-    EventImpl(WindowImpl window, Event.Type type, MouseEvent e) {
-        this(window, type, (InputEvent) e, e.getX(), e.getY(),
+    DefaultEvent(final DefaultWorld window, final Event.Type type,
+            final MouseEvent e) {
+        this(window, type, e, e.getX(), e.getY(),
                 e.getButton(), '\0', Key.Location.UNKNOWN, 0.0);
     }
 
-    EventImpl(WindowImpl window, Event.Type type, WindowEvent e) {
+    DefaultEvent(final DefaultWorld window, final Event.Type type,
+            final WindowEvent e) {
         this(window, type, 0, 0, 0, '\0', Key.Location.UNKNOWN, 0.0);
     }
 
-    EventImpl(WindowImpl window, Event.Type type, MouseWheelEvent e) {
-        this(window, type, (InputEvent) e, e.getX(), e.getY(), 0, '\0',
+    DefaultEvent(final DefaultWorld window, final Event.Type type,
+            final MouseWheelEvent e) {
+        this(window, type, e, e.getX(), e.getY(), 0, '\0',
                 Key.Location.UNKNOWN, e.getPreciseWheelRotation());
     }
 
-    private static Key.Location getLocation(KeyEvent e) {
-        int loc = e.getKeyLocation();
+    private static Key.Location getLocation(final KeyEvent e) {
+        final int loc = e.getKeyLocation();
         if ((loc & KeyEvent.KEY_LOCATION_LEFT) != 0) {
             return Key.Location.LEFT;
         } else if ((loc & KeyEvent.KEY_LOCATION_RIGHT) != 0) {
@@ -188,6 +196,7 @@ class EventImpl implements Event {
         return y;
     }
 
+    @Override
     public Vector getPosition() {
         return new Vector(x, y);
     }
@@ -207,8 +216,9 @@ class EventImpl implements Event {
         return keyCode;
     }
 
+    @Override
     public Key getKey() {
-        Key key = keys.get(keyCode);
+        final Key key = keys.get(keyCode);
         if (key == null) {
             switch (keyCode) {
             case KeyEvent.VK_SHIFT:
@@ -295,7 +305,7 @@ class EventImpl implements Event {
     }
 
     @Override
-    public WindowImpl getWindow() {
+    public DefaultWorld getWindow() {
         return window;
     }
 
@@ -304,6 +314,7 @@ class EventImpl implements Event {
         return keyLocation;
     }
 
+    @Override
     public String toString() {
         return String.format("%s (x=%d,y=%d,%s,#%d,'%s')",
                 type, x, y, getButton(), keyCode, keyChar);

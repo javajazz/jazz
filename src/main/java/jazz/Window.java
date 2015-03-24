@@ -3,10 +3,10 @@ package jazz;
 /**
  * A Jazz Window - a drawing canvas with a window border, or a fullscreen
  * canvas.
- * 
+ *
  * The canvas in a Jazz window can be accessed via a coordinate system just like
  * in mathematics.
- * 
+ *
  * <pre>
  *                (+)
  *               y ^
@@ -19,7 +19,7 @@ package jazz;
  *                 |
  *                (-)
  * </pre>
- * 
+ *
  * @author Julian Fleischer
  */
 public interface Window {
@@ -33,37 +33,37 @@ public interface Window {
      * @param title
      * @return
      */
-    Window title(String title);
+    Window title(final String title);
 
     /**
      * @param runnable
      * @return
      */
-    Window onClose(Runnable runnable);
+    Window onClose(final Runnable runnable);
 
     /**
      * @param runnable
      * @return
      */
-    Window onShow(Runnable runnable);
+    Window onShow(final Runnable runnable);
 
     /**
      * @param runnable
      * @return
      */
-    Window onHide(Runnable runnable);
+    Window onHide(final Runnable runnable);
 
     /**
      * @param runnable
      * @return
      */
-    Window onActivate(Runnable runnable);
+    Window onActivate(final Runnable runnable);
 
     /**
      * @param runnable
      * @return
      */
-    Window onDeactivate(Runnable runnable);
+    Window onDeactivate(final Runnable runnable);
 
     /**
      * @return
@@ -89,37 +89,37 @@ public interface Window {
      * @param originX
      * @return this.
      */
-    Window originX(int originX);
+    Window originX(final int originX);
 
     /**
      * @param originY
      * @return this.
      */
-    Window originY(int originY);
+    Window originY(final int originY);
 
     /**
      * @param antialias
      * @return this.
      */
-    Window antiAlias(boolean antialias);
+    Window antiAlias(final boolean antialias);
 
     /**
      * @param maxFps
      * @return this.
      */
-    Window maxFps(int maxFps);
+    Window maxFps(final int maxFps);
 
     /**
      * @param doShowDebugOutput
      * @return this.
      */
-    Window debugOutput(boolean doShowDebugOutput);
+    Window debugOutput(final boolean doShowDebugOutput);
 
     /**
      * @param acceleration
      * @return this.
      */
-    Window speed(double acceleration);
+    Window speed(final double acceleration);
 
     /**
      * @return
@@ -150,5 +150,5 @@ public interface Window {
      * @param scale
      * @return this.
      */
-    Window scale(double scale);
+    Window scale(final double scale);
 }

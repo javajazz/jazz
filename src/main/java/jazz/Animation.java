@@ -9,7 +9,7 @@ public abstract class Animation implements Model {
     private boolean mouseDown = false;
 
     @Override
-    final public void on(Event e) {
+    final public void on(final Event e) {
         switch (e.getType()) {
 
         case MOUSE_DOWN: {
@@ -23,8 +23,8 @@ public abstract class Animation implements Model {
 
         case MOUSE_UP: {
             mouseDown = false;
-            int deltaX = e.getWindowX() - startDragX;
-            int deltaY = e.getWindowY() - startDragY;
+            final int deltaX = e.getWindowX() - startDragX;
+            final int deltaY = e.getWindowY() - startDragY;
             e.getWindow().originX(initialOffsetX + deltaX);
             e.getWindow().originY(initialOffsetY + deltaY);
             break;
@@ -32,8 +32,8 @@ public abstract class Animation implements Model {
 
         case MOUSE_MOVE: {
             if (mouseDown) {
-                int deltaX = e.getWindowX() - startDragX;
-                int deltaY = e.getWindowY() - startDragY;
+                final int deltaX = e.getWindowX() - startDragX;
+                final int deltaY = e.getWindowY() - startDragY;
                 e.getWindow().originX(initialOffsetX + deltaX);
                 e.getWindow().originY(initialOffsetY + deltaY);
             }

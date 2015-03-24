@@ -7,11 +7,11 @@ import jazz.pictures.ImmutableAbstractPicture;
 
 public final class Ellipse extends ImmutableAbstractPicture<Ellipse> {
 
-    public Ellipse(double a, double b) {
+    public Ellipse(final double a, final double b) {
         super(new Ellipse2D.Double(0, 0, a * 2, b * 2));
     }
 
-    private Ellipse(Shape shape) {
+    private Ellipse(final Shape shape) {
         super(shape);
     }
 

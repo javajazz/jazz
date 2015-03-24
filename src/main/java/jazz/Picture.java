@@ -4,40 +4,41 @@ import java.awt.geom.AffineTransform;
 
 public interface Picture extends Cloneable, Drawable {
 
-    Picture alpha(double alpha);
+    Picture alpha(final double alpha);
 
-    Picture color(Color color);
+    Picture color(final Color color);
 
-    Picture color(int r, int g, int b);
+    Picture color(final int r, final int g, final int b);
 
-    Picture color(float h, float s, float v);
+    Picture color(final float h, final float s, final float v);
 
-    Picture color(int r, int g, int b, double alpha);
+    Picture color(final int r, final int g, final int b, final double alpha);
 
-    Picture translate(double x, double y);
+    Picture translate(final double x, final double y);
 
-    Picture rotate(double angle);
+    Picture rotate(final double angle);
 
-    Picture scale(double x, double y);
+    Picture scale(final double x, final double y);
 
-    Picture shear(double x, double y);
+    Picture shear(final double x, final double y);
 
-    Picture stroke(double width);
+    Picture stroke(final double width);
 
     Picture flipX();
 
     Picture flipY();
 
-    Picture filled(boolean filled);
+    Picture filled(final boolean filled);
 
     Picture remove();
 
     Picture reset();
 
-    Picture transform(AffineTransform transform);
+    Picture transform(final AffineTransform transform);
 
-    Picture transform(double m00, double m10, double m01, double m11,
-            double m02, double m12);
+    Picture transform(final double m00, final double m10, final double m01,
+            final double m11,
+            final double m02, final double m12);
 
     Picture clone() throws CloneNotSupportedException;
 

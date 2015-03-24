@@ -5,20 +5,20 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-class WindowImpl implements Window {
+class DefaultWorld implements Window {
 
     private MainWindow mainWindow = null;
-    private List<Runnable> onClose = new ArrayList<>();
-    private List<Runnable> onHide = new ArrayList<>();
-    private List<Runnable> onShow = new ArrayList<>();
-    private List<Runnable> onFocus = new ArrayList<>();
-    private List<Runnable> onBlur = new ArrayList<>();
+    private final List<Runnable> onClose = new ArrayList<>();
+    private final List<Runnable> onHide = new ArrayList<>();
+    private final List<Runnable> onShow = new ArrayList<>();
+    private final List<Runnable> onFocus = new ArrayList<>();
+    private final List<Runnable> onBlur = new ArrayList<>();
 
-    WindowImpl() {
+    DefaultWorld() {
 
     }
 
-    void setMainWindow(MainWindow mainWindow) {
+    void setMainWindow(final MainWindow mainWindow) {
         this.mainWindow = mainWindow;
     }
 
@@ -27,9 +27,10 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl close() {
+    public DefaultWorld close() {
         if (mainWindow != null) {
             SwingUtilities.invokeLater(new Runnable() {
+                @Override
                 public void run() {
                     mainWindow.dispose();
                 }
@@ -39,38 +40,39 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl onClose(Runnable runnable) {
+    public DefaultWorld onClose(final Runnable runnable) {
         onClose.add(runnable);
         return this;
     }
 
     @Override
-    public WindowImpl onShow(Runnable runnable) {
+    public DefaultWorld onShow(final Runnable runnable) {
         onShow.add(runnable);
         return this;
     }
 
     @Override
-    public WindowImpl onHide(Runnable runnable) {
+    public DefaultWorld onHide(final Runnable runnable) {
         onHide.add(runnable);
         return this;
     }
 
     @Override
-    public WindowImpl onActivate(Runnable runnable) {
+    public DefaultWorld onActivate(final Runnable runnable) {
         onFocus.add(runnable);
         return this;
     }
 
     @Override
-    public WindowImpl onDeactivate(Runnable runnable) {
+    public DefaultWorld onDeactivate(final Runnable runnable) {
         onBlur.add(runnable);
         return this;
     }
 
     @Override
-    public WindowImpl title(final String title) {
+    public DefaultWorld title(final String title) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 mainWindow.setTitle(title);
             }
@@ -79,31 +81,31 @@ class WindowImpl implements Window {
     }
 
     void onClose() {
-        for (Runnable runnable : onClose) {
+        for (final Runnable runnable : onClose) {
             runnable.run();
         }
     }
 
     public void onBlur() {
-        for (Runnable runnable : onBlur) {
+        for (final Runnable runnable : onBlur) {
             runnable.run();
         }
     }
 
     public void onFocus() {
-        for (Runnable runnable : onFocus) {
+        for (final Runnable runnable : onFocus) {
             runnable.run();
         }
     }
 
     public void onShow() {
-        for (Runnable runnable : onShow) {
+        for (final Runnable runnable : onShow) {
             runnable.run();
         }
     }
 
     public void onHide() {
-        for (Runnable runnable : onHide) {
+        for (final Runnable runnable : onHide) {
             runnable.run();
         }
     }
@@ -141,7 +143,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl originX(final int originX) {
+    public DefaultWorld originX(final int originX) {
         if (mainWindow != null) {
             mainWindow.mainPanel.offsetX = originX;
         }
@@ -149,7 +151,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl originY(final int originY) {
+    public DefaultWorld originY(final int originY) {
         if (mainWindow != null) {
             mainWindow.mainPanel.offsetY = originY;
         }
@@ -157,7 +159,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl antiAlias(final boolean antialias) {
+    public DefaultWorld antiAlias(final boolean antialias) {
         if (mainWindow != null) {
             mainWindow.mainPanel.antialias = antialias;
         }
@@ -165,8 +167,9 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl maxFps(final int maxFps) {
+    public DefaultWorld maxFps(final int maxFps) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 if (mainWindow != null) {
                     mainWindow.mainPanel.maxFramesPerSecond = maxFps;
@@ -177,7 +180,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl speed(double acceleration) {
+    public DefaultWorld speed(final double acceleration) {
         if (mainWindow != null) {
             mainWindow.mainPanel.acceleration = acceleration;
         }
@@ -193,7 +196,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl scale(double scale) {
+    public DefaultWorld scale(final double scale) {
         if (mainWindow != null) {
             mainWindow.mainPanel.scale = scale;
         }
@@ -209,7 +212,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl pauseOrUnpause() {
+    public DefaultWorld pauseOrUnpause() {
         if (mainWindow != null) {
             if (mainWindow.mainPanel.isPaused()) {
                 mainWindow.mainPanel.resume();
@@ -221,7 +224,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl pause() {
+    public DefaultWorld pause() {
         if (mainWindow != null) {
             mainWindow.mainPanel.pause();
         }
@@ -229,7 +232,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public WindowImpl resume() {
+    public DefaultWorld resume() {
         if (mainWindow != null) {
             mainWindow.mainPanel.resume();
         }
@@ -237,7 +240,7 @@ class WindowImpl implements Window {
     }
 
     @Override
-    public Window debugOutput(boolean doShowDebugOutput) {
+    public Window debugOutput(final boolean doShowDebugOutput) {
         if (mainWindow != null) {
             mainWindow.mainPanel.doShowDebugOutput = doShowDebugOutput;
         }

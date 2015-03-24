@@ -2,5 +2,5 @@ package jazz;
 
 public interface EventHandler<M> {
 
-    void on(M m, Event e);
+    void on(final M m, final Event e);
 }

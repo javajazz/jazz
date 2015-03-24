@@ -24,7 +24,7 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
         super(null);
     }
 
-    public Pictures(Collection<? extends Picture> pictures) {
+    public Pictures(final Collection<? extends Picture> pictures) {
         this();
         this.pictures.addAll(pictures);
     }
@@ -33,24 +33,24 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
         return new UnmodifieablePictures(this);
     }
 
-    public Pictures add(Picture pic) {
+    public Pictures add(final Picture pic) {
         this.pictures.add(pic);
         return this;
     }
 
-    public Pictures remove(int index) {
+    public Pictures remove(final int index) {
         try {
             this.pictures.remove(index);
-        } catch (IndexOutOfBoundsException exc) {
+        } catch (final IndexOutOfBoundsException exc) {
             // do nothing
         }
         return this;
     }
 
     @SuppressWarnings("unchecked")
-    public <P extends Picture> P get(int index, Class<P> clazz) {
+    public <P extends Picture> P get(final int index, final Class<P> clazz) {
         try {
-            Picture p = pictures.get(index);
+            final Picture p = pictures.get(index);
             if (p == null) {
                 return null;
             }
@@ -58,36 +58,36 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
                 return (P) p;
             }
             return null;
-        } catch (IndexOutOfBoundsException exc) {
+        } catch (final IndexOutOfBoundsException exc) {
             return null;
         }
     }
 
-    public Picture get(int index) {
+    public Picture get(final int index) {
         try {
             return pictures.get(index);
-        } catch (IndexOutOfBoundsException exc) {
+        } catch (final IndexOutOfBoundsException exc) {
             return null;
         }
     }
 
     @SafeVarargs
-    public Pictures(Picture... pictures) {
+    public Pictures(final Picture... pictures) {
         this(Arrays.asList(pictures));
     }
 
     @Override
-    protected void doDraw(Graphics2D g2d) {
+    protected void doDraw(final Graphics2D g2d) {
         if (color != null) {
             g2d.setColor(color);
         }
         g2d.setTransform(getTransform(g2d.getTransform()));
-        for (Picture picture : pictures) {
+        for (final Picture picture : pictures) {
             if (picture != null) {
-                AffineTransform savedTransform = g2d.getTransform();
-                Composite alpha = g2d.getComposite();
-                Stroke stroke = g2d.getStroke();
-                Color savedColor = g2d.getColor();
+                final AffineTransform savedTransform = g2d.getTransform();
+                final Composite alpha = g2d.getComposite();
+                final Stroke stroke = g2d.getStroke();
+                final Color savedColor = g2d.getColor();
                 picture.draw(g2d);
                 g2d.setColor(savedColor);
                 g2d.setStroke(stroke);
@@ -97,6 +97,7 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
         }
     }
 
+    @Override
     public String toString() {
         return pictures.toString();
     }

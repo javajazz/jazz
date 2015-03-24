@@ -48,13 +48,6 @@
 						<format>html</format>
 						<format>xml</format>
 					</formats>
-					<instrumentation>
-						<excludes>
-							<exclude>de/fu/mi/scuttle/domain/**/*.class</exclude>
-							<exclude>de/fu/mi/scuttle/util/Mail*.class</exclude>
-							<exclude>de/fu/mi/scuttle/**/*Exception.class</exclude>
-						</excludes>
-					</instrumentation>
 				</configuration>
 			</plugin>
 

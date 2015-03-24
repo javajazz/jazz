@@ -9,7 +9,9 @@ public class PongEventHandler implements EventHandler<PongWorld> {
 
     @Override
     public void on(PongWorld m, Event e) {
+
         switch (e.getType()) {
+
         case KEY_DOWN:
             switch (e.getKey()) {
             case _Q:
@@ -27,6 +29,7 @@ public class PongEventHandler implements EventHandler<PongWorld> {
             default:
             }
             break;
+
         case KEY_UP:
             switch (e.getKey()) {
             case _Q:
@@ -45,6 +48,7 @@ public class PongEventHandler implements EventHandler<PongWorld> {
             default:
             }
             break;
+
         default:
         }
     }

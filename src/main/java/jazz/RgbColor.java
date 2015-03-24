@@ -7,14 +7,14 @@ public class RgbColor implements Color {
     final private int b;
     final private int a;
 
-    public RgbColor(int r, int g, int b) {
+    public RgbColor(final int r, final int g, final int b) {
         this.r = r;
         this.g = g;
         this.b = b;
         this.a = 255;
     }
 
-    public RgbColor(int r, int g, int b, int a) {
+    public RgbColor(final int r, final int g, final int b, final int a) {
         this.r = r;
         this.g = g;
         this.b = b;

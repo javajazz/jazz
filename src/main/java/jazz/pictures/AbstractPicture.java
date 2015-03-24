@@ -25,7 +25,7 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
     protected java.awt.Composite alpha = null;
     protected boolean filled = false;
 
-    public AbstractPicture(java.awt.Shape shape) {
+    public AbstractPicture(final java.awt.Shape shape) {
         this.shape = shape;
     }
 
@@ -47,14 +47,14 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public P translate(double x, double y) {
+    public P translate(final double x, final double y) {
         transforms.addFirst(AffineTransform.getTranslateInstance(x, y));
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P rotate(double angle) {
+    public P rotate(final double angle) {
         transforms.addFirst(AffineTransform.getRotateInstance(angle / 180
                 * Math.PI, 0, 0));
         return (P) this;
@@ -62,30 +62,30 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public P scale(double x, double y) {
+    public P scale(final double x, final double y) {
         transforms.addFirst(AffineTransform.getScaleInstance(x, y));
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P shear(double x, double y) {
+    public P shear(final double x, final double y) {
         transforms.addFirst(AffineTransform.getShearInstance(x, y));
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P transform(AffineTransform transform) {
+    public P transform(final AffineTransform transform) {
         transforms.addFirst(transform);
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P transform(double m00, double m10, double m01,
-            double m11,
-            double m02, double m12) {
+    public P transform(final double m00, final double m10, final double m01,
+            final double m11,
+            final double m02, final double m12) {
         transforms.addFirst(new AffineTransform(m00, m10, m01, m11, m02, m12));
         return (P) this;
     }
@@ -102,21 +102,21 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public P filled(boolean filled) {
+    public P filled(final boolean filled) {
         this.filled = filled;
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P stroke(double width) {
+    public P stroke(final double width) {
         this.stroke = new BasicStroke((float) width);
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P alpha(double alpha) {
+    public P alpha(final double alpha) {
         this.alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
                 (float) alpha);
         return (P) this;
@@ -124,15 +124,15 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public P color(Color color) {
+    public P color(final Color color) {
 
         if (color instanceof RgbColor) {
-            RgbColor rgb = (RgbColor) color;
+            final RgbColor rgb = (RgbColor) color;
             this.color = new java.awt.Color(
                     rgb.getRed(), rgb.getGreen(), rgb.getBlue());
 
         } else if (color instanceof HsvColor) {
-            HsvColor hsv = (HsvColor) color;
+            final HsvColor hsv = (HsvColor) color;
             this.color = java.awt.Color.getHSBColor(
                     hsv.getH(), hsv.getS(), hsv.getV());
 
@@ -145,21 +145,21 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public P color(int r, int g, int b) {
+    public P color(final int r, final int g, final int b) {
         this.color = new java.awt.Color(r, g, b);
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P color(int r, int g, int b, double alpha) {
+    public P color(final int r, final int g, final int b, final double alpha) {
         this.color = new java.awt.Color(r, g, b, (int) Math.floor(alpha * 255));
         return (P) this;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public P color(float h, float s, float v) {
+    public P color(final float h, final float s, final float v) {
         this.color = java.awt.Color.getHSBColor(h, s, v);
         return (P) this;
     }
@@ -169,23 +169,24 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
         return getTransform(new AffineTransform());
     }
 
-    protected final AffineTransform getTransform(AffineTransform finalTransform) {
-        AffineTransform transform = new AffineTransform(finalTransform);
-        for (AffineTransform t : transforms) {
+    protected final AffineTransform getTransform(
+            final AffineTransform finalTransform) {
+        final AffineTransform transform = new AffineTransform(finalTransform);
+        for (final AffineTransform t : transforms) {
             transform.concatenate(t);
         }
         return transform;
     }
 
     protected final Point2D.Double getCenter() {
-        Point2D.Double pos = new Point2D.Double();
+        final Point2D.Double pos = new Point2D.Double();
         getTransform().transform(new Point2D.Double(), pos);
         return pos;
     }
 
-    protected void doDraw(Graphics2D g2d) {
-        Rectangle2D bounds = shape.getBounds2D();
-        AffineTransform transform = getTransform(g2d.getTransform());
+    protected void doDraw(final Graphics2D g2d) {
+        final Rectangle2D bounds = shape.getBounds2D();
+        final AffineTransform transform = getTransform(g2d.getTransform());
 
         transform.concatenate(AffineTransform.getTranslateInstance(
                 bounds.getWidth() / -2, bounds.getHeight() / -2));
@@ -194,7 +195,7 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
         doRender(g2d);
     }
 
-    protected void doRender(Graphics2D g2d) {
+    protected void doRender(final Graphics2D g2d) {
         if (color != null) {
             g2d.setColor(color);
         }
@@ -211,24 +212,27 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
         }
     }
 
-    final public void draw(Graphics2D g2d) {
+    @Override
+    final public void draw(final Graphics2D g2d) {
         doDraw(g2d);
     }
 
+    @Override
     public String toString() {
-        Point2D.Double pos = getCenter();
-        Rectangle2D bounds = shape.getBounds2D();
+        final Point2D.Double pos = getCenter();
+        final Rectangle2D bounds = shape.getBounds2D();
         return String.format("%s(x=%.3f,y=%.3f,a=%.3f,b=%.3f)", getClass()
                 .getSimpleName(), pos.x, pos.y, bounds.getWidth(), bounds
                 .getHeight());
     }
 
-    protected P doClone(P object) {
+    protected P doClone(final P object) {
         object.transforms.addAll(transforms);
         object.color = color;
         object.filled = filled;
         return object;
     }
 
+    @Override
     abstract public P clone();
 }

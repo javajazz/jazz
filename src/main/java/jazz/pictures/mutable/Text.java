@@ -8,19 +8,20 @@ import jazz.pictures.MutableAbstractPicture;
 
 public final class Text extends MutableAbstractPicture<Text> {
 
-    final String text;
-    Rectangle2D bounds = null;
+    private final String text;
+    private Rectangle2D bounds = null;
 
-    public Text(String text) {
+    public Text(final String text) {
         super(null);
         this.text = text;
     }
 
-    protected void doDraw(Graphics2D g2d) {
+    @Override
+    protected void doDraw(final Graphics2D g2d) {
         if (bounds == null) {
             bounds = g2d.getFontMetrics().getStringBounds(text, g2d);
         }
-        AffineTransform transform = getTransform(g2d.getTransform());
+        final AffineTransform transform = getTransform(g2d.getTransform());
 
         transform.concatenate(AffineTransform.getTranslateInstance(
                 bounds.getWidth() / -2, bounds.getHeight() / -2));
@@ -31,7 +32,7 @@ public final class Text extends MutableAbstractPicture<Text> {
     }
 
     @Override
-    protected void doRender(Graphics2D g2d) {
+    protected void doRender(final Graphics2D g2d) {
         if (color != null) {
             g2d.setColor(color);
         }

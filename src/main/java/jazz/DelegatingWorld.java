@@ -8,8 +8,9 @@ final public class DelegatingWorld<M> extends World {
 
     final private M model;
 
-    public DelegatingWorld(M m, Renderer<M> r, UpdateHandler<M> u,
-            EventHandler<M> e) {
+    public DelegatingWorld(final M m, final Renderer<M> r,
+            final UpdateHandler<M> u,
+            final EventHandler<M> e) {
         this.updateHandler = u;
         this.eventHandler = e;
         this.renderer = r;
@@ -17,12 +18,12 @@ final public class DelegatingWorld<M> extends World {
     }
 
     @Override
-    final public void update(double time, double delta) {
+    final public void update(final double time, final double delta) {
         updateHandler.update(model, time, delta);
     }
 
     @Override
-    final public void on(Event e) {
+    final public void on(final Event e) {
         eventHandler.on(model, e);
     }
 

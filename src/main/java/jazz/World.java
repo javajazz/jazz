@@ -3,12 +3,12 @@ package jazz;
 public abstract class World implements Model {
 
     @Override
-    public void update(double time, double delta) {
+    public void update(final double time, final double delta) {
 
     }
 
     @Override
-    public void on(Event e) {
+    public void on(final Event e) {
 
     }
 }

@@ -28,7 +28,7 @@ public interface Event {
 
     /**
      * Return the mouse position at the time this event happened as a Vector.
-     * 
+     *
      * @return The position of the mouse as a vector leading from the origin to
      *         the current point.
      */

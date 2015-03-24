@@ -8,11 +8,11 @@ import jazz.pictures.ImmutableAbstractPicture;
 public final class Rectangle extends
         ImmutableAbstractPicture<Rectangle> {
 
-    public Rectangle(double width, double height) {
+    public Rectangle(final double width, final double height) {
         super(new Rectangle2D.Double(0, 0, width, height));
     }
 
-    private Rectangle(Shape shape) {
+    private Rectangle(final Shape shape) {
         super(shape);
     }
 

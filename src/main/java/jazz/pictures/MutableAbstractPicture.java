@@ -9,7 +9,7 @@ import jazz.Mutable;
 public abstract class MutableAbstractPicture<P extends MutableAbstractPicture<P>>
         extends AbstractPicture<P> implements Mutable {
 
-    public MutableAbstractPicture(Shape shape) {
+    public MutableAbstractPicture(final Shape shape) {
         super(shape);
     }
 
@@ -24,35 +24,35 @@ public abstract class MutableAbstractPicture<P extends MutableAbstractPicture<P>
     }
 
     @Override
-    final public P translate(double x, double y) {
+    final public P translate(final double x, final double y) {
         return super.translate(x, y);
     }
 
     @Override
-    final public P rotate(double angle) {
+    final public P rotate(final double angle) {
         return super.rotate(angle);
     }
 
     @Override
-    final public P scale(double x, double y) {
+    final public P scale(final double x, final double y) {
         return super.scale(x, y);
     }
 
     @Override
-    final public P shear(double x, double y) {
+    final public P shear(final double x, final double y) {
         return super.shear(x, y);
     }
 
     @Override
-    final public P transform(AffineTransform transform) {
+    final public P transform(final AffineTransform transform) {
         return super.transform(transform);
     }
 
     @Override
     final public P transform(
-            double m00, double m10,
-            double m01, double m11,
-            double m02, double m12) {
+            final double m00, final double m10,
+            final double m01, final double m11,
+            final double m02, final double m12) {
         return super.transform(m00, m10, m01, m11, m02, m12);
     }
 
@@ -67,22 +67,22 @@ public abstract class MutableAbstractPicture<P extends MutableAbstractPicture<P>
     }
 
     @Override
-    final public P filled(boolean filled) {
+    final public P filled(final boolean filled) {
         return super.filled(filled);
     }
 
     @Override
-    final public P color(Color color) {
+    final public P color(final Color color) {
         return super.color(color);
     }
 
     @Override
-    final public P color(int r, int g, int b) {
+    final public P color(final int r, final int g, final int b) {
         return super.color(r, g, b);
     }
 
     @Override
-    final public P color(float h, float s, float v) {
+    final public P color(final float h, final float s, final float v) {
         return super.color(h, s, v);
     }
 

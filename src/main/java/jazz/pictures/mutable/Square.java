@@ -7,11 +7,11 @@ import jazz.pictures.MutableAbstractPicture;
 
 public final class Square extends MutableAbstractPicture<Square> {
 
-    public Square(double side) {
+    public Square(final double side) {
         super(new Rectangle2D.Double(0, 0, side, side));
     }
 
-    private Square(Shape shape) {
+    private Square(final Shape shape) {
         super(shape);
     }
 

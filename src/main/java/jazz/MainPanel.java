@@ -26,7 +26,7 @@ class MainPanel extends JPanel {
     final Random rand = new Random();
     final ReentrantLock lock = new ReentrantLock();
     final Thread timer;
-    final WindowImpl window;
+    final DefaultWorld window;
 
     int maxFramesPerSecond = 100;
     long maxRefreshRate = 1000000000L / maxFramesPerSecond;
@@ -49,7 +49,7 @@ class MainPanel extends JPanel {
     private volatile boolean paused = false;
 
     MainPanel(final MainWindow mainWindow, final Model theModel,
-            final WindowImpl window, final int a, final int b) {
+            final DefaultWorld window, final int a, final int b) {
         this.model = theModel;
         this.window = window;
 
@@ -59,6 +59,7 @@ class MainPanel extends JPanel {
         setDoubleBuffered(true);
 
         this.timer = new Thread(new Runnable() {
+            @Override
             public void run() {
                 lastUpdate = System.nanoTime();
                 for (; !Thread.interrupted();) {
@@ -75,7 +76,7 @@ class MainPanel extends JPanel {
                                     try {
                                         updateModel();
                                         repaint();
-                                    } catch (Exception exc) {
+                                    } catch (final Exception exc) {
                                         exc.printStackTrace(System.err);
                                     }
                                 }
@@ -84,7 +85,7 @@ class MainPanel extends JPanel {
                             //
                         }
                         Thread.sleep(currentRefreshRate / 1000000);
-                    } catch (InterruptedException e) {
+                    } catch (final InterruptedException e) {
                         break;
                     }
                 }
@@ -95,52 +96,52 @@ class MainPanel extends JPanel {
         addMouseWheelListener(new MouseWheelListener() {
 
             @Override
-            public void mouseWheelMoved(MouseWheelEvent e) {
-                model.on(new EventImpl(window, Event.Type.MOUSE_WHEEL, e));
+            public void mouseWheelMoved(final MouseWheelEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.MOUSE_WHEEL, e));
             }
         });
 
         addMouseMotionListener(new MouseMotionListener() {
 
             @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mouseDragged(final MouseEvent e) {
                 mouseX = e.getX();
                 mouseY = e.getY();
-                model.on(new EventImpl(window, Event.Type.MOUSE_MOVE, e));
+                model.on(new DefaultEvent(window, Event.Type.MOUSE_MOVE, e));
             }
 
             @Override
-            public void mouseMoved(MouseEvent e) {
+            public void mouseMoved(final MouseEvent e) {
                 mouseX = e.getX();
                 mouseY = e.getY();
-                model.on(new EventImpl(window, Event.Type.MOUSE_MOVE, e));
+                model.on(new DefaultEvent(window, Event.Type.MOUSE_MOVE, e));
             }
         });
 
         addMouseListener(new MouseListener() {
 
             @Override
-            public void mouseClicked(MouseEvent e) {
-                model.on(new EventImpl(window, Event.Type.CLICK, e));
+            public void mouseClicked(final MouseEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.CLICK, e));
             }
 
             @Override
-            public void mousePressed(MouseEvent e) {
-                model.on(new EventImpl(window, Event.Type.MOUSE_DOWN, e));
+            public void mousePressed(final MouseEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.MOUSE_DOWN, e));
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-                model.on(new EventImpl(window, Event.Type.MOUSE_UP, e));
+            public void mouseReleased(final MouseEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.MOUSE_UP, e));
             }
 
             @Override
-            public void mouseEntered(MouseEvent e) {
+            public void mouseEntered(final MouseEvent e) {
 
             }
 
             @Override
-            public void mouseExited(MouseEvent e) {
+            public void mouseExited(final MouseEvent e) {
 
             }
         });
@@ -148,28 +149,30 @@ class MainPanel extends JPanel {
         mainWindow.addKeyListener(new KeyListener() {
 
             @Override
-            public void keyTyped(KeyEvent e) {
-                model.on(new EventImpl(window, Event.Type.KEY_TYPED, e, mouseX,
+            public void keyTyped(final KeyEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.KEY_TYPED, e,
+                        mouseX,
                         mouseY));
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                model.on(new EventImpl(window, Event.Type.KEY_DOWN, e, mouseX,
+            public void keyPressed(final KeyEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.KEY_DOWN, e,
+                        mouseX,
                         mouseY));
             }
 
             @Override
-            public void keyReleased(KeyEvent e) {
-                model.on(new EventImpl(window, Event.Type.KEY_UP, e, mouseX,
+            public void keyReleased(final KeyEvent e) {
+                model.on(new DefaultEvent(window, Event.Type.KEY_UP, e, mouseX,
                         mouseY));
             }
         });
     }
 
     void updateModel() {
-        long currentUpdate = System.nanoTime();
-        double delta = (currentUpdate - lastUpdate) / 1000000000.0
+        final long currentUpdate = System.nanoTime();
+        final double delta = (currentUpdate - lastUpdate) / 1000000000.0
                 * acceleration;
         currentTime += delta;
         lastUpdate = currentUpdate;
@@ -196,9 +199,9 @@ class MainPanel extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(final Graphics g) {
 
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
 
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antialias
                 ? RenderingHints.VALUE_ANTIALIAS_ON
@@ -228,7 +231,7 @@ class MainPanel extends JPanel {
                     20);
         }
 
-        long delta = System.nanoTime() - startUpdate;
+        final long delta = System.nanoTime() - startUpdate;
         currentRefreshRate = Math.max(maxRefreshRate, delta);
 
         isPainting = false;

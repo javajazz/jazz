@@ -9,43 +9,44 @@ import jazz.pictures.MutableAbstractPicture;
 
 public final class Polygon extends MutableAbstractPicture<Polygon> {
 
-    public Polygon(Vector... points) {
+    public Polygon(final Vector... points) {
         super(makePath(points));
     }
 
-    public Polygon(int n, double r) {
+    public Polygon(final int n, final double r) {
         super(makePath(n, r));
     }
 
-    private static Shape makePath(int n, double r) {
+    private static Shape makePath(final int n, final double r) {
         if (n < 3) {
             throw new IllegalArgumentException();
         }
-        GeneralPath path = new GeneralPath();
+        final GeneralPath path = new GeneralPath();
         path.moveTo(0, r);
         for (int i = 1; i < n; i++) {
-            double rad = 2 * Math.PI * i / n + Math.PI / 2;
+            final double rad = 2 * Math.PI * i / n + Math.PI / 2;
             path.lineTo(Math.cos(rad) * r, Math.sin(rad) * r);
         }
         path.lineTo(0, r);
         return path;
     }
 
-    private static Shape makePath(Vector[] points) {
-        GeneralPath path = new GeneralPath();
+    private static Shape makePath(final Vector[] points) {
+        final GeneralPath path = new GeneralPath();
         path.moveTo(points[0].x, points[0].y);
         for (int i = 0; i < points.length; i++) {
-            int ix = (i + 1) % points.length;
+            final int ix = (i + 1) % points.length;
             path.lineTo(points[ix].x, points[ix].y);
         }
         return path;
     }
 
-    private Polygon(GeneralPath path) {
+    private Polygon(final GeneralPath path) {
         super((GeneralPath) path.clone());
     }
 
-    protected void doDraw(Graphics2D g2d) {
+    @Override
+    protected void doDraw(final Graphics2D g2d) {
         g2d.setTransform(getTransform(g2d.getTransform()));
         doRender(g2d);
     }

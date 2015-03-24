@@ -9,15 +9,16 @@ import jazz.pictures.ImmutableAbstractPicture;
 
 public final class Line extends ImmutableAbstractPicture<Line> {
 
-    public Line(Vector from, Vector to) {
+    public Line(final Vector from, final Vector to) {
         super(new Line2D.Double(from.x, from.y, to.x, to.y));
     }
 
-    private Line(Shape shape) {
+    private Line(final Shape shape) {
         super(shape);
     }
 
-    protected void doDraw(Graphics2D g2d) {
+    @Override
+    protected void doDraw(final Graphics2D g2d) {
         g2d.setTransform(getTransform(g2d.getTransform()));
         doRender(g2d);
     }
