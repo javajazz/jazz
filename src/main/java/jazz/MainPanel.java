@@ -13,45 +13,42 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
-import java.util.Random;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-@SuppressWarnings("serial")
 class MainPanel extends JPanel {
 
-    final Model model;
-    final Random rand = new Random();
-    final ReentrantLock lock = new ReentrantLock();
-    final Thread timer;
-    final DefaultWorld window;
+    private static final long serialVersionUID = 1L;
 
-    int maxFramesPerSecond = 100;
-    long maxRefreshRate = 1000000000L / maxFramesPerSecond;
-    boolean doShowDebugOutput = false;
-    long currentRefreshRate = maxRefreshRate;
-    double currentTime;
-    double lastUpdate;
-    double pausedTime;
+    private final Model model;
+    private final ReentrantLock lock = new ReentrantLock();
+    private final Thread timer;
 
-    volatile boolean antialias = true;
-    volatile boolean isPainting = false;
-    volatile long startUpdate;
-    volatile int mouseX = 0;
-    volatile int mouseY = 0;
-    volatile int offsetX = 0;
-    volatile int offsetY = 0;
-    volatile double acceleration = 1;
-    volatile double scale = 1;
+    private int maxFramesPerSecond = 100;
+    private final long maxRefreshRate = 1000000000L / getMaxFramesPerSecond();
+    private boolean doShowDebugOutput = false;
+    private long currentRefreshRate = maxRefreshRate;
+    private double currentTime;
+    private double lastUpdate;
+
+    private volatile boolean antialias = true;
+    private volatile boolean isPainting = false;
+    private volatile long startUpdate;
+    private volatile int mouseX = 0;
+    private volatile int mouseY = 0;
+    private volatile int offsetX = 0;
+    private volatile int offsetY = 0;
+    private volatile double acceleration = 1;
+    private volatile double scale = 1;
 
     private volatile boolean paused = false;
 
     MainPanel(final MainWindow mainWindow, final Model theModel,
             final DefaultWorld window, final int a, final int b) {
+
         this.model = theModel;
-        this.window = window;
 
         setPreferredSize(new Dimension(a, b));
         setSize(a, b);
@@ -150,22 +147,20 @@ class MainPanel extends JPanel {
 
             @Override
             public void keyTyped(final KeyEvent e) {
-                model.on(new DefaultEvent(window, Event.Type.KEY_TYPED, e,
-                        mouseX,
-                        mouseY));
+                model.on(new DefaultEvent(
+                        window, Event.Type.KEY_TYPED, e, mouseX, mouseY));
             }
 
             @Override
             public void keyPressed(final KeyEvent e) {
-                model.on(new DefaultEvent(window, Event.Type.KEY_DOWN, e,
-                        mouseX,
-                        mouseY));
+                model.on(new DefaultEvent(
+                        window, Event.Type.KEY_DOWN, e, mouseX, mouseY));
             }
 
             @Override
             public void keyReleased(final KeyEvent e) {
-                model.on(new DefaultEvent(window, Event.Type.KEY_UP, e, mouseX,
-                        mouseY));
+                model.on(new DefaultEvent(
+                        window, Event.Type.KEY_UP, e, mouseX, mouseY));
             }
         });
     }
@@ -173,7 +168,7 @@ class MainPanel extends JPanel {
     void updateModel() {
         final long currentUpdate = System.nanoTime();
         final double delta = (currentUpdate - lastUpdate) / 1000000000.0
-                * acceleration;
+                * getAcceleration();
         currentTime += delta;
         lastUpdate = currentUpdate;
         model.update(currentTime, delta);
@@ -203,7 +198,7 @@ class MainPanel extends JPanel {
 
         final Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antialias
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, isAntialias()
                 ? RenderingHints.VALUE_ANTIALIAS_ON
                 : RenderingHints.VALUE_ANTIALIAS_OFF);
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -217,11 +212,12 @@ class MainPanel extends JPanel {
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
         g2d.setColor(Color.BLACK);
-        g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 - offsetY);
-        g2d.scale(1 * scale, -1 * scale);
+        g2d.translate(getWidth() / 2 + getOffsetX(), getHeight() / 2
+                - getOffsetY());
+        g2d.scale(1 * getScale(), -1 * getScale());
         model.getPicture().draw(g2d);
 
-        if (doShowDebugOutput) {
+        if (isDoShowDebugOutput()) {
             g2d.setTransform(new AffineTransform());
             g2d.setColor(Color.WHITE);
             g2d.drawString(
@@ -235,5 +231,61 @@ class MainPanel extends JPanel {
         currentRefreshRate = Math.max(maxRefreshRate, delta);
 
         isPainting = false;
+    }
+
+    public int getOffsetX() {
+        return offsetX;
+    }
+
+    public void setOffsetX(final int offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public int getOffsetY() {
+        return offsetY;
+    }
+
+    public void setOffsetY(final int offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    public boolean isAntialias() {
+        return antialias;
+    }
+
+    public void setAntialias(final boolean antialias) {
+        this.antialias = antialias;
+    }
+
+    public int getMaxFramesPerSecond() {
+        return maxFramesPerSecond;
+    }
+
+    public void setMaxFramesPerSecond(final int maxFramesPerSecond) {
+        this.maxFramesPerSecond = maxFramesPerSecond;
+    }
+
+    public double getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(final double acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public double getScale() {
+        return scale;
+    }
+
+    public void setScale(final double scale) {
+        this.scale = scale;
+    }
+
+    public boolean isDoShowDebugOutput() {
+        return doShowDebugOutput;
+    }
+
+    public void setDoShowDebugOutput(final boolean doShowDebugOutput) {
+        this.doShowDebugOutput = doShowDebugOutput;
     }
 }

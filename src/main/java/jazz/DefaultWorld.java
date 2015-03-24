@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 class DefaultWorld implements Window {
 
     private MainWindow mainWindow = null;
+
     private final List<Runnable> onClose = new ArrayList<>();
     private final List<Runnable> onHide = new ArrayList<>();
     private final List<Runnable> onShow = new ArrayList<>();
@@ -113,7 +114,7 @@ class DefaultWorld implements Window {
     @Override
     public int height() {
         if (mainWindow != null) {
-            return mainWindow.mainPanel.getHeight();
+            return mainWindow.getMainPanel().getHeight();
         }
         return 0;
     }
@@ -121,7 +122,7 @@ class DefaultWorld implements Window {
     @Override
     public int width() {
         if (mainWindow != null) {
-            return mainWindow.mainPanel.getWidth();
+            return mainWindow.getMainPanel().getWidth();
         }
         return 0;
     }
@@ -129,7 +130,7 @@ class DefaultWorld implements Window {
     @Override
     public int originX() {
         if (mainWindow != null) {
-            return mainWindow.mainPanel.offsetX;
+            return mainWindow.getMainPanel().getOffsetX();
         }
         return 0;
     }
@@ -137,7 +138,7 @@ class DefaultWorld implements Window {
     @Override
     public int originY() {
         if (mainWindow != null) {
-            return mainWindow.mainPanel.offsetY;
+            return mainWindow.getMainPanel().getOffsetY();
         }
         return 0;
     }
@@ -145,7 +146,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld originX(final int originX) {
         if (mainWindow != null) {
-            mainWindow.mainPanel.offsetX = originX;
+            mainWindow.getMainPanel().setOffsetX(originX);
         }
         return this;
     }
@@ -153,7 +154,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld originY(final int originY) {
         if (mainWindow != null) {
-            mainWindow.mainPanel.offsetY = originY;
+            mainWindow.getMainPanel().setOffsetY(originY);
         }
         return this;
     }
@@ -161,7 +162,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld antiAlias(final boolean antialias) {
         if (mainWindow != null) {
-            mainWindow.mainPanel.antialias = antialias;
+            mainWindow.getMainPanel().setAntialias(antialias);
         }
         return this;
     }
@@ -172,7 +173,7 @@ class DefaultWorld implements Window {
             @Override
             public void run() {
                 if (mainWindow != null) {
-                    mainWindow.mainPanel.maxFramesPerSecond = maxFps;
+                    mainWindow.getMainPanel().setMaxFramesPerSecond(maxFps);
                 }
             }
         });
@@ -182,7 +183,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld speed(final double acceleration) {
         if (mainWindow != null) {
-            mainWindow.mainPanel.acceleration = acceleration;
+            mainWindow.getMainPanel().setAcceleration(acceleration);
         }
         return this;
     }
@@ -190,7 +191,7 @@ class DefaultWorld implements Window {
     @Override
     public double speed() {
         if (mainWindow != null) {
-            return mainWindow.mainPanel.acceleration;
+            return mainWindow.getMainPanel().getAcceleration();
         }
         return 0;
     }
@@ -198,7 +199,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld scale(final double scale) {
         if (mainWindow != null) {
-            mainWindow.mainPanel.scale = scale;
+            mainWindow.getMainPanel().setScale(scale);
         }
         return this;
     }
@@ -206,7 +207,7 @@ class DefaultWorld implements Window {
     @Override
     public double scale() {
         if (mainWindow != null) {
-            return mainWindow.mainPanel.scale;
+            return mainWindow.getMainPanel().getScale();
         }
         return 1.0;
     }
@@ -214,10 +215,10 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld pauseOrUnpause() {
         if (mainWindow != null) {
-            if (mainWindow.mainPanel.isPaused()) {
-                mainWindow.mainPanel.resume();
+            if (mainWindow.getMainPanel().isPaused()) {
+                mainWindow.getMainPanel().resume();
             } else {
-                mainWindow.mainPanel.pause();
+                mainWindow.getMainPanel().pause();
             }
         }
         return this;
@@ -226,7 +227,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld pause() {
         if (mainWindow != null) {
-            mainWindow.mainPanel.pause();
+            mainWindow.getMainPanel().pause();
         }
         return this;
     }
@@ -234,7 +235,7 @@ class DefaultWorld implements Window {
     @Override
     public DefaultWorld resume() {
         if (mainWindow != null) {
-            mainWindow.mainPanel.resume();
+            mainWindow.getMainPanel().resume();
         }
         return this;
     }
@@ -242,7 +243,7 @@ class DefaultWorld implements Window {
     @Override
     public Window debugOutput(final boolean doShowDebugOutput) {
         if (mainWindow != null) {
-            mainWindow.mainPanel.doShowDebugOutput = doShowDebugOutput;
+            mainWindow.getMainPanel().setDoShowDebugOutput(doShowDebugOutput);
         }
         return this;
     }

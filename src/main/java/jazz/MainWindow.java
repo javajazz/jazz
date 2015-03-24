@@ -5,19 +5,21 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
-@SuppressWarnings("serial")
 class MainWindow extends JFrame {
 
-    final MainPanel mainPanel;
+    private static final long serialVersionUID = 1L;
+
+    private final MainPanel mainPanel;
 
     MainWindow(final String title, final Model model,
             final DefaultWorld window,
             final int a, final int b) {
+
         super(title);
 
         mainPanel = new MainPanel(this, model, window, a, b);
 
-        setContentPane(mainPanel);
+        setContentPane(getMainPanel());
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
@@ -30,7 +32,7 @@ class MainWindow extends JFrame {
 
             @Override
             public void windowClosing(final WindowEvent e) {
-                mainPanel.stop();
+                getMainPanel().stop();
                 window.setMainWindow(null);
                 MainWindow.this.dispose();
             }
@@ -43,14 +45,14 @@ class MainWindow extends JFrame {
 
             @Override
             public void windowIconified(final WindowEvent e) {
-                mainPanel.pause();
+                getMainPanel().pause();
                 window.onHide();
                 model.on(new DefaultEvent(window, Event.Type.WINDOW_HIDDEN, e));
             }
 
             @Override
             public void windowDeiconified(final WindowEvent e) {
-                mainPanel.resume();
+                getMainPanel().resume();
                 window.onShow();
                 model.on(new DefaultEvent(window, Event.Type.WINDOW_SHOWN, e));
             }
@@ -58,8 +60,8 @@ class MainWindow extends JFrame {
             @Override
             public void windowActivated(final WindowEvent e) {
                 window.onFocus();
-                model.on(new DefaultEvent(window, Event.Type.WINDOW_ACTIVATED,
-                        e));
+                model.on(new DefaultEvent(
+                        window, Event.Type.WINDOW_ACTIVATED, e));
             }
 
             @Override
@@ -71,5 +73,9 @@ class MainWindow extends JFrame {
         });
 
         window.setMainWindow(this);
+    }
+
+    public MainPanel getMainPanel() {
+        return mainPanel;
     }
 }
