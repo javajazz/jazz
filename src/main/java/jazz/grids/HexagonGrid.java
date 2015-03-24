@@ -6,7 +6,7 @@ import jazz.Vector;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Polygon;
 
-public class SimpleHexagonGrid<T> {
+public class HexagonGrid<T> {
 
     private final TileEventHandler<T> tileHandler;
     private final TileDecorator<T> tileDecorator;
@@ -19,7 +19,7 @@ public class SimpleHexagonGrid<T> {
     private final T[][] tiles;
 
     @SuppressWarnings("unchecked")
-    public SimpleHexagonGrid(
+    public HexagonGrid(
             final TileFactory<T> tileFactory,
             final TileDecorator<T> tileDecorator,
             final TileEventHandler<T> tileHandler,

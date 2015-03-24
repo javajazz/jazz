@@ -13,7 +13,7 @@ import jazz.Jazz;
 import jazz.Picture;
 import jazz.World;
 import jazz.grids.DefaultTileFactory;
-import jazz.grids.SimpleHexagonGrid;
+import jazz.grids.HexagonGrid;
 import jazz.grids.TileDecorator;
 import jazz.grids.TileEventHandler;
 import jazz.grids.TilePos;
@@ -21,7 +21,7 @@ import jazz.pictures.mutable.Pictures;
 
 public class DWWorld extends World {
 
-    private SimpleHexagonGrid<DWTile> grid;
+    private HexagonGrid<DWTile> grid;
     private final static List<Color> colors = new ArrayList<Color>();
     {
         colors.add(Color.PURPLE);
@@ -41,7 +41,7 @@ public class DWWorld extends World {
 
     private void init(int numPlayers, int each) {
 
-        grid = new SimpleHexagonGrid<DWTile>(
+        grid = new HexagonGrid<DWTile>(
 
                 new DefaultTileFactory<DWTile>(),
 
