@@ -14,41 +14,43 @@ import jazz.util.ImageLoader;
 
 public final class Bitmap extends AbstractPicture<Bitmap> {
 
-  private final BufferedImage bufferedImage;
+    private final BufferedImage bufferedImage;
 
-  public Bitmap(Class<?> clazz, String resource) throws IOException {
-    this(ImageLoader.loadImage(clazz.getResourceAsStream(resource), resource));
-  }
-
-  public Bitmap(final String fileName) throws IOException {
-    this(ImageLoader.loadImage(fileName == null ? null : new File(fileName)));
-  }
-
-  private Bitmap(BufferedImage bufferedImage) {
-    super(new Rectangle2D.Double(0, 0, bufferedImage.getWidth(),
-        bufferedImage.getHeight()));
-    this.bufferedImage = bufferedImage;
-  }
-
-  @Override
-  protected void doRender(Graphics2D g2d) {
-    if (alpha != null) {
-      g2d.setComposite(alpha);
+    public Bitmap(Class<?> clazz, String resource) throws IOException {
+        this(ImageLoader.loadImage(clazz.getResourceAsStream(resource),
+                resource));
     }
-    g2d.drawImage(bufferedImage, new AffineTransform(),
-        new ImageObserver() {
-          @Override
-          public boolean imageUpdate(
-              Image img, int infoflags, int x, int y, int width,
-              int height) {
-            return true;
-          }
-        });
-  }
 
-  @Override
-  public Bitmap clone() {
-    return doClone(new Bitmap(bufferedImage));
-  }
+    public Bitmap(final String fileName) throws IOException {
+        this(ImageLoader
+                .loadImage(fileName == null ? null : new File(fileName)));
+    }
+
+    private Bitmap(BufferedImage bufferedImage) {
+        super(new Rectangle2D.Double(0, 0, bufferedImage.getWidth(),
+                bufferedImage.getHeight()));
+        this.bufferedImage = bufferedImage;
+    }
+
+    @Override
+    protected void doRender(Graphics2D g2d) {
+        if (alpha != null) {
+            g2d.setComposite(alpha);
+        }
+        g2d.drawImage(bufferedImage, new AffineTransform(),
+                new ImageObserver() {
+                    @Override
+                    public boolean imageUpdate(
+                            Image img, int infoflags, int x, int y, int width,
+                            int height) {
+                        return true;
+                    }
+                });
+    }
+
+    @Override
+    public Bitmap clone() {
+        return doClone(new Bitmap(bufferedImage));
+    }
 
 }

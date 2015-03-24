@@ -12,188 +12,188 @@ import jazz.Event.Type;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.World;
+import jazz.grids.DefaultTileFactory;
+import jazz.grids.SimpleHexagonGrid;
+import jazz.grids.TileDecorator;
+import jazz.grids.TileEventHandler;
+import jazz.grids.TilePos;
 import jazz.pictures.mutable.Pictures;
-import jazz.util.DefaultTileFactory;
-import jazz.util.SimpleHexagonGrid;
-import jazz.util.TileDecorator;
-import jazz.util.TileEventHandler;
-import jazz.util.TilePos;
 
 public class DWWorld extends World {
 
-	private SimpleHexagonGrid<DWTile> grid;
-	private final static List<Color> colors = new ArrayList<Color>();
-	{
-		colors.add(Color.PURPLE);
-		colors.add(Color.OLIVE);
-		colors.add(Color.ORANGE);
-		colors.add(Color.BLUE);
-		colors.add(Color.YELLOW);
-		colors.add(Color.CYAN);
-		colors.add(Color.BROWN);
-		colors.add(Color.DARK_GREEN);
-		colors.add(Color.AZURE);
-	}
+    private SimpleHexagonGrid<DWTile> grid;
+    private final static List<Color> colors = new ArrayList<Color>();
+    {
+        colors.add(Color.PURPLE);
+        colors.add(Color.OLIVE);
+        colors.add(Color.ORANGE);
+        colors.add(Color.BLUE);
+        colors.add(Color.YELLOW);
+        colors.add(Color.CYAN);
+        colors.add(Color.BROWN);
+        colors.add(Color.DARK_GREEN);
+        colors.add(Color.AZURE);
+    }
 
-	public DWWorld() {
+    public DWWorld() {
 
-	}
+    }
 
-	private void init(int numPlayers, int each) {
+    private void init(int numPlayers, int each) {
 
-		grid = new SimpleHexagonGrid<DWTile>(
+        grid = new SimpleHexagonGrid<DWTile>(
 
-				new DefaultTileFactory<DWTile>(),
+                new DefaultTileFactory<DWTile>(),
 
-				new TileDecorator<DWTile>() {
-					@Override
-					public Picture decorate(DWTile tile, Picture picture) {
-						if (tile == null) {
-							return picture;
-						}
-						return picture.filled(true).color(tile.getColor());
-					}
-				},
+                new TileDecorator<DWTile>() {
+                    @Override
+                    public Picture decorate(DWTile tile, Picture picture) {
+                        if (tile == null) {
+                            return picture;
+                        }
+                        return picture.filled(true).color(tile.getColor());
+                    }
+                },
 
-				new TileEventHandler<DWTile>() {
-					@Override
-					public void on(Event ev, DWTile tile) {
+                new TileEventHandler<DWTile>() {
+                    @Override
+                    public void on(Event ev, DWTile tile) {
 
-					}
-				},
+                    }
+                },
 
-				15, 30, 25);
+                15, 30, 25);
 
-		Deque<Color> colors = new ArrayDeque<>();
+        Deque<Color> colors = new ArrayDeque<>();
 
-		for (int i = 0; i < numPlayers; i++) {
-			colors.add(DWWorld.colors.get(i));
-		}
+        for (int i = 0; i < numPlayers; i++) {
+            colors.add(DWWorld.colors.get(i));
+        }
 
-		List<DWTile> tiles = new ArrayList<DWTile>(32);
-		for (Color c : colors) {
-			for (int j = 0; j < each; j++) {
-				tiles.add(new DWTile(c));
-			}
-		}
-		Jazz.shuffle(tiles);
+        List<DWTile> tiles = new ArrayList<DWTile>(32);
+        for (Color c : colors) {
+            for (int j = 0; j < each; j++) {
+                tiles.add(new DWTile(c));
+            }
+        }
+        Jazz.shuffle(tiles);
 
-		int n = grid.getWidth() * grid.getHeight();
+        int n = grid.getWidth() * grid.getHeight();
 
-		int countries = (int) Math.ceil(Math.sqrt(colors.size() * each));
-		int w = grid.getWidth() / countries;
-		int h = grid.getHeight() / countries;
+        int countries = (int) Math.ceil(Math.sqrt(colors.size() * each));
+        int w = grid.getWidth() / countries;
+        int h = grid.getHeight() / countries;
 
-		Iterator<DWTile> tilesIt = tiles.iterator();
-		for (int i = 0; i < countries; i++) {
-			for (int j = 0; j < countries; j++) {
-				int x = i * w + Jazz.randomInt(w);
-				int y = j * h + Jazz.randomInt(h);
+        Iterator<DWTile> tilesIt = tiles.iterator();
+        for (int i = 0; i < countries; i++) {
+            for (int j = 0; j < countries; j++) {
+                int x = i * w + Jazz.randomInt(w);
+                int y = j * h + Jazz.randomInt(h);
 
-				if (tilesIt.hasNext()) {
-					grid.setTileAt(x, y, tilesIt.next());
-					n--;
-				}
-			}
-		}
+                if (tilesIt.hasNext()) {
+                    grid.setTileAt(x, y, tilesIt.next());
+                    n--;
+                }
+            }
+        }
 
-		while (n > 0) {
-			for (int i = 0; i < grid.getWidth(); i++) {
-				for (int j = 0; j < grid.getHeight(); j++) {
+        while (n > 0) {
+            for (int i = 0; i < grid.getWidth(); i++) {
+                for (int j = 0; j < grid.getHeight(); j++) {
 
-					TilePos p = new TilePos(i, j);
-					DWTile t = grid.getTileAt(p);
+                    TilePos p = new TilePos(i, j);
+                    DWTile t = grid.getTileAt(p);
 
-					if (t == null) {
-						continue;
-					}
+                    if (t == null) {
+                        continue;
+                    }
 
-					List<Integer> xs = new ArrayList<Integer>();
-					for (int k = 0; k < 6; k++) {
-						xs.add(k);
-					}
-					Jazz.shuffle(xs);
+                    List<Integer> xs = new ArrayList<Integer>();
+                    for (int k = 0; k < 6; k++) {
+                        xs.add(k);
+                    }
+                    Jazz.shuffle(xs);
 
-					neighbors: for (int x : xs) {
-						switch (x) {
-						case 0: {
-							TilePos p2 = grid.right(p);
-							if (p2 != null && grid.getTileAt(p2) == null) {
-								grid.setTileAt(p2, t);
-								n--;
-								break neighbors;
-							}
-							break;
-						}
-						case 1: {
-							TilePos p2 = grid.topRight(p);
-							if (p2 != null && grid.getTileAt(p2) == null) {
-								grid.setTileAt(p2, t);
-								n--;
-								break neighbors;
-							}
-							break;
-						}
-						case 2: {
-							TilePos p2 = grid.topLeft(p);
-							if (p2 != null && grid.getTileAt(p2) == null) {
-								grid.setTileAt(p2, t);
-								n--;
-								break neighbors;
-							}
-							break;
-						}
-						case 3: {
-							TilePos p2 = grid.left(p);
-							if (p2 != null && grid.getTileAt(p2) == null) {
-								grid.setTileAt(p2, t);
-								n--;
-								break neighbors;
-							}
-							break;
-						}
-						case 4: {
-							TilePos p2 = grid.bottomLeft(p);
-							if (p2 != null && grid.getTileAt(p2) == null) {
-								grid.setTileAt(p2, t);
-								n--;
-								break neighbors;
-							}
-							break;
-						}
-						case 5: {
-							TilePos p2 = grid.bottomRight(p);
-							if (p2 != null && grid.getTileAt(p2) == null) {
-								grid.setTileAt(p2, t);
-								n--;
-								break neighbors;
-							}
-							break;
-						}
-						}
-					}
-				}
-			}
-		}
-	}
+                    neighbors: for (int x : xs) {
+                        switch (x) {
+                        case 0: {
+                            TilePos p2 = grid.right(p);
+                            if (p2 != null && grid.getTileAt(p2) == null) {
+                                grid.setTileAt(p2, t);
+                                n--;
+                                break neighbors;
+                            }
+                            break;
+                        }
+                        case 1: {
+                            TilePos p2 = grid.topRight(p);
+                            if (p2 != null && grid.getTileAt(p2) == null) {
+                                grid.setTileAt(p2, t);
+                                n--;
+                                break neighbors;
+                            }
+                            break;
+                        }
+                        case 2: {
+                            TilePos p2 = grid.topLeft(p);
+                            if (p2 != null && grid.getTileAt(p2) == null) {
+                                grid.setTileAt(p2, t);
+                                n--;
+                                break neighbors;
+                            }
+                            break;
+                        }
+                        case 3: {
+                            TilePos p2 = grid.left(p);
+                            if (p2 != null && grid.getTileAt(p2) == null) {
+                                grid.setTileAt(p2, t);
+                                n--;
+                                break neighbors;
+                            }
+                            break;
+                        }
+                        case 4: {
+                            TilePos p2 = grid.bottomLeft(p);
+                            if (p2 != null && grid.getTileAt(p2) == null) {
+                                grid.setTileAt(p2, t);
+                                n--;
+                                break neighbors;
+                            }
+                            break;
+                        }
+                        case 5: {
+                            TilePos p2 = grid.bottomRight(p);
+                            if (p2 != null && grid.getTileAt(p2) == null) {
+                                grid.setTileAt(p2, t);
+                                n--;
+                                break neighbors;
+                            }
+                            break;
+                        }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
-	@Override
-	public Picture getPicture() {
-		if (grid != null) {
-			return grid.getPicture();
-		}
-		return new Pictures();
-	}
+    @Override
+    public Picture getPicture() {
+        if (grid != null) {
+            return grid.getPicture();
+        }
+        return new Pictures();
+    }
 
-	@Override
-	public void update(double time, double delta) {
-		
-	}
+    @Override
+    public void update(double time, double delta) {
 
-	@Override
-	public void on(Event ev) {
-		if (ev.getType() == Type.CLICK) {
-			init(8, 4);
-		}
-	}
+    }
+
+    @Override
+    public void on(Event ev) {
+        if (ev.getType() == Type.CLICK) {
+            init(8, 4);
+        }
+    }
 }

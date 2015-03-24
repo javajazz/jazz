@@ -1,4 +1,4 @@
-package jazz.util;
+package jazz.grids;
 
 import jazz.Event;
 
@@ -11,8 +11,8 @@ import jazz.Event;
  */
 public class DefaultTileEventHandler<T> implements TileEventHandler<T> {
 
-	@Override
-	public void on(Event ev, T tile) {
-		
-	}
+    @Override
+    public void on(Event ev, T tile) {
+
+    }
 }

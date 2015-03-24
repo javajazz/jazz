@@ -16,99 +16,99 @@ import jazz.pictures.MutableAbstractPicture;
 import jazz.pictures.UnmodifieablePictures;
 
 public final class Pictures extends MutableAbstractPicture<Pictures> implements
-    Iterable<Picture> {
+        Iterable<Picture> {
 
-  private final List<Picture> pictures = new ArrayList<>();
+    private final List<Picture> pictures = new ArrayList<>();
 
-  private Pictures() {
-    super(null);
-  }
-
-  public Pictures(Collection<? extends Picture> pictures) {
-    this();
-    this.pictures.addAll(pictures);
-  }
-
-  public UnmodifieablePictures getImmutable() {
-    return new UnmodifieablePictures(this);
-  }
-
-  public Pictures add(Picture pic) {
-    this.pictures.add(pic);
-    return this;
-  }
-
-  public Pictures remove(int index) {
-    try {
-      this.pictures.remove(index);
-    } catch (IndexOutOfBoundsException exc) {
-      // do nothing
+    private Pictures() {
+        super(null);
     }
-    return this;
-  }
 
-  @SuppressWarnings("unchecked")
-  public <P extends Picture> P get(int index, Class<P> clazz) {
-    try {
-      Picture p = pictures.get(index);
-      if (p == null) {
+    public Pictures(Collection<? extends Picture> pictures) {
+        this();
+        this.pictures.addAll(pictures);
+    }
+
+    public UnmodifieablePictures getImmutable() {
+        return new UnmodifieablePictures(this);
+    }
+
+    public Pictures add(Picture pic) {
+        this.pictures.add(pic);
+        return this;
+    }
+
+    public Pictures remove(int index) {
+        try {
+            this.pictures.remove(index);
+        } catch (IndexOutOfBoundsException exc) {
+            // do nothing
+        }
+        return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <P extends Picture> P get(int index, Class<P> clazz) {
+        try {
+            Picture p = pictures.get(index);
+            if (p == null) {
+                return null;
+            }
+            if (clazz.isAssignableFrom(p.getClass())) {
+                return (P) p;
+            }
+            return null;
+        } catch (IndexOutOfBoundsException exc) {
+            return null;
+        }
+    }
+
+    public Picture get(int index) {
+        try {
+            return pictures.get(index);
+        } catch (IndexOutOfBoundsException exc) {
+            return null;
+        }
+    }
+
+    @SafeVarargs
+    public Pictures(Picture... pictures) {
+        this(Arrays.asList(pictures));
+    }
+
+    @Override
+    protected void doDraw(Graphics2D g2d) {
+        if (color != null) {
+            g2d.setColor(color);
+        }
+        g2d.setTransform(getTransform(g2d.getTransform()));
+        for (Picture picture : pictures) {
+            if (picture != null) {
+                AffineTransform savedTransform = g2d.getTransform();
+                Composite alpha = g2d.getComposite();
+                Stroke stroke = g2d.getStroke();
+                Color savedColor = g2d.getColor();
+                picture.draw(g2d);
+                g2d.setColor(savedColor);
+                g2d.setStroke(stroke);
+                g2d.setComposite(alpha);
+                g2d.setTransform(savedTransform);
+            }
+        }
+    }
+
+    public String toString() {
+        return pictures.toString();
+    }
+
+    @Override
+    public Pictures clone() {
+        // TODO Auto-generated method stub
         return null;
-      }
-      if (clazz.isAssignableFrom(p.getClass())) {
-        return (P) p;
-      }
-      return null;
-    } catch (IndexOutOfBoundsException exc) {
-      return null;
     }
-  }
 
-  public Picture get(int index) {
-    try {
-      return pictures.get(index);
-    } catch (IndexOutOfBoundsException exc) {
-      return null;
+    @Override
+    public Iterator<Picture> iterator() {
+        return pictures.iterator();
     }
-  }
-
-  @SafeVarargs
-  public Pictures(Picture... pictures) {
-    this(Arrays.asList(pictures));
-  }
-
-  @Override
-  protected void doDraw(Graphics2D g2d) {
-    if (color != null) {
-      g2d.setColor(color);
-    }
-    g2d.setTransform(getTransform(g2d.getTransform()));
-    for (Picture picture : pictures) {
-      if (picture != null) {
-        AffineTransform savedTransform = g2d.getTransform();
-        Composite alpha = g2d.getComposite();
-        Stroke stroke = g2d.getStroke();
-        Color savedColor = g2d.getColor();
-        picture.draw(g2d);
-        g2d.setColor(savedColor);
-        g2d.setStroke(stroke);
-        g2d.setComposite(alpha);
-        g2d.setTransform(savedTransform);
-      }
-    }
-  }
-
-  public String toString() {
-    return pictures.toString();
-  }
-
-  @Override
-  public Pictures clone() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Iterator<Picture> iterator() {
-    return pictures.iterator();
-  }
 }

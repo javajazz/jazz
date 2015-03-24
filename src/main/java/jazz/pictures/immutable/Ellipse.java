@@ -7,17 +7,17 @@ import jazz.pictures.ImmutableAbstractPicture;
 
 public final class Ellipse extends ImmutableAbstractPicture<Ellipse> {
 
-  public Ellipse(double a, double b) {
-    super(new Ellipse2D.Double(0, 0, a * 2, b * 2));
-  }
+    public Ellipse(double a, double b) {
+        super(new Ellipse2D.Double(0, 0, a * 2, b * 2));
+    }
 
-  private Ellipse(Shape shape) {
-    super(shape);
-  }
+    private Ellipse(Shape shape) {
+        super(shape);
+    }
 
-  @Override
-  public Ellipse clone() {
-    return doClone(new Ellipse(shape));
-  }
+    @Override
+    public Ellipse clone() {
+        return doClone(new Ellipse(shape));
+    }
 
 }

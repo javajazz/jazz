@@ -4,59 +4,59 @@ import jazz.Key.Location;
 
 public interface Event {
 
-	enum Type {
-		MOUSE_DOWN,
-		MOUSE_UP,
-		CLICK,
-		MOUSE_MOVE,
-		MOUSE_WHEEL,
-		KEY_DOWN,
-		KEY_UP,
-		KEY_TYPED,
-		WINDOW_CLOSED,
-		WINDOW_HIDDEN,
-		WINDOW_SHOWN,
-		WINDOW_ACTIVATED,
-		WINDOW_DEACTIVATED, WINDOW_OPENED
-	}
+    enum Type {
+        MOUSE_DOWN,
+        MOUSE_UP,
+        CLICK,
+        MOUSE_MOVE,
+        MOUSE_WHEEL,
+        KEY_DOWN,
+        KEY_UP,
+        KEY_TYPED,
+        WINDOW_CLOSED,
+        WINDOW_HIDDEN,
+        WINDOW_SHOWN,
+        WINDOW_ACTIVATED,
+        WINDOW_DEACTIVATED, WINDOW_OPENED
+    }
 
-	Type getType();
+    Type getType();
 
-	int getX();
+    int getX();
 
-	int getY();
+    int getY();
 
-	/**
-	 * Return the mouse position at the time this event happened as a Vector.
-	 * 
-	 * @return The position of the mouse as a vector leading from the origin to
-	 *         the current point.
-	 */
-	Vector getPosition();
+    /**
+     * Return the mouse position at the time this event happened as a Vector.
+     * 
+     * @return The position of the mouse as a vector leading from the origin to
+     *         the current point.
+     */
+    Vector getPosition();
 
-	MouseButton getButton();
+    MouseButton getButton();
 
-	int getKeyCode();
+    int getKeyCode();
 
-	Key getKey();
+    Key getKey();
 
-	char getChar();
+    char getChar();
 
-	boolean isShiftPressed();
+    boolean isShiftPressed();
 
-	boolean isAltPressed();
+    boolean isAltPressed();
 
-	boolean isCtrlPressed();
+    boolean isCtrlPressed();
 
-	boolean isSuperPressed();
+    boolean isSuperPressed();
 
-	Window getWindow();
+    Window getWindow();
 
-	int getWindowY();
+    int getWindowY();
 
-	int getWindowX();
+    int getWindowX();
 
-	double getWheelRotation();
+    double getWheelRotation();
 
-	Location getKeyLocation();
+    Location getKeyLocation();
 }

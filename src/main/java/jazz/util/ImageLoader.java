@@ -15,69 +15,69 @@ import javax.imageio.stream.MemoryCacheImageInputStream;
 
 public final class ImageLoader {
 
-  public static BufferedImage loadImage(final File file) throws IOException {
-    if (file == null) {
-      throw new IllegalArgumentException(
-          "The `fileName` must not be null.");
-    }
-    if (!file.exists()) {
-      throw new IOException(String.format(
-          "The file `%s` does not exist",
-          file.getAbsolutePath()));
-    }
-    if (!file.canRead()) {
-      throw new IOException(String.format(
-          "The file `%s` does exist but may not be read.",
-          file.getAbsolutePath()));
-    }
-    return loadImage(new FileInputStream(file), file.getName());
-  }
-
-  public static BufferedImage loadImage(
-      final InputStream stream,
-      final String name) throws IOException {
-
-    if (stream == null) {
-      throw new IOException(String.format(
-          "The supplied resource `%s` could not be found.", name));
+    public static BufferedImage loadImage(final File file) throws IOException {
+        if (file == null) {
+            throw new IllegalArgumentException(
+                    "The `fileName` must not be null.");
+        }
+        if (!file.exists()) {
+            throw new IOException(String.format(
+                    "The file `%s` does not exist",
+                    file.getAbsolutePath()));
+        }
+        if (!file.canRead()) {
+            throw new IOException(String.format(
+                    "The file `%s` does exist but may not be read.",
+                    file.getAbsolutePath()));
+        }
+        return loadImage(new FileInputStream(file), file.getName());
     }
 
-    final String[] suffixes = name.split("\\.");
-    final String suffix = suffixes[suffixes.length - 1];
+    public static BufferedImage loadImage(
+            final InputStream stream,
+            final String name) throws IOException {
 
-    String mimeType = "";
-    switch (suffix.toUpperCase()) {
-    case "PNG":
-      mimeType = "image/png";
-      break;
-    case "JPG":
-    case "JPEG":
-      mimeType = "image/jpeg";
-      break;
+        if (stream == null) {
+            throw new IOException(String.format(
+                    "The supplied resource `%s` could not be found.", name));
+        }
+
+        final String[] suffixes = name.split("\\.");
+        final String suffix = suffixes[suffixes.length - 1];
+
+        String mimeType = "";
+        switch (suffix.toUpperCase()) {
+        case "PNG":
+            mimeType = "image/png";
+            break;
+        case "JPG":
+        case "JPEG":
+            mimeType = "image/jpeg";
+            break;
+        }
+
+        final Iterator<ImageReader> imageReaders =
+                ImageIO.getImageReadersByMIMEType(mimeType);
+
+        if (!imageReaders.hasNext()) {
+            throw new IllegalArgumentException();
+        }
+        final ImageReader imageReader = imageReaders.next();
+
+        imageReader.setInput(new MemoryCacheImageInputStream(stream));
+        BufferedImage image = imageReader.read(0);
+
+        AffineTransform transform = AffineTransform.getScaleInstance(1, -1);
+        transform.concatenate(AffineTransform.getTranslateInstance(0,
+                -image.getHeight()));
+
+        AffineTransformOp transformOp = new AffineTransformOp(
+                transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        BufferedImage bufferedImage = new BufferedImage(
+                image.getWidth(), image.getHeight(), image.getType());
+        transformOp.filter(image, bufferedImage);
+
+        return bufferedImage;
     }
-
-    final Iterator<ImageReader> imageReaders =
-        ImageIO.getImageReadersByMIMEType(mimeType);
-
-    if (!imageReaders.hasNext()) {
-      throw new IllegalArgumentException();
-    }
-    final ImageReader imageReader = imageReaders.next();
-
-    imageReader.setInput(new MemoryCacheImageInputStream(stream));
-    BufferedImage image = imageReader.read(0);
-
-    AffineTransform transform = AffineTransform.getScaleInstance(1, -1);
-    transform.concatenate(AffineTransform.getTranslateInstance(0,
-        -image.getHeight()));
-
-    AffineTransformOp transformOp = new AffineTransformOp(
-        transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-    BufferedImage bufferedImage = new BufferedImage(
-        image.getWidth(), image.getHeight(), image.getType());
-    transformOp.filter(image, bufferedImage);
-
-    return bufferedImage;
-  }
 
 }

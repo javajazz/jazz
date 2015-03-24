@@ -15,22 +15,22 @@ import jazz.pictures.mutable.Pictures;
  */
 public class SingleImage {
 
-	/**
-	 * main method.
-	 * 
-	 * @param args
-	 *            All arguments are ignored.
-	 * @throws IOException
-	 *             If the image could not be loaded.
-	 */
-	public static void main(String... args) throws IOException {
+    /**
+     * main method.
+     * 
+     * @param args
+     *            All arguments are ignored.
+     * @throws IOException
+     *             If the image could not be loaded.
+     */
+    public static void main(String... args) throws IOException {
 
-		Jazz.display(
-				"On this page you see a little girl giggling at a Hippopotamus",
-				1400, 900, new Pictures(
-						new Circle(40).color(Color.RED).stroke(5),
-						new Bitmap(SingleImage.class, "hippo.png")
-								.alpha(0.1)));
+        Jazz.display(
+                "On this page you see a little girl giggling at a Hippopotamus",
+                1400, 900, new Pictures(
+                        new Circle(40).color(Color.RED).stroke(5),
+                        new Bitmap(SingleImage.class, "hippo.png")
+                                .alpha(0.1)));
 
-	}
+    }
 }

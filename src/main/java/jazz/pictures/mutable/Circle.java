@@ -7,17 +7,17 @@ import jazz.pictures.MutableAbstractPicture;
 
 public final class Circle extends MutableAbstractPicture<Circle> {
 
-  public Circle(double radius) {
-    super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));
-  }
+    public Circle(double radius) {
+        super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));
+    }
 
-  private Circle(Shape shape) {
-    super(shape);
-  }
+    private Circle(Shape shape) {
+        super(shape);
+    }
 
-  @Override
-  public Circle clone() {
-    return doClone(new Circle(shape));
-  }
+    @Override
+    public Circle clone() {
+        return doClone(new Circle(shape));
+    }
 
 }
