@@ -10,8 +10,8 @@ class Quadtree<E> {
 
     private static int M = 32;
 
-    public static void main(String... args) {
-        Quadtree<Integer> q = new Quadtree<>();
+    public static void main(final String... args) {
+        final Quadtree<Integer> q = new Quadtree<>();
         q.insert(7, 3, 1);
         q.insert(7, 3, 2);
         q.insert(7, 3, 3);
@@ -42,7 +42,7 @@ class Quadtree<E> {
             return num;
         }
 
-        String toString(StringBuilder b) {
+        String toString(final StringBuilder b) {
             if (as != null) {
                 b.append(as);
             } else {
@@ -62,8 +62,8 @@ class Quadtree<E> {
 
     Node root = new Node();
 
-    Node select(Node c, int i, int x, int y) {
-        int j = (1 << (M - 1)) >>> i;
+    Node select(final Node c, final int i, final int x, final int y) {
+        final int j = (1 << (M - 1)) >>> i;
         if ((x & j) == j) {
             return (y & j) == j ? c.q3 : c.q2;
         } else {
@@ -71,7 +71,7 @@ class Quadtree<E> {
         }
     }
 
-    Node insert(Node c, int i, int x, int y) {
+    Node insert(final Node c, int i, final int x, final int y) {
 
         i = (1 << (M - 1)) >>> i;
 
@@ -88,7 +88,7 @@ class Quadtree<E> {
         }
     }
 
-    public List<E> at(int x, int y) {
+    public List<E> at(final int x, final int y) {
 
         Node c = root;
 
@@ -109,7 +109,7 @@ class Quadtree<E> {
         return Collections.emptyList();
     }
 
-    public void insert(int x, int y, E e) {
+    public void insert(final int x, final int y, final E e) {
 
         Node c = root;
 
@@ -122,7 +122,7 @@ class Quadtree<E> {
                     c.ay = y;
                     return;
                 }
-                Node n = insert(c, i, c.ax, c.ay);
+                final Node n = insert(c, i, c.ax, c.ay);
                 n.as = c.as;
                 n.ax = c.ax;
                 n.ay = c.ay;
@@ -133,11 +133,11 @@ class Quadtree<E> {
         c.as.add(e);
     }
 
-    public void delete(int x, int y, E e) {
+    public void delete(final int x, final int y, final E e) {
 
         Node c = root;
 
-        Deque<Node> path = new ArrayDeque<Node>(M);
+        final Deque<Node> path = new ArrayDeque<Node>(M);
         for (int i = 0; i < M; i++) {
             if (c.isLeaf()) {
                 if (c.ax == x && c.ay == y) {
@@ -158,8 +158,9 @@ class Quadtree<E> {
         }
     }
 
+    @Override
     public String toString() {
-        StringBuilder b = new StringBuilder();
+        final StringBuilder b = new StringBuilder();
         b.append("<style>table { border-collapse: collapse; } td { margin: 0; padding: 0; border: 1px solid gray; }</style>");
         root.toString(b);
         return b.toString();

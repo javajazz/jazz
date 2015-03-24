@@ -8,12 +8,11 @@ import jazz.pictures.mutable.Polygon;
 
 public class Polygons2 {
 
-    public static void main(String... args) {
+    public static void main(final String... args) {
         Jazz.animate(
                 "Woohoo", 800, 600, new Animation() {
 
                     Pictures pictures = new Pictures();
-
                     {
                         for (int i = 3; i < 15; i++) {
                             pictures.add(new Polygon(i, (i - 2) * 25));
@@ -21,9 +20,9 @@ public class Polygons2 {
                     }
 
                     @Override
-                    public void update(double time, double delta) {
+                    public void update(final double time, final double delta) {
                         double i = 30;
-                        for (Picture p : pictures) {
+                        for (final Picture p : pictures) {
                             p.reset().rotate(time * i);
                             i *= -1;
                         }
@@ -33,6 +32,7 @@ public class Polygons2 {
                     public Picture getPicture() {
                         return pictures;
                     }
+
                 }).onClose(new Runnable() {
             @Override
             public void run() {

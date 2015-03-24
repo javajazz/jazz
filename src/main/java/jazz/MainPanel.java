@@ -27,7 +27,7 @@ class MainPanel extends JPanel {
     private final Thread timer;
 
     private int maxFramesPerSecond = 100;
-    private final long maxRefreshRate = 1000000000L / getMaxFramesPerSecond();
+    private long maxRefreshRate = 1000000000L / maxFramesPerSecond;
     private boolean doShowDebugOutput = false;
     private long currentRefreshRate = maxRefreshRate;
     private double currentTime;
@@ -221,8 +221,8 @@ class MainPanel extends JPanel {
             g2d.setTransform(new AffineTransform());
             g2d.setColor(Color.WHITE);
             g2d.drawString(
-                    Long.toString(Math
-                            .round(1000 / (currentRefreshRate / 1000000.0))),
+                    Long.toString(
+                            Math.round(1000 / (currentRefreshRate / 1000000.0))),
                     10,
                     20);
         }
@@ -233,59 +233,60 @@ class MainPanel extends JPanel {
         isPainting = false;
     }
 
-    public int getOffsetX() {
+    int getOffsetX() {
         return offsetX;
     }
 
-    public void setOffsetX(final int offsetX) {
+    void setOffsetX(final int offsetX) {
         this.offsetX = offsetX;
     }
 
-    public int getOffsetY() {
+    int getOffsetY() {
         return offsetY;
     }
 
-    public void setOffsetY(final int offsetY) {
+    void setOffsetY(final int offsetY) {
         this.offsetY = offsetY;
     }
 
-    public boolean isAntialias() {
+    boolean isAntialias() {
         return antialias;
     }
 
-    public void setAntialias(final boolean antialias) {
+    void setAntialias(final boolean antialias) {
         this.antialias = antialias;
     }
 
-    public int getMaxFramesPerSecond() {
+    int getMaxFramesPerSecond() {
         return maxFramesPerSecond;
     }
 
-    public void setMaxFramesPerSecond(final int maxFramesPerSecond) {
+    void setMaxFramesPerSecond(final int maxFramesPerSecond) {
         this.maxFramesPerSecond = maxFramesPerSecond;
+        this.maxRefreshRate = 1000000000L / maxFramesPerSecond;
     }
 
-    public double getAcceleration() {
+    double getAcceleration() {
         return acceleration;
     }
 
-    public void setAcceleration(final double acceleration) {
+    void setAcceleration(final double acceleration) {
         this.acceleration = acceleration;
     }
 
-    public double getScale() {
+    double getScale() {
         return scale;
     }
 
-    public void setScale(final double scale) {
+    void setScale(final double scale) {
         this.scale = scale;
     }
 
-    public boolean isDoShowDebugOutput() {
+    boolean isDoShowDebugOutput() {
         return doShowDebugOutput;
     }
 
-    public void setDoShowDebugOutput(final boolean doShowDebugOutput) {
+    void setDoShowDebugOutput(final boolean doShowDebugOutput) {
         this.doShowDebugOutput = doShowDebugOutput;
     }
 }

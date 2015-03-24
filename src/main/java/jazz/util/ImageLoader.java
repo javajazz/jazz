@@ -65,15 +65,16 @@ public final class ImageLoader {
         final ImageReader imageReader = imageReaders.next();
 
         imageReader.setInput(new MemoryCacheImageInputStream(stream));
-        BufferedImage image = imageReader.read(0);
+        final BufferedImage image = imageReader.read(0);
 
-        AffineTransform transform = AffineTransform.getScaleInstance(1, -1);
+        final AffineTransform transform = AffineTransform.getScaleInstance(1,
+                -1);
         transform.concatenate(AffineTransform.getTranslateInstance(0,
                 -image.getHeight()));
 
-        AffineTransformOp transformOp = new AffineTransformOp(
+        final AffineTransformOp transformOp = new AffineTransformOp(
                 transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-        BufferedImage bufferedImage = new BufferedImage(
+        final BufferedImage bufferedImage = new BufferedImage(
                 image.getWidth(), image.getHeight(), image.getType());
         transformOp.filter(image, bufferedImage);
 

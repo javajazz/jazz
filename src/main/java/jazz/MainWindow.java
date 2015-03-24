@@ -75,7 +75,7 @@ class MainWindow extends JFrame {
         window.setMainWindow(this);
     }
 
-    public MainPanel getMainPanel() {
+    MainPanel getMainPanel() {
         return mainPanel;
     }
 }
