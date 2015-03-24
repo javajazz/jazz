@@ -10,9 +10,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import jazz.Color;
-import jazz.HsvColor;
 import jazz.Picture;
-import jazz.RgbColor;
 
 public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
         Picture {
@@ -125,21 +123,9 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
     @SuppressWarnings("unchecked")
     @Override
     public P color(final Color color) {
-
-        if (color instanceof RgbColor) {
-            final RgbColor rgb = (RgbColor) color;
-            this.color = new java.awt.Color(
-                    rgb.getRed(), rgb.getGreen(), rgb.getBlue());
-
-        } else if (color instanceof HsvColor) {
-            final HsvColor hsv = (HsvColor) color;
-            this.color = java.awt.Color.getHSBColor(
-                    hsv.getH(), hsv.getS(), hsv.getV());
-
-        } else {
-            this.color = null;
+        if (color != null) {
+            this.color = color.getAWTColor();
         }
-
         return (P) this;
     }
 

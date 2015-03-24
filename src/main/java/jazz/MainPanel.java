@@ -168,7 +168,7 @@ class MainPanel extends JPanel {
     void updateModel() {
         final long currentUpdate = System.nanoTime();
         final double delta = (currentUpdate - lastUpdate) / 1000000000.0
-                * getAcceleration();
+                * acceleration;
         currentTime += delta;
         lastUpdate = currentUpdate;
         model.update(currentTime, delta);
@@ -198,7 +198,7 @@ class MainPanel extends JPanel {
 
         final Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, isAntialias()
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antialias
                 ? RenderingHints.VALUE_ANTIALIAS_ON
                 : RenderingHints.VALUE_ANTIALIAS_OFF);
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -212,12 +212,11 @@ class MainPanel extends JPanel {
         g2d.fillRect(0, 0, getWidth(), getHeight());
 
         g2d.setColor(Color.BLACK);
-        g2d.translate(getWidth() / 2 + getOffsetX(), getHeight() / 2
-                - getOffsetY());
-        g2d.scale(1 * getScale(), -1 * getScale());
+        g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 - offsetY);
+        g2d.scale(1 * scale, -1 * scale);
         model.getPicture().draw(g2d);
 
-        if (isDoShowDebugOutput()) {
+        if (doShowDebugOutput) {
             g2d.setTransform(new AffineTransform());
             g2d.setColor(Color.WHITE);
             g2d.drawString(

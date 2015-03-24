@@ -36,4 +36,9 @@ public class RgbColor implements Color {
     public int getAlpha() {
         return a;
     }
+
+    @Override
+    public java.awt.Color getAWTColor() {
+        return new java.awt.Color(r, g, b);
+    }
 }

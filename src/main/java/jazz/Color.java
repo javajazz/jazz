@@ -32,4 +32,6 @@ public interface Color {
 
     final Color FOREST = new RgbColor(34, 139, 34);
     final Color BROWN = new RgbColor(150, 75, 0);
+
+    java.awt.Color getAWTColor();
 }

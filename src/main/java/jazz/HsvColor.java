@@ -12,15 +12,20 @@ public class HsvColor implements Color {
         this.v = v;
     }
 
-    public float getH() {
+    public float getHue() {
         return h;
     }
 
-    public float getS() {
+    public float getSaturation() {
         return s;
     }
 
-    public float getV() {
+    public float getValue() {
         return v;
+    }
+
+    @Override
+    public java.awt.Color getAWTColor() {
+        return java.awt.Color.getHSBColor(h, s, v);
     }
 }

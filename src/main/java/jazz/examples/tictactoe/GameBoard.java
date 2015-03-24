@@ -16,13 +16,21 @@ public class GameBoard extends World {
     private boolean turn;
     private Tile currentTile;
 
+    private enum TileType {
+        X, O
+    }
+
     private static class Tile {
 
-        private char value = '\0';
+        private TileType value;
         private boolean highlight;
 
+        Tile() {
+            reset();
+        }
+
         void reset() {
-            value = '\0';
+            value = null;
             highlight = false;
         }
     }
@@ -38,9 +46,10 @@ public class GameBoard extends World {
 
         private void check(final int x0, final int y0, final int x1,
                 final int y1, final int x2, final int y2) {
-            if (grid.getTileAt(x0, y0).value != '\0'
+            if (grid.getTileAt(x0, y0).value != null
                     && grid.getTileAt(x0, y0).value == grid.getTileAt(x1, y1).value
                     && grid.getTileAt(x1, y1).value == grid.getTileAt(x2, y2).value) {
+
                 grid.getTileAt(x0, y0).highlight = true;
                 grid.getTileAt(x1, y1).highlight = true;
                 grid.getTileAt(x2, y2).highlight = true;
@@ -60,8 +69,8 @@ public class GameBoard extends World {
                     }
                     gameOver = false;
                 }
-            } else if (ev.getType() == Event.Type.CLICK && tile.value == '\0') {
-                tile.value = turn ? 'o' : 'x';
+            } else if (ev.getType() == Event.Type.CLICK && tile.value == null) {
+                tile.value = turn ? TileType.O : TileType.X;
                 turn = !turn;
 
                 check(0, 0, 1, 1, 2, 2);
@@ -75,15 +84,15 @@ public class GameBoard extends World {
                 check(0, 1, 1, 1, 2, 1);
                 check(0, 2, 1, 2, 2, 2);
 
-                if (grid.getTileAt(0, 0).value != '\0'
-                        && grid.getTileAt(0, 1).value != '\0'
-                        && grid.getTileAt(0, 2).value != '\0'
-                        && grid.getTileAt(1, 0).value != '\0'
-                        && grid.getTileAt(1, 1).value != '\0'
-                        && grid.getTileAt(1, 2).value != '\0'
-                        && grid.getTileAt(2, 0).value != '\0'
-                        && grid.getTileAt(2, 1).value != '\0'
-                        && grid.getTileAt(2, 2).value != '\0') {
+                if (grid.getTileAt(0, 0).value != null
+                        && grid.getTileAt(0, 1).value != null
+                        && grid.getTileAt(0, 2).value != null
+                        && grid.getTileAt(1, 0).value != null
+                        && grid.getTileAt(1, 1).value != null
+                        && grid.getTileAt(1, 2).value != null
+                        && grid.getTileAt(2, 0).value != null
+                        && grid.getTileAt(2, 1).value != null
+                        && grid.getTileAt(2, 2).value != null) {
                     gameOver = true;
                 }
             } else if (ev.getType() == Event.Type.MOUSE_MOVE) {
@@ -93,12 +102,16 @@ public class GameBoard extends World {
     };
 
     private final TileRenderer<Tile> tileRenderer = new TileRenderer<Tile>() {
+
         @Override
-        public Picture render(final Tile tile, final double x, final double y,
+        public Picture render(final Tile tile,
+                final double x, final double y,
                 final double width, final double height) {
+
             final Picture picture;
-            if (tile.value != '\0') {
-                picture = tile.value == 'x'
+
+            if (tile.value != null) {
+                picture = tile.value == TileType.X
                         ? new Cross(width * 0.8)
                         : new Circle(width * 0.4);
                 picture.filled(true);
@@ -109,8 +122,16 @@ public class GameBoard extends World {
             } else {
                 return null;
             }
-            return picture.translate(x, y).color(
-                    tile.highlight ? Color.RED : Color.BLACK);
+
+            if (tile.highlight) {
+                picture.color(Color.RED);
+            } else if (gameOver) {
+                picture.color(Color.AZURE);
+            } else {
+                picture.color(Color.BLACK);
+            }
+
+            return picture.translate(x, y);
         }
     };
 
