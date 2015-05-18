@@ -9,33 +9,33 @@ import jazz.pictures.ImmutableAbstractPicture;
 
 public final class Polygon extends ImmutableAbstractPicture<Polygon> {
 
-    public Polygon(final Vector... points) {
-        super(makePath(points));
-    }
+  public Polygon(final Vector... points) {
+    super(makePath(points));
+  }
 
-    private static Shape makePath(final Vector[] points) {
-        final GeneralPath path = new GeneralPath();
-        path.moveTo(points[0].x, points[0].y);
-        for (int i = 0; i < points.length; i++) {
-            final int ix = (i + 1) % points.length;
-            path.lineTo(points[ix].x, points[ix].y);
-        }
-        return path;
+  private static Shape makePath(final Vector[] points) {
+    final GeneralPath path = new GeneralPath();
+    path.moveTo(points[0].x, points[0].y);
+    for (int i = 0; i < points.length; i++) {
+      final int ix = (i + 1) % points.length;
+      path.lineTo(points[ix].x, points[ix].y);
     }
+    return path;
+  }
 
-    private Polygon(final GeneralPath path) {
-        super((GeneralPath) path.clone());
-    }
+  private Polygon(final GeneralPath path) {
+    super((GeneralPath) path.clone());
+  }
 
-    @Override
-    protected void doDraw(final Graphics2D g2d) {
-        g2d.setTransform(getTransform(g2d.getTransform()));
-        doRender(g2d);
-    }
+  @Override
+  protected void doDraw(final Graphics2D g2d) {
+    g2d.setTransform(getTransform(g2d.getTransform()));
+    doRender(g2d);
+  }
 
-    @Override
-    public Polygon clone() {
-        return doClone(new Polygon((GeneralPath) shape));
-    }
+  @Override
+  public Polygon clone() {
+    return doClone(new Polygon((GeneralPath) shape));
+  }
 
 }

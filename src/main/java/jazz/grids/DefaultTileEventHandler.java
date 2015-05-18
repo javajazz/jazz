@@ -11,8 +11,8 @@ import jazz.Event;
  */
 public class DefaultTileEventHandler<T> implements TileEventHandler<T> {
 
-    @Override
-    public void on(final Event ev, final T tile) {
+  @Override
+  public void on(final Event ev, final T tile) {
 
-    }
+  }
 }

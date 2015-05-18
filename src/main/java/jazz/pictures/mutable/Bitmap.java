@@ -14,45 +14,45 @@ import jazz.util.ImageLoader;
 
 public final class Bitmap extends AbstractPicture<Bitmap> {
 
-    private final BufferedImage bufferedImage;
+  private final BufferedImage bufferedImage;
 
-    public Bitmap(final Class<?> clazz, final String resource)
-            throws IOException {
-        this(ImageLoader.loadImage(clazz.getResourceAsStream(resource),
-                resource));
-    }
+  public Bitmap(final Class<?> clazz, final String resource)
+      throws IOException {
+    this(ImageLoader.loadImage(clazz.getResourceAsStream(resource),
+        resource));
+  }
 
-    public Bitmap(final String fileName) throws IOException {
-        this(ImageLoader
-                .loadImage(fileName == null ? null : new File(fileName)));
-    }
+  public Bitmap(final String fileName) throws IOException {
+    this(ImageLoader
+        .loadImage(fileName == null ? null : new File(fileName)));
+  }
 
-    private Bitmap(final BufferedImage bufferedImage) {
-        super(new Rectangle2D.Double(0, 0, bufferedImage.getWidth(),
-                bufferedImage.getHeight()));
-        this.bufferedImage = bufferedImage;
-    }
+  private Bitmap(final BufferedImage bufferedImage) {
+    super(new Rectangle2D.Double(0, 0, bufferedImage.getWidth(),
+        bufferedImage.getHeight()));
+    this.bufferedImage = bufferedImage;
+  }
 
-    @Override
-    protected void doRender(final Graphics2D g2d) {
-        if (alpha != null) {
-            g2d.setComposite(alpha);
-        }
-        g2d.drawImage(bufferedImage, new AffineTransform(),
-                new ImageObserver() {
-                    @Override
-                    public boolean imageUpdate(
-                            final Image img, final int infoflags, final int x,
-                            final int y, final int width,
-                            final int height) {
-                        return true;
-                    }
-                });
+  @Override
+  protected void doRender(final Graphics2D g2d) {
+    if (alpha != null) {
+      g2d.setComposite(alpha);
     }
+    g2d.drawImage(bufferedImage, new AffineTransform(),
+        new ImageObserver() {
+          @Override
+          public boolean imageUpdate(
+              final Image img, final int infoflags, final int x,
+              final int y, final int width,
+              final int height) {
+            return true;
+          }
+        });
+  }
 
-    @Override
-    public Bitmap clone() {
-        return doClone(new Bitmap(bufferedImage));
-    }
+  @Override
+  public Bitmap clone() {
+    return doClone(new Bitmap(bufferedImage));
+  }
 
 }

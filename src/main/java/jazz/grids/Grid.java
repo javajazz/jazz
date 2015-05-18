@@ -12,101 +12,101 @@ import jazz.Vector;
  */
 public interface Grid<A, T> {
 
-    /**
-     * @return
-     */
-    Picture getPicture();
+  /**
+   * @return
+   */
+  Picture getPicture();
 
-    /**
-     * @param ev
-     */
-    void on(final Event ev);
+  /**
+   * @param ev
+   */
+  void on(final Event ev);
 
-    /**
-     * @param p
-     * @return
-     */
-    A setCenter(final Vector p);
+  /**
+   * @param p
+   * @return
+   */
+  A setCenter(final Vector p);
 
-    /**
-     * @param x
-     * @param y
-     * @return
-     */
-    A setCenter(final double x, final double y);
+  /**
+   * @param x
+   * @param y
+   * @return
+   */
+  A setCenter(final double x, final double y);
 
-    /**
-     * @return
-     */
-    Vector getCenter();
+  /**
+   * @return
+   */
+  Vector getCenter();
 
-    /**
-     * @param width
-     * @return
-     */
-    A setWidth(final double width);
+  /**
+   * @param width
+   * @return
+   */
+  A setWidth(final double width);
 
-    /**
-     * @return
-     */
-    double getWidth();
+  /**
+   * @return
+   */
+  double getWidth();
 
-    /**
-     * @param height
-     * @return
-     */
-    A setHeight(final double height);
+  /**
+   * @param height
+   * @return
+   */
+  A setHeight(final double height);
 
-    /**
-     * @return
-     */
-    double getHeight();
+  /**
+   * @return
+   */
+  double getHeight();
 
-    /**
-     * @param p
-     * @param resize
-     * @return
-     */
-    A setLowerLeftCorner(final Vector p, final boolean resize);
+  /**
+   * @param p
+   * @param resize
+   * @return
+   */
+  A setLowerLeftCorner(final Vector p, final boolean resize);
 
-    /**
-     * @return
-     */
-    Vector getLowerLeftCorner();
+  /**
+   * @return
+   */
+  Vector getLowerLeftCorner();
 
-    /**
-     * @param p
-     * @param resize
-     * @return
-     */
-    A setUpperLeftCorner(final Vector p, final boolean resize);
+  /**
+   * @param p
+   * @param resize
+   * @return
+   */
+  A setUpperLeftCorner(final Vector p, final boolean resize);
 
-    /**
-     * @return
-     */
-    Vector getUpperLeftCorner();
+  /**
+   * @return
+   */
+  Vector getUpperLeftCorner();
 
-    /**
-     * @param p
-     * @param resize
-     * @return
-     */
-    A setLowerRightCorner(final Vector p, final boolean resize);
+  /**
+   * @param p
+   * @param resize
+   * @return
+   */
+  A setLowerRightCorner(final Vector p, final boolean resize);
 
-    /**
-     * @return
-     */
-    Vector getLowerRightCorner();
+  /**
+   * @return
+   */
+  Vector getLowerRightCorner();
 
-    /**
-     * @param p
-     * @param resize
-     * @return
-     */
-    A setUpperRightCorner(final Vector p, final boolean resize);
+  /**
+   * @param p
+   * @param resize
+   * @return
+   */
+  A setUpperRightCorner(final Vector p, final boolean resize);
 
-    /**
-     * @return
-     */
-    Vector getUpperRightCorner();
+  /**
+   * @return
+   */
+  Vector getUpperRightCorner();
 }

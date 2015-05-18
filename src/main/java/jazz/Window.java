@@ -24,131 +24,131 @@ package jazz;
  */
 public interface Window {
 
-    /**
-     * @return
-     */
-    Window close();
+  /**
+   * @return
+   */
+  Window close();
 
-    /**
-     * @param title
-     * @return
-     */
-    Window title(final String title);
+  /**
+   * @param title
+   * @return
+   */
+  Window title(final String title);
 
-    /**
-     * @param runnable
-     * @return
-     */
-    Window onClose(final Runnable runnable);
+  /**
+   * @param runnable
+   * @return
+   */
+  Window onClose(final Runnable runnable);
 
-    /**
-     * @param runnable
-     * @return
-     */
-    Window onShow(final Runnable runnable);
+  /**
+   * @param runnable
+   * @return
+   */
+  Window onShow(final Runnable runnable);
 
-    /**
-     * @param runnable
-     * @return
-     */
-    Window onHide(final Runnable runnable);
+  /**
+   * @param runnable
+   * @return
+   */
+  Window onHide(final Runnable runnable);
 
-    /**
-     * @param runnable
-     * @return
-     */
-    Window onActivate(final Runnable runnable);
+  /**
+   * @param runnable
+   * @return
+   */
+  Window onActivate(final Runnable runnable);
 
-    /**
-     * @param runnable
-     * @return
-     */
-    Window onDeactivate(final Runnable runnable);
+  /**
+   * @param runnable
+   * @return
+   */
+  Window onDeactivate(final Runnable runnable);
 
-    /**
-     * @return
-     */
-    int width();
+  /**
+   * @return
+   */
+  int width();
 
-    /**
-     * @return
-     */
-    int height();
+  /**
+   * @return
+   */
+  int height();
 
-    /**
-     * @return
-     */
-    int originX();
+  /**
+   * @return
+   */
+  int originX();
 
-    /**
-     * @return
-     */
-    int originY();
+  /**
+   * @return
+   */
+  int originY();
 
-    /**
-     * @param originX
-     * @return this.
-     */
-    Window originX(final int originX);
+  /**
+   * @param originX
+   * @return this.
+   */
+  Window originX(final int originX);
 
-    /**
-     * @param originY
-     * @return this.
-     */
-    Window originY(final int originY);
+  /**
+   * @param originY
+   * @return this.
+   */
+  Window originY(final int originY);
 
-    /**
-     * @param antialias
-     * @return this.
-     */
-    Window antiAlias(final boolean antialias);
+  /**
+   * @param antialias
+   * @return this.
+   */
+  Window antiAlias(final boolean antialias);
 
-    /**
-     * @param maxFps
-     * @return this.
-     */
-    Window maxFps(final int maxFps);
+  /**
+   * @param maxFps
+   * @return this.
+   */
+  Window maxFps(final int maxFps);
 
-    /**
-     * @param doShowDebugOutput
-     * @return this.
-     */
-    Window debugOutput(final boolean doShowDebugOutput);
+  /**
+   * @param doShowDebugOutput
+   * @return this.
+   */
+  Window debugOutput(final boolean doShowDebugOutput);
 
-    /**
-     * @param acceleration
-     * @return this.
-     */
-    Window speed(final double acceleration);
+  /**
+   * @param acceleration
+   * @return this.
+   */
+  Window speed(final double acceleration);
 
-    /**
-     * @return
-     */
-    double speed();
+  /**
+   * @return
+   */
+  double speed();
 
-    /**
-     * @return this.
-     */
-    Window pause();
+  /**
+   * @return this.
+   */
+  Window pause();
 
-    /**
-     * @return this.
-     */
-    Window resume();
+  /**
+   * @return this.
+   */
+  Window resume();
 
-    /**
-     * @return this.
-     */
-    Window pauseOrUnpause();
+  /**
+   * @return this.
+   */
+  Window pauseOrUnpause();
 
-    /**
-     * @return
-     */
-    double scale();
+  /**
+   * @return
+   */
+  double scale();
 
-    /**
-     * @param scale
-     * @return this.
-     */
-    Window scale(final double scale);
+  /**
+   * @param scale
+   * @return this.
+   */
+  Window scale(final double scale);
 }
