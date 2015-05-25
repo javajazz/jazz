@@ -13,7 +13,7 @@ package de.scravy.jazz;
  *                 |
  *                 |
  *                 |
- * (-) ------------+------------> x (+)
+ * (-) ------------+------------&gt; x (+)
  *                 |
  *                 |
  *                 |
@@ -123,7 +123,7 @@ public interface Window {
   Window speed(final double acceleration);
 
   /**
-   * @return
+   * @return The speed currently set.
    */
   double speed();
 
@@ -143,7 +143,7 @@ public interface Window {
   Window pauseOrUnpause();
 
   /**
-   * @return
+   * @return The scale currently set.
    */
   double scale();
 
