@@ -16,7 +16,7 @@ public final class Bitmap extends AbstractPicture<Bitmap> {
 
   private static final long serialVersionUID = 1L;
 
-  private final BufferedImage bufferedImage;
+  private final transient BufferedImage bufferedImage;
 
   public Bitmap(final Class<?> clazz, final String resource)
       throws IOException {

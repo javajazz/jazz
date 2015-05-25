@@ -184,38 +184,6 @@ public class Jazz {
   }
 
   /**
-   * Shuffles an int-array (in-place).
-   *
-   * The array is shuffled using the global random generator offered by Jazz.
-   *
-   * @since 1.0.0
-   * @param array
-   *          The array to shuffle.
-   */
-  public static void shuffle(final int[] array) {
-    // asList uses the backing array as store,
-    // therefore changes to the list are reflected by the array.
-    synchronized (array) {
-      Collections.shuffle(Arrays.asList(array), random);
-    }
-  }
-
-  /**
-   * Shuffles a double-array (in-place)
-   *
-   * The array is shuffled using the global random generator offered by Jazz.
-   *
-   * @since 1.0.0
-   * @param array
-   *          The array to shuffle.
-   */
-  public static void shuffle(final double[] array) {
-    synchronized (array) {
-      Collections.shuffle(Arrays.asList(array), random);
-    }
-  }
-
-  /**
    * Displays a static picture in a single window.
    *
    * You can open multiple windows using this method.

@@ -1,8 +1,5 @@
 package de.scravy.jazz;
 
-import de.scravy.jazz.Key;
-import de.scravy.jazz.MouseButton;
-import de.scravy.jazz.Vector;
 import de.scravy.jazz.Key.Location;
 
 public interface Event {

@@ -4,10 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
+import lombok.EqualsAndHashCode;
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Picture;
 import de.scravy.jazz.pictures.mutable.Pictures;
 
+@EqualsAndHashCode
 public class UnmodifieablePictures implements Picture {
 
   private static final long serialVersionUID = 1L;
@@ -27,22 +29,12 @@ public class UnmodifieablePictures implements Picture {
   }
 
   @Override
-  public int hashCode() {
-    return this.p.hashCode();
-  }
-
-  @Override
   public String toString() {
     return this.p.toString();
   }
 
   public Iterator<Picture> iterator() {
     return this.p.iterator();
-  }
-
-  @Override
-  public boolean equals(final Object obj) {
-    return this.p.equals(obj);
   }
 
   @Override

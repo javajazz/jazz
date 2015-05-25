@@ -2,9 +2,9 @@ package de.scravy.jazz;
 
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.io.Serializable;
 
 import lombok.Value;
+import de.scravy.pair.ComparableSerializablePair;
 import de.scravy.pair.Pair;
 import de.scravy.pair.Pairs;
 
@@ -12,7 +12,7 @@ import de.scravy.pair.Pairs;
  * An immutable point in the two dimensional plane.
  */
 @Value
-public class Vector implements Serializable, Pair<Double, Double> {
+public class Vector implements ComparableSerializablePair<Double, Double> {
 
   private static final long serialVersionUID = 1L;
 
@@ -150,5 +150,10 @@ public class Vector implements Serializable, Pair<Double, Double> {
   @Override
   public Double getSecond() {
     return this.y;
+  }
+
+  @Override
+  public int compareTo(final ComparableSerializablePair<Double, Double> o) {
+    return Pairs.compare(this, o);
   }
 }
