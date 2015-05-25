@@ -1,8 +1,8 @@
 package jazz.examples.pong;
 
 import de.scravy.jazz.Color;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.Renderer;
-import jazz.Picture;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Rectangle;
 import jazz.pictures.mutable.Square;

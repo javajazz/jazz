@@ -1,9 +1,9 @@
 package jazz.examples.basic;
 
-import jazz.Event;
-import jazz.Jazz;
-import jazz.Picture;
-import jazz.World;
+import de.scravy.jazz.Event;
+import de.scravy.jazz.Jazz;
+import de.scravy.jazz.Picture;
+import de.scravy.jazz.World;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Pie;
 

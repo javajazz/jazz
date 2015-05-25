@@ -1,6 +1,8 @@
-package jazz;
+package de.scravy.jazz;
 
+import de.scravy.jazz.Event;
 import de.scravy.jazz.EventHandler;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.Renderer;
 import de.scravy.jazz.UpdateHandler;
 

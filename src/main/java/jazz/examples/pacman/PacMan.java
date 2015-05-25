@@ -2,8 +2,8 @@ package jazz.examples.pacman;
 
 import java.io.IOException;
 
-import jazz.DelegatingWorld;
-import jazz.Jazz;
+import de.scravy.jazz.DelegatingWorld;
+import de.scravy.jazz.Jazz;
 
 public class PacMan {
 

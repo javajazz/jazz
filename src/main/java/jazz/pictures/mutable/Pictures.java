@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import jazz.Picture;
+import de.scravy.jazz.Picture;
 import jazz.pictures.MutableAbstractPicture;
 import jazz.pictures.UnmodifieablePictures;
 

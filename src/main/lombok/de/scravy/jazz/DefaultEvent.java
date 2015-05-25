@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -8,9 +8,8 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.scravy.jazz.Event;
 import de.scravy.jazz.Key;
-import de.scravy.jazz.MouseButton;
-import de.scravy.jazz.Vector;
 import de.scravy.jazz.Key.Location;
 
 class DefaultEvent implements Event {

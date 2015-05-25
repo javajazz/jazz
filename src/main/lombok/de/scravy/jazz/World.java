@@ -1,5 +1,6 @@
-package jazz;
+package de.scravy.jazz;
 
+import de.scravy.jazz.Event;
 import de.scravy.jazz.Model;
 
 public abstract class World implements Model {

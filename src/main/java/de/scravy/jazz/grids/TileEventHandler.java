@@ -1,6 +1,6 @@
 package de.scravy.jazz.grids;
 
-import jazz.Event;
+import de.scravy.jazz.Event;
 import de.scravy.jazz.annotation.Experimental;
 
 @Experimental

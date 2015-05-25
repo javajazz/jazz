@@ -1,6 +1,6 @@
 package jazz.examples.pong;
 
-import jazz.Jazz;
+import de.scravy.jazz.Jazz;
 
 public class Pong {
 

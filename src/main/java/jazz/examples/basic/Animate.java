@@ -1,8 +1,8 @@
 package jazz.examples.basic;
 
-import jazz.Animation;
-import jazz.Jazz;
-import jazz.Picture;
+import de.scravy.jazz.Animation;
+import de.scravy.jazz.Jazz;
+import de.scravy.jazz.Picture;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Rectangle;
 

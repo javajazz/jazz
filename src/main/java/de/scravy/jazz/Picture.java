@@ -1,11 +1,9 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.geom.AffineTransform;
+import java.io.Serializable;
 
-import de.scravy.jazz.Color;
-import de.scravy.jazz.Drawable;
-
-public interface Picture extends Cloneable, Drawable {
+public interface Picture extends Serializable, Cloneable, Drawable {
 
   Picture alpha(final double alpha);
 

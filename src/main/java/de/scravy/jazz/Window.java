@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 /**
  * A Jazz Window - a drawing canvas with a window border, or a fullscreen

@@ -1,6 +1,5 @@
 package de.scravy.jazz;
 
-import jazz.Jazz;
 import lombok.experimental.UtilityClass;
 
 /**

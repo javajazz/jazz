@@ -1,6 +1,6 @@
 package jazz.grids;
 
-import jazz.Event;
+import de.scravy.jazz.Event;
 import de.scravy.jazz.annotation.Experimental;
 import de.scravy.jazz.grids.TileEventHandler;
 

@@ -1,6 +1,6 @@
 package jazz.examples.dw;
 
-import jazz.Jazz;
+import de.scravy.jazz.Jazz;
 
 public class DW {
 

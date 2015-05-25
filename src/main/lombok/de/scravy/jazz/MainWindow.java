@@ -1,10 +1,11 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
+import de.scravy.jazz.Event;
 import de.scravy.jazz.Model;
 
 class MainWindow extends JFrame {

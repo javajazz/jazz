@@ -1,15 +1,17 @@
 package jazz.grids;
 
+import jazz.pictures.mutable.Pictures;
+import jazz.pictures.mutable.Polygon;
+import de.scravy.jazz.Event;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.Vector;
+import de.scravy.jazz.annotation.Experimental;
 import de.scravy.jazz.grids.TileDecorator;
 import de.scravy.jazz.grids.TileEventHandler;
 import de.scravy.jazz.grids.TileFactory;
 import de.scravy.jazz.grids.TilePos;
-import jazz.Event;
-import jazz.Picture;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Polygon;
 
+@Experimental
 public class HexagonGrid<T> {
 
   private final TileEventHandler<T> tileHandler;
@@ -37,42 +39,42 @@ public class HexagonGrid<T> {
 
     this.a = a;
 
-    tiles = (T[][]) new Object[width][height];
+    this.tiles = (T[][]) new Object[width][height];
 
-    w1 = Math.sqrt(3) * a;
-    w2 = w1 / 2;
+    this.w1 = Math.sqrt(3) * a;
+    this.w2 = this.w1 / 2;
 
-    h1 = a / 2;
-    h2 = h1 * 3;
+    this.h1 = a / 2;
+    this.h2 = this.h1 * 3;
 
-    w = width * w1 + w2;
-    h = height * h2 + h1;
+    this.w = width * this.w1 + this.w2;
+    this.h = height * this.h2 + this.h1;
   }
 
   public Picture getPicture() {
 
     final Pictures pictures = new Pictures();
 
-    for (int i = 0; i < width; i++) {
-      for (int j = 0; j < height; j++) {
+    for (int i = 0; i < this.width; i++) {
+      for (int j = 0; j < this.height; j++) {
 
-        double x = i * w1 - w / 2;
-        final double y = j * h2 - h / 2;
+        double x = i * this.w1 - this.w / 2;
+        final double y = j * this.h2 - this.h / 2;
 
         if (j % 2 != 0) {
-          x += w2;
+          x += this.w2;
         }
 
         final Polygon p = new Polygon(
-            new Vector(x + w2, y),
-            new Vector(x + w1, y + h1),
-            new Vector(x + w1, y + h2),
-            new Vector(x + w2, y + 2 * a),
-            new Vector(x, y + h2),
-            new Vector(x, y + h1)
+            new Vector(x + this.w2, y),
+            new Vector(x + this.w1, y + this.h1),
+            new Vector(x + this.w1, y + this.h2),
+            new Vector(x + this.w2, y + 2 * this.a),
+            new Vector(x, y + this.h2),
+            new Vector(x, y + this.h1)
             );
 
-        pictures.add(tileDecorator.decorate(tiles[i][j], p));
+        pictures.add(this.tileDecorator.decorate(this.tiles[i][j], p));
       }
     }
     return pictures;
@@ -83,23 +85,23 @@ public class HexagonGrid<T> {
   }
 
   public void setTileAt(final int x, final int y, final T tile) {
-    tiles[x][y] = tile;
+    this.tiles[x][y] = tile;
   }
 
   public void setTileAt(final TilePos p, final T tile) {
-    tiles[p.x][p.y] = tile;
+    this.tiles[p.x][p.y] = tile;
   }
 
   public T getTileAt(final int x, final int y) {
-    return tiles[x][y];
+    return this.tiles[x][y];
   }
 
   public T getTileAt(final TilePos p) {
-    return tiles[p.x][p.y];
+    return this.tiles[p.x][p.y];
   }
 
   public TilePos topLeft(final TilePos p) {
-    if (p.y + 1 >= height) {
+    if (p.y + 1 >= this.height) {
       return null;
     } else if (p.y % 2 == 0) {
       return p.x == 0 ? null : new TilePos(p.x - 1, p.y + 1);
@@ -109,12 +111,12 @@ public class HexagonGrid<T> {
   }
 
   public TilePos topRight(final TilePos p) {
-    if (p.y + 1 >= height) {
+    if (p.y + 1 >= this.height) {
       return null;
     } else if (p.y % 2 == 0) {
       return new TilePos(p.x, p.y + 1);
     } else {
-      return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y + 1);
+      return p.x + 1 >= this.width ? null : new TilePos(p.x + 1, p.y + 1);
     }
   }
 
@@ -134,7 +136,7 @@ public class HexagonGrid<T> {
     } else if (p.y % 2 == 0) {
       return new TilePos(p.x, p.y - 1);
     } else {
-      return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y - 1);
+      return p.x + 1 >= this.width ? null : new TilePos(p.x + 1, p.y - 1);
     }
   }
 
@@ -143,14 +145,14 @@ public class HexagonGrid<T> {
   }
 
   public TilePos right(final TilePos p) {
-    return p.x + 1 >= width ? null : new TilePos(p.x + 1, p.y);
+    return p.x + 1 >= this.width ? null : new TilePos(p.x + 1, p.y);
   }
 
   public int getHeight() {
-    return height;
+    return this.height;
   }
 
   public int getWidth() {
-    return width;
+    return this.width;
   }
 }

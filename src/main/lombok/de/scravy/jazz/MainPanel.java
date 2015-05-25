@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -18,6 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import de.scravy.jazz.Event;
 import de.scravy.jazz.Model;
 
 class MainPanel extends JPanel {

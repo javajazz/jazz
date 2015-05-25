@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.scravy.jazz.Direction;
-import jazz.Picture;
+import de.scravy.jazz.Picture;
 import jazz.pictures.mutable.Pictures;
 
 public class PacManWorld {

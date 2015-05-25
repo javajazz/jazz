@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
@@ -12,8 +12,10 @@ import javax.swing.SwingUtilities;
 
 import de.scravy.jazz.EventHandler;
 import de.scravy.jazz.Model;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.Renderer;
 import de.scravy.jazz.UpdateHandler;
+import de.scravy.jazz.Window;
 
 /**
  * The Jazz main class, used to create Jazz windows and adjust the global Jazz

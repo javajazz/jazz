@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import de.scravy.jazz.Color;
-import jazz.Picture;
+import de.scravy.jazz.Picture;
 
 public abstract class DelegatingPicture<X extends Picture> implements Picture {
 

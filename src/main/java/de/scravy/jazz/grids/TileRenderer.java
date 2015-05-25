@@ -1,6 +1,6 @@
 package de.scravy.jazz.grids;
 
-import jazz.Picture;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.annotation.Experimental;
 
 @Experimental

@@ -1,7 +1,5 @@
 package de.scravy.jazz;
 
-import jazz.Event;
-import jazz.Picture;
 
 public interface Model {
 

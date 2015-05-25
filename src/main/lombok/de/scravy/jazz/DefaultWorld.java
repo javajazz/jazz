@@ -1,9 +1,11 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
+
+import de.scravy.jazz.Window;
 
 class DefaultWorld implements Window {
 

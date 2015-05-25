@@ -1,7 +1,7 @@
 package jazz.grids;
 
-import jazz.Event;
-import jazz.Picture;
+import de.scravy.jazz.Event;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.Vector;
 import de.scravy.jazz.annotation.Experimental;
 

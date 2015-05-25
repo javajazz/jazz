@@ -10,7 +10,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import de.scravy.jazz.Color;
-import jazz.Picture;
+import de.scravy.jazz.Picture;
 
 public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
     Picture {

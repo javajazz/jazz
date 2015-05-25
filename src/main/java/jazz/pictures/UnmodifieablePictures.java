@@ -5,7 +5,7 @@ import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
 import de.scravy.jazz.Color;
-import jazz.Picture;
+import de.scravy.jazz.Picture;
 import jazz.pictures.mutable.Pictures;
 
 public class UnmodifieablePictures implements Picture {

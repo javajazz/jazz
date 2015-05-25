@@ -1,9 +1,9 @@
 package jazz.grids;
 
-import jazz.Event;
-import jazz.Picture;
 import jazz.pictures.UnmodifieablePictures;
 import jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.Event;
+import de.scravy.jazz.Picture;
 import de.scravy.jazz.Vector;
 import de.scravy.jazz.annotation.Experimental;
 import de.scravy.jazz.grids.TileEventHandler;
