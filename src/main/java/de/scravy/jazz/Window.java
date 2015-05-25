@@ -20,104 +20,105 @@ package de.scravy.jazz;
  *                (-)
  * </pre>
  *
+ * @since 1.0.0
  * @author Julian Fleischer
  */
 public interface Window {
 
   /**
-   * @return
+   * @return This window.
    */
   Window close();
 
   /**
    * @param title
-   * @return
+   * @return This window.
    */
   Window title(final String title);
 
   /**
    * @param runnable
-   * @return
+   * @return This window.
    */
   Window onClose(final Runnable runnable);
 
   /**
    * @param runnable
-   * @return
+   * @return This window.
    */
   Window onShow(final Runnable runnable);
 
   /**
    * @param runnable
-   * @return
+   * @return This window.
    */
   Window onHide(final Runnable runnable);
 
   /**
    * @param runnable
-   * @return
+   * @return This window.
    */
   Window onActivate(final Runnable runnable);
 
   /**
    * @param runnable
-   * @return
+   * @return This window.
    */
   Window onDeactivate(final Runnable runnable);
 
   /**
-   * @return
+   * @return The width of this window.
    */
   int width();
 
   /**
-   * @return
+   * @return The height of this window.
    */
   int height();
 
   /**
-   * @return
+   * @return The horizontal position on the screen.
    */
   int originX();
 
   /**
-   * @return
+   * @return The vertical position on the screen.
    */
   int originY();
 
   /**
    * @param originX
-   * @return this.
+   * @return This window.
    */
   Window originX(final int originX);
 
   /**
    * @param originY
-   * @return this.
+   * @return This window.
    */
   Window originY(final int originY);
 
   /**
    * @param antialias
-   * @return this.
+   * @return This window.
    */
   Window antiAlias(final boolean antialias);
 
   /**
    * @param maxFps
-   * @return this.
+   * @return This window.
    */
   Window maxFps(final int maxFps);
 
   /**
    * @param doShowDebugOutput
-   * @return this.
+   * @return This window.
    */
   Window debugOutput(final boolean doShowDebugOutput);
 
   /**
    * @param acceleration
-   * @return this.
+   * @return This window.
    */
   Window speed(final double acceleration);
 
@@ -127,17 +128,17 @@ public interface Window {
   double speed();
 
   /**
-   * @return this.
+   * @return This window.
    */
   Window pause();
 
   /**
-   * @return this.
+   * @return This window.
    */
   Window resume();
 
   /**
-   * @return this.
+   * @return This window.
    */
   Window pauseOrUnpause();
 
@@ -148,7 +149,7 @@ public interface Window {
 
   /**
    * @param scale
-   * @return this.
+   * @return This window.
    */
   Window scale(final double scale);
 }
