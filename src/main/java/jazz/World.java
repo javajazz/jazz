@@ -1,5 +1,7 @@
 package jazz;
 
+import de.scravy.jazz.Model;
+
 public abstract class World implements Model {
 
   @Override

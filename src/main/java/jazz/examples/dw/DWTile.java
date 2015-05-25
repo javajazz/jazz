@@ -1,6 +1,6 @@
 package jazz.examples.dw;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
 
 public class DWTile {
 

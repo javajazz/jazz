@@ -1,7 +1,11 @@
 package jazz.grids;
 
-import jazz.Vector;
+import de.scravy.jazz.Vector;
+import de.scravy.jazz.annotation.Experimental;
+import de.scravy.jazz.grids.TileEventHandler;
+import de.scravy.jazz.grids.TileRenderer;
 
+@Experimental
 public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
   protected Vector center = Vector.ZERO;
@@ -39,7 +43,7 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
   @Override
   public Vector getCenter() {
-    return center;
+    return this.center;
   }
 
   @Override
@@ -51,7 +55,7 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
   @Override
   public double getWidth() {
-    return width;
+    return this.width;
   }
 
   @Override
@@ -63,7 +67,7 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
 
   @Override
   public double getHeight() {
-    return height;
+    return this.height;
   }
 
   @Override
@@ -71,18 +75,22 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
   public A setLowerLeftCorner(final Vector p, final boolean resize) {
     if (resize) {
       final Vector c = getUpperRightCorner();
-      setWidth(Math.abs(p.x - c.x));
-      setHeight(Math.abs(p.y - c.y));
-      setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
+      setWidth(Math.abs(p.getX() - c.getX()));
+      setHeight(Math.abs(p.getY() - c.getY()));
+      setCenter((p.getX() + c.getX()) / 2, (p.getY() + c.getY()) / 2);
     } else {
-      setCenter(new Vector(p.x + width / 2, p.y + height / 2));
+      setCenter(new Vector(
+          p.getX() + this.width / 2,
+          p.getY() + this.height / 2));
     }
     return (A) this;
   }
 
   @Override
   public Vector getLowerLeftCorner() {
-    return new Vector(center.x - width / 2, center.y - height / 2);
+    return new Vector(
+        this.center.getX() - this.width / 2,
+        this.center.getY() - this.height / 2);
   }
 
   @Override
@@ -90,18 +98,22 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
   public A setUpperLeftCorner(final Vector p, final boolean resize) {
     if (resize) {
       final Vector c = getLowerRightCorner();
-      setWidth(Math.abs(p.x - c.x));
-      setHeight(Math.abs(p.y - c.y));
-      setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
+      setWidth(Math.abs(p.getX() - c.getX()));
+      setHeight(Math.abs(p.getY() - c.getY()));
+      setCenter((p.getX() + c.getX()) / 2, (p.getY() + c.getY()) / 2);
     } else {
-      setCenter(new Vector(p.x + width / 2, p.y - height / 2));
+      setCenter(new Vector(
+          p.getX() + this.width / 2,
+          p.getY() - this.height / 2));
     }
     return (A) this;
   }
 
   @Override
   public Vector getUpperLeftCorner() {
-    return new Vector(center.x - width / 2, center.y + height / 2);
+    return new Vector(
+        this.center.getX() - this.width / 2,
+        this.center.getY() + this.height / 2);
   }
 
   @Override
@@ -109,18 +121,24 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
   public A setLowerRightCorner(final Vector p, final boolean resize) {
     if (resize) {
       final Vector c = getUpperLeftCorner();
-      setWidth(Math.abs(p.x - c.x));
-      setHeight(Math.abs(p.y - c.y));
-      setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
+      setWidth(Math.abs(p.getX() - c.getX()));
+      setHeight(Math.abs(p.getY() - c.getY()));
+      setCenter(
+          (p.getX() + c.getX()) / 2,
+          (p.getY() + c.getY()) / 2);
     } else {
-      setCenter(new Vector(p.x - width / 2, p.y + height / 2));
+      setCenter(new Vector(
+          p.getX() - this.width / 2,
+          p.getY() + this.height / 2));
     }
     return (A) this;
   }
 
   @Override
   public Vector getLowerRightCorner() {
-    return new Vector(center.x + width / 2, center.y - height / 2);
+    return new Vector(
+        this.center.getX() + this.width / 2,
+        this.center.getY() - this.height / 2);
   }
 
   @Override
@@ -128,17 +146,21 @@ public abstract class AbstractGrid<A, T> implements Grid<A, T> {
   public A setUpperRightCorner(final Vector p, final boolean resize) {
     if (resize) {
       final Vector c = getLowerLeftCorner();
-      setWidth(Math.abs(p.x - c.x));
-      setHeight(Math.abs(p.y - c.y));
-      setCenter((p.x + c.x) / 2, (p.y + c.y) / 2);
+      setWidth(Math.abs(p.getX() - c.getX()));
+      setHeight(Math.abs(p.getY() - c.getY()));
+      setCenter((p.getX() + c.getX()) / 2, (p.getY() + c.getY()) / 2);
     } else {
-      setCenter(new Vector(p.x - width / 2, p.y - height / 2));
+      setCenter(new Vector(
+          p.getX() - this.width / 2,
+          p.getY() - this.height / 2));
     }
     return (A) this;
   }
 
   @Override
   public Vector getUpperRightCorner() {
-    return new Vector(center.x + width / 2, center.y + height / 2);
+    return new Vector(
+        this.center.getX() + this.width / 2,
+        this.center.getY() + this.height / 2);
   }
 }

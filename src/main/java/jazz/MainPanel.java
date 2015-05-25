@@ -18,6 +18,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import de.scravy.jazz.Model;
+
 class MainPanel extends JPanel {
 
   private static final long serialVersionUID = 1L;

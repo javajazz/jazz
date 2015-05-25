@@ -3,10 +3,8 @@ package jazz.pictures;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
-import jazz.Mutable;
-
 public abstract class MutableAbstractPicture<P extends MutableAbstractPicture<P>>
-    extends AbstractPicture<P> implements Mutable {
+    extends AbstractPicture<P> {
 
   public MutableAbstractPicture(final Shape shape) {
     super(shape);

@@ -1,13 +1,13 @@
 package jazz.examples.tictactoe;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
+import de.scravy.jazz.grids.TileEventHandler;
+import de.scravy.jazz.grids.TileFactory;
+import de.scravy.jazz.grids.TileRenderer;
 import jazz.Event;
 import jazz.Picture;
 import jazz.World;
 import jazz.grids.RectangularGrid;
-import jazz.grids.TileEventHandler;
-import jazz.grids.TileFactory;
-import jazz.grids.TileRenderer;
 import jazz.pictures.mutable.Circle;
 
 public class GameBoard extends World {

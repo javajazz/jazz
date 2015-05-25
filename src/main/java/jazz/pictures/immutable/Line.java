@@ -4,13 +4,13 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
 
-import jazz.Vector;
 import jazz.pictures.ImmutableAbstractPicture;
+import de.scravy.jazz.Vector;
 
 public final class Line extends ImmutableAbstractPicture<Line> {
 
   public Line(final Vector from, final Vector to) {
-    super(new Line2D.Double(from.x, from.y, to.x, to.y));
+    super(new Line2D.Double(from.getX(), from.getY(), to.getX(), to.getY()));
   }
 
   private Line(final Shape shape) {
@@ -25,7 +25,7 @@ public final class Line extends ImmutableAbstractPicture<Line> {
 
   @Override
   public Line clone() {
-    return doClone(new Line(shape));
+    return doClone(new Line(this.shape));
   }
 
 }

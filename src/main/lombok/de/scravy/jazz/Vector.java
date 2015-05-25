@@ -1,19 +1,20 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.io.Serializable;
-import java.util.Objects;
+
+import lombok.Value;
+import de.scravy.pair.Pair;
+import de.scravy.pair.Pairs;
 
 /**
  * An immutable point in the two dimensional plane.
  */
-public class Vector implements Serializable {
+@Value
+public class Vector implements Serializable, Pair<Double, Double> {
 
-  /**
-   * Serial Version UID.
-   */
-  private static final long serialVersionUID = -637242503868681706L;
+  private static final long serialVersionUID = 1L;
 
   /**
    * The origin (a point with the coordinates (0,0).
@@ -23,43 +24,12 @@ public class Vector implements Serializable {
   /**
    * The x coordinate of this point.
    */
-  public final double x;
+  private final double x;
 
   /**
    * The y coordinate of this point.
    */
-  public final double y;
-
-  /**
-   * Creates a new point with the coordinates (x,y).
-   *
-   * @param x
-   *          The x coordinate.
-   * @param y
-   *          The y coordinate.
-   */
-  public Vector(final double x, final double y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  /**
-   * Return the x coordinate of this point.
-   *
-   * @return The x coordinate of this point.
-   */
-  public double getX() {
-    return x;
-  }
-
-  /**
-   * Return the y coordinate of this point.
-   *
-   * @return The y coordinate of this point.
-   */
-  public double getY() {
-    return y;
-  }
+  private final double y;
 
   /**
    * Translate this point by the coordinates of the given point.
@@ -114,7 +84,7 @@ public class Vector implements Serializable {
   }
 
   public Vector rotate(final Vector origin, final double angle) {
-    final Point2D.Double p = new Point2D.Double(x, y);
+    final Point2D.Double p = new Point2D.Double(this.x, this.y);
     final Point2D.Double t = new Point2D.Double(0, 0);
     AffineTransform
         .getRotateInstance(angle / 180 * Math.PI, origin.x, origin.y)
@@ -127,15 +97,15 @@ public class Vector implements Serializable {
   }
 
   public double distanceTo(final Vector p) {
-    return Math.sqrt(Math.pow(p.x - x, 2) + Math.pow(p.y - y, 2));
+    return Math.sqrt(Math.pow(p.x - this.x, 2) + Math.pow(p.y - this.y, 2));
   }
 
   public double distanceFromOrigin() {
-    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
   }
 
   public double angleFromOrigin() {
-    final double result = -(Math.atan2(x, y) / Math.PI * 180 - 90);
+    final double result = -(Math.atan2(this.x, this.y) / Math.PI * 180 - 90);
     return result < 0 ? 360 + result : result;
   }
 
@@ -153,19 +123,32 @@ public class Vector implements Serializable {
 
   @Override
   public String toString() {
-    return String.format("(%f,%f)", x, y);
+    return String.format("(%f,%f)", this.x, this.y);
   }
 
   @Override
   public boolean equals(final Object p) {
+    if (p instanceof Pair) {
+      return Pairs.equals(this, p);
+    }
     if (p instanceof Vector) {
-      return x == ((Vector) p).x && y == ((Vector) p).y;
+      return this.x == ((Vector) p).x && this.y == ((Vector) p).y;
     }
     return false;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(x, y);
+    return Pairs.hashCode(this);
+  }
+
+  @Override
+  public Double getFirst() {
+    return this.x;
+  }
+
+  @Override
+  public Double getSecond() {
+    return this.y;
   }
 }

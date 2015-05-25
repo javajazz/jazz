@@ -1,8 +1,8 @@
 package jazz.examples.pacman;
 
-import jazz.Direction;
+import de.scravy.jazz.Direction;
+import de.scravy.jazz.EventHandler;
 import jazz.Event;
-import jazz.EventHandler;
 
 public class PacManEventHandler implements EventHandler<PacManWorld> {
 

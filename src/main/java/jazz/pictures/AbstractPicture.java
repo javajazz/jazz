@@ -9,7 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
 import jazz.Picture;
 
 public abstract class AbstractPicture<P extends AbstractPicture<P>> implements

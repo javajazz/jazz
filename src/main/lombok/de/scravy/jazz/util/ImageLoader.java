@@ -1,4 +1,4 @@
-package jazz.util;
+package de.scravy.jazz.util;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;

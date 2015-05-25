@@ -1,6 +1,6 @@
 package jazz.examples.pong;
 
-import jazz.UpdateHandler;
+import de.scravy.jazz.UpdateHandler;
 
 public class PongUpdateHandler implements UpdateHandler<PongWorld> {
 

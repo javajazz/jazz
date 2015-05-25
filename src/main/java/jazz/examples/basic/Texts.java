@@ -1,7 +1,7 @@
 package jazz.examples.basic;
 
+import de.scravy.jazz.Color;
 import jazz.Animation;
-import jazz.Color;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.pictures.mutable.Pictures;

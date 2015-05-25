@@ -1,5 +1,7 @@
 package jazz;
 
+import de.scravy.jazz.Model;
+
 public abstract class Animation implements Model {
 
   private int startDragX = 0;

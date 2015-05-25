@@ -1,9 +1,9 @@
 package jazz.examples.basic;
 
+import de.scravy.jazz.Vector;
 import jazz.Animation;
 import jazz.Jazz;
 import jazz.Picture;
-import jazz.Vector;
 import jazz.pictures.mutable.Circle;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Polygon;

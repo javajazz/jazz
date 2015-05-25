@@ -1,4 +1,6 @@
-package jazz;
+package de.scravy.jazz;
+
+import jazz.Event;
 
 public interface EventHandler<M> {
 

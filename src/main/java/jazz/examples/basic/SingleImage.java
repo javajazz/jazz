@@ -2,7 +2,7 @@ package jazz.examples.basic;
 
 import java.io.IOException;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
 import jazz.Jazz;
 import jazz.pictures.mutable.Bitmap;
 import jazz.pictures.mutable.Circle;

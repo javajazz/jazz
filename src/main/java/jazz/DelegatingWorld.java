@@ -1,5 +1,9 @@
 package jazz;
 
+import de.scravy.jazz.EventHandler;
+import de.scravy.jazz.Renderer;
+import de.scravy.jazz.UpdateHandler;
+
 final public class DelegatingWorld<M> extends World {
 
   final private UpdateHandler<M> updateHandler;

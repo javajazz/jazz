@@ -6,7 +6,10 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
+import de.scravy.jazz.grids.TileDecorator;
+import de.scravy.jazz.grids.TileEventHandler;
+import de.scravy.jazz.grids.TilePos;
 import jazz.Event;
 import jazz.Event.Type;
 import jazz.Jazz;
@@ -14,9 +17,6 @@ import jazz.Picture;
 import jazz.World;
 import jazz.grids.DefaultTileFactory;
 import jazz.grids.HexagonGrid;
-import jazz.grids.TileDecorator;
-import jazz.grids.TileEventHandler;
-import jazz.grids.TilePos;
 import jazz.pictures.mutable.Pictures;
 
 public class DWWorld extends World {

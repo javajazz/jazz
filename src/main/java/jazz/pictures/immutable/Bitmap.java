@@ -9,8 +9,8 @@ import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
 
+import de.scravy.jazz.util.ImageLoader;
 import jazz.pictures.ImmutableAbstractPicture;
-import jazz.util.ImageLoader;
 
 public final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
 

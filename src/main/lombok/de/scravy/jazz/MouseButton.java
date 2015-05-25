@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 public enum MouseButton {
   LEFT,

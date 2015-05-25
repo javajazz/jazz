@@ -3,7 +3,7 @@ package jazz.pictures;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
 import jazz.Picture;
 
 public abstract class DelegatingPicture<X extends Picture> implements Picture {

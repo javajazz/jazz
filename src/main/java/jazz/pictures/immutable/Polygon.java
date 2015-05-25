@@ -4,8 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.GeneralPath;
 
-import jazz.Vector;
 import jazz.pictures.ImmutableAbstractPicture;
+import de.scravy.jazz.Vector;
 
 public final class Polygon extends ImmutableAbstractPicture<Polygon> {
 
@@ -15,10 +15,10 @@ public final class Polygon extends ImmutableAbstractPicture<Polygon> {
 
   private static Shape makePath(final Vector[] points) {
     final GeneralPath path = new GeneralPath();
-    path.moveTo(points[0].x, points[0].y);
+    path.moveTo(points[0].getX(), points[0].getY());
     for (int i = 0; i < points.length; i++) {
       final int ix = (i + 1) % points.length;
-      path.lineTo(points[ix].x, points[ix].y);
+      path.lineTo(points[ix].getX(), points[ix].getY());
     }
     return path;
   }
@@ -35,7 +35,7 @@ public final class Polygon extends ImmutableAbstractPicture<Polygon> {
 
   @Override
   public Polygon clone() {
-    return doClone(new Polygon((GeneralPath) shape));
+    return doClone(new Polygon((GeneralPath) this.shape));
   }
 
 }

@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import jazz.Direction;
+import de.scravy.jazz.Direction;
 import jazz.Picture;
 import jazz.pictures.mutable.Pictures;
 

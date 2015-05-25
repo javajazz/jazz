@@ -2,7 +2,8 @@ package jazz.grids;
 
 import jazz.Event;
 import jazz.Picture;
-import jazz.Vector;
+import de.scravy.jazz.Vector;
+import de.scravy.jazz.annotation.Experimental;
 
 /**
  * @author Julian Fleischer
@@ -10,6 +11,7 @@ import jazz.Vector;
  * @param <A>
  * @param <T>
  */
+@Experimental
 public interface Grid<A, T> {
 
   /**

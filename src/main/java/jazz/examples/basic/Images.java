@@ -3,8 +3,8 @@ package jazz.examples.basic;
 import java.awt.geom.AffineTransform;
 import java.io.IOException;
 
+import de.scravy.jazz.Color;
 import jazz.Animation;
-import jazz.Color;
 import jazz.Jazz;
 import jazz.Picture;
 import jazz.pictures.mutable.Bitmap;

@@ -10,6 +10,11 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
+import de.scravy.jazz.EventHandler;
+import de.scravy.jazz.Model;
+import de.scravy.jazz.Renderer;
+import de.scravy.jazz.UpdateHandler;
+
 /**
  * The Jazz main class, used to create Jazz windows and adjust the global Jazz
  * configuration.

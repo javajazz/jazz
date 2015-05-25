@@ -1,5 +1,8 @@
 package jazz.grids;
 
+import de.scravy.jazz.annotation.Experimental;
+import de.scravy.jazz.grids.TileFactory;
+
 /**
  * A {@link TileFactory} that always returns the same tile or null.
  *
@@ -8,6 +11,7 @@ package jazz.grids;
  * @param <T>
  *          The type of the tile.
  */
+@Experimental
 public class DefaultTileFactory<T> implements TileFactory<T> {
 
   private final T defaultTile;
@@ -16,7 +20,7 @@ public class DefaultTileFactory<T> implements TileFactory<T> {
    * Creates a tile factory that always returns null.
    */
   public DefaultTileFactory() {
-    defaultTile = null;
+    this.defaultTile = null;
   }
 
   /**
@@ -31,7 +35,7 @@ public class DefaultTileFactory<T> implements TileFactory<T> {
 
   @Override
   public T createTile(final int x, final int y) {
-    return defaultTile;
+    return this.defaultTile;
   }
 
 }

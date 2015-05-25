@@ -3,11 +3,10 @@ package jazz.pictures;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
-import jazz.Color;
-import jazz.Immutable;
+import de.scravy.jazz.Color;
 
 public abstract class ImmutableAbstractPicture<P extends ImmutableAbstractPicture<P>>
-    extends AbstractPicture<P> implements Immutable {
+    extends AbstractPicture<P> {
 
   public ImmutableAbstractPicture(final Shape shape) {
     super(shape);

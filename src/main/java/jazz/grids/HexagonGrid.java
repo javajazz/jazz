@@ -1,8 +1,12 @@
 package jazz.grids;
 
+import de.scravy.jazz.Vector;
+import de.scravy.jazz.grids.TileDecorator;
+import de.scravy.jazz.grids.TileEventHandler;
+import de.scravy.jazz.grids.TileFactory;
+import de.scravy.jazz.grids.TilePos;
 import jazz.Event;
 import jazz.Picture;
-import jazz.Vector;
 import jazz.pictures.mutable.Pictures;
 import jazz.pictures.mutable.Polygon;
 

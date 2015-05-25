@@ -2,6 +2,9 @@ package jazz;
 
 import java.awt.geom.AffineTransform;
 
+import de.scravy.jazz.Color;
+import de.scravy.jazz.Drawable;
+
 public interface Picture extends Cloneable, Drawable {
 
   Picture alpha(final double alpha);

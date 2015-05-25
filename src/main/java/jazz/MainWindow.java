@@ -5,6 +5,8 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
+import de.scravy.jazz.Model;
+
 class MainWindow extends JFrame {
 
   private static final long serialVersionUID = 1L;

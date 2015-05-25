@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
-import jazz.Color;
+import de.scravy.jazz.Color;
 import jazz.Picture;
 import jazz.pictures.mutable.Pictures;
 

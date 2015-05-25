@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 import java.awt.Graphics2D;
 

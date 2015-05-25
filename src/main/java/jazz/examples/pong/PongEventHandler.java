@@ -1,7 +1,7 @@
 package jazz.examples.pong;
 
+import de.scravy.jazz.EventHandler;
 import jazz.Event;
-import jazz.EventHandler;
 
 public class PongEventHandler implements EventHandler<PongWorld> {
 

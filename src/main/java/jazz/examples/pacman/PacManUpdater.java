@@ -1,6 +1,6 @@
 package jazz.examples.pacman;
 
-import jazz.UpdateHandler;
+import de.scravy.jazz.UpdateHandler;
 
 public class PacManUpdater implements UpdateHandler<PacManWorld> {
 

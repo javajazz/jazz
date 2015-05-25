@@ -8,7 +8,10 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import jazz.Key.Location;
+import de.scravy.jazz.Key;
+import de.scravy.jazz.MouseButton;
+import de.scravy.jazz.Vector;
+import de.scravy.jazz.Key.Location;
 
 class DefaultEvent implements Event {
 

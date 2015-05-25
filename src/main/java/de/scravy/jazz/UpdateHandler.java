@@ -1,4 +1,4 @@
-package jazz;
+package de.scravy.jazz;
 
 public interface UpdateHandler<M> {
 
