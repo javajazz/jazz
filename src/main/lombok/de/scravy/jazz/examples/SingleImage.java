@@ -1,4 +1,4 @@
-package jazz.examples.basic;
+package de.scravy.jazz.examples;
 
 import java.io.IOException;
 

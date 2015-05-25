@@ -7,6 +7,8 @@ import de.scravy.jazz.pictures.ImmutableAbstractPicture;
 
 public final class Square extends ImmutableAbstractPicture<Square> {
 
+  private static final long serialVersionUID = 1L;
+
   public Square(final double side) {
     super(new Rectangle2D.Double(0, 0, side, side));
   }
@@ -17,7 +19,7 @@ public final class Square extends ImmutableAbstractPicture<Square> {
 
   @Override
   public Square clone() {
-    return doClone(new Square(shape));
+    return doClone(new Square(this.shape));
   }
 
 }

@@ -1,4 +1,4 @@
-package jazz.examples.basic;
+package de.scravy.jazz.examples;
 
 import de.scravy.jazz.Animation;
 import de.scravy.jazz.Color;

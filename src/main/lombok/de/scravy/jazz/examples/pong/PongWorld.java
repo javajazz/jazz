@@ -1,4 +1,4 @@
-package jazz.examples.pong;
+package de.scravy.jazz.examples.pong;
 
 public class PongWorld {
 

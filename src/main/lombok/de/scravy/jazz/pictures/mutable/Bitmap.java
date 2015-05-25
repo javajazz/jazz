@@ -14,6 +14,8 @@ import de.scravy.jazz.util.ImageLoader;
 
 public final class Bitmap extends AbstractPicture<Bitmap> {
 
+  private static final long serialVersionUID = 1L;
+
   private final BufferedImage bufferedImage;
 
   public Bitmap(final Class<?> clazz, final String resource)
@@ -35,10 +37,10 @@ public final class Bitmap extends AbstractPicture<Bitmap> {
 
   @Override
   protected void doRender(final Graphics2D g2d) {
-    if (alpha != null) {
-      g2d.setComposite(alpha);
+    if (this.alpha != null) {
+      g2d.setComposite(this.alpha);
     }
-    g2d.drawImage(bufferedImage, new AffineTransform(),
+    g2d.drawImage(this.bufferedImage, new AffineTransform(),
         new ImageObserver() {
           @Override
           public boolean imageUpdate(
@@ -52,7 +54,7 @@ public final class Bitmap extends AbstractPicture<Bitmap> {
 
   @Override
   public Bitmap clone() {
-    return doClone(new Bitmap(bufferedImage));
+    return doClone(new Bitmap(this.bufferedImage));
   }
 
 }

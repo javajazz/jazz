@@ -6,6 +6,8 @@ import java.awt.geom.AffineTransform;
 public abstract class MutableAbstractPicture<P extends MutableAbstractPicture<P>>
     extends AbstractPicture<P> {
 
+  private static final long serialVersionUID = 1L;
+
   public MutableAbstractPicture(final Shape shape) {
     super(shape);
   }

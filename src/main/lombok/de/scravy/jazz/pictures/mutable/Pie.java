@@ -8,6 +8,8 @@ import de.scravy.jazz.pictures.MutableAbstractPicture;
 
 public class Pie extends MutableAbstractPicture<Pie> {
 
+  private static final long serialVersionUID = 1L;
+
   public Pie(final double w, final double h, final double start,
       final double extent) {
     super(new Arc2D.Double(-w / 4, -h / 4, w / 2, h / 2,
@@ -26,7 +28,7 @@ public class Pie extends MutableAbstractPicture<Pie> {
 
   @Override
   public Pie clone() {
-    return doClone(new Pie(shape));
+    return doClone(new Pie(this.shape));
   }
 
 }

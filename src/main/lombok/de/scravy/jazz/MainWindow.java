@@ -5,9 +5,11 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 
-import de.scravy.jazz.Event;
-import de.scravy.jazz.Model;
-
+/**
+ * INTERNAL
+ *
+ * @since 1.0.0
+ */
 class MainWindow extends JFrame {
 
   private static final long serialVersionUID = 1L;
@@ -20,7 +22,7 @@ class MainWindow extends JFrame {
 
     super(title);
 
-    mainPanel = new MainPanel(this, model, window, a, b);
+    this.mainPanel = new MainPanel(this, model, window, a, b);
 
     setContentPane(getMainPanel());
     pack();
@@ -79,6 +81,6 @@ class MainWindow extends JFrame {
   }
 
   MainPanel getMainPanel() {
-    return mainPanel;
+    return this.mainPanel;
   }
 }

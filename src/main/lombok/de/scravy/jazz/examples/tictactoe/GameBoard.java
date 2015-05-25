@@ -1,4 +1,4 @@
-package jazz.examples.tictactoe;
+package de.scravy.jazz.examples.tictactoe;
 
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Event;

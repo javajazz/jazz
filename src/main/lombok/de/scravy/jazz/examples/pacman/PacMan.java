@@ -1,4 +1,4 @@
-package jazz.examples.pacman;
+package de.scravy.jazz.examples.pacman;
 
 import java.io.IOException;
 

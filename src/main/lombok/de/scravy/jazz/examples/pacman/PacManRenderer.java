@@ -1,4 +1,4 @@
-package jazz.examples.pacman;
+package de.scravy.jazz.examples.pacman;
 
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Picture;

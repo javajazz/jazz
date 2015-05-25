@@ -18,9 +18,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import de.scravy.jazz.Event;
-import de.scravy.jazz.Model;
-
+/**
+ * INTERNAL
+ *
+ * @since 1.0.0
+ */
 class MainPanel extends JPanel {
 
   private static final long serialVersionUID = 1L;
@@ -30,9 +32,9 @@ class MainPanel extends JPanel {
   private final Thread timer;
 
   private int maxFramesPerSecond = 100;
-  private long maxRefreshRate = 1000000000L / maxFramesPerSecond;
+  private long maxRefreshRate = 1000000000L / this.maxFramesPerSecond;
   private boolean doShowDebugOutput = false;
-  private long currentRefreshRate = maxRefreshRate;
+  private long currentRefreshRate = this.maxRefreshRate;
   private double currentTime;
   private double lastUpdate;
 
@@ -61,15 +63,15 @@ class MainPanel extends JPanel {
     this.timer = new Thread(new Runnable() {
       @Override
       public void run() {
-        lastUpdate = System.nanoTime();
+        MainPanel.this.lastUpdate = System.nanoTime();
         for (; !Thread.interrupted();) {
           try {
-            lock.lockInterruptibly();
-            lock.unlock();
+            MainPanel.this.lock.lockInterruptibly();
+            MainPanel.this.lock.unlock();
 
-            if (!isPainting) {
-              isPainting = true;
-              startUpdate = System.nanoTime();
+            if (!MainPanel.this.isPainting) {
+              MainPanel.this.isPainting = true;
+              MainPanel.this.startUpdate = System.nanoTime();
               SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
@@ -84,7 +86,7 @@ class MainPanel extends JPanel {
             } else {
               //
             }
-            Thread.sleep(currentRefreshRate / 1000000);
+            Thread.sleep(MainPanel.this.currentRefreshRate / 1000000);
           } catch (final InterruptedException e) {
             break;
           }
@@ -97,7 +99,8 @@ class MainPanel extends JPanel {
 
       @Override
       public void mouseWheelMoved(final MouseWheelEvent e) {
-        model.on(new DefaultEvent(window, Event.Type.MOUSE_WHEEL, e));
+        MainPanel.this.model.on(new DefaultEvent(window,
+            Event.Type.MOUSE_WHEEL, e));
       }
     });
 
@@ -105,16 +108,18 @@ class MainPanel extends JPanel {
 
       @Override
       public void mouseDragged(final MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
-        model.on(new DefaultEvent(window, Event.Type.MOUSE_MOVE, e));
+        MainPanel.this.mouseX = e.getX();
+        MainPanel.this.mouseY = e.getY();
+        MainPanel.this.model.on(new DefaultEvent(window, Event.Type.MOUSE_MOVE,
+            e));
       }
 
       @Override
       public void mouseMoved(final MouseEvent e) {
-        mouseX = e.getX();
-        mouseY = e.getY();
-        model.on(new DefaultEvent(window, Event.Type.MOUSE_MOVE, e));
+        MainPanel.this.mouseX = e.getX();
+        MainPanel.this.mouseY = e.getY();
+        MainPanel.this.model.on(new DefaultEvent(window, Event.Type.MOUSE_MOVE,
+            e));
       }
     });
 
@@ -122,17 +127,19 @@ class MainPanel extends JPanel {
 
       @Override
       public void mouseClicked(final MouseEvent e) {
-        model.on(new DefaultEvent(window, Event.Type.CLICK, e));
+        MainPanel.this.model.on(new DefaultEvent(window, Event.Type.CLICK, e));
       }
 
       @Override
       public void mousePressed(final MouseEvent e) {
-        model.on(new DefaultEvent(window, Event.Type.MOUSE_DOWN, e));
+        MainPanel.this.model.on(new DefaultEvent(window, Event.Type.MOUSE_DOWN,
+            e));
       }
 
       @Override
       public void mouseReleased(final MouseEvent e) {
-        model.on(new DefaultEvent(window, Event.Type.MOUSE_UP, e));
+        MainPanel.this.model
+            .on(new DefaultEvent(window, Event.Type.MOUSE_UP, e));
       }
 
       @Override
@@ -150,50 +157,53 @@ class MainPanel extends JPanel {
 
       @Override
       public void keyTyped(final KeyEvent e) {
-        model.on(new DefaultEvent(
-            window, Event.Type.KEY_TYPED, e, mouseX, mouseY));
+        MainPanel.this.model.on(new DefaultEvent(
+            window, Event.Type.KEY_TYPED, e, MainPanel.this.mouseX,
+            MainPanel.this.mouseY));
       }
 
       @Override
       public void keyPressed(final KeyEvent e) {
-        model.on(new DefaultEvent(
-            window, Event.Type.KEY_DOWN, e, mouseX, mouseY));
+        MainPanel.this.model.on(new DefaultEvent(
+            window, Event.Type.KEY_DOWN, e, MainPanel.this.mouseX,
+            MainPanel.this.mouseY));
       }
 
       @Override
       public void keyReleased(final KeyEvent e) {
-        model.on(new DefaultEvent(
-            window, Event.Type.KEY_UP, e, mouseX, mouseY));
+        MainPanel.this.model.on(new DefaultEvent(
+            window, Event.Type.KEY_UP, e, MainPanel.this.mouseX,
+            MainPanel.this.mouseY));
       }
     });
   }
 
   void updateModel() {
     final long currentUpdate = System.nanoTime();
-    final double delta = (currentUpdate - lastUpdate) / 1000000000.0
-        * acceleration;
-    currentTime += delta;
-    lastUpdate = currentUpdate;
-    model.update(currentTime, delta);
+    final double delta = (currentUpdate - this.lastUpdate) / 1000000000.0
+        * this.acceleration;
+    this.currentTime += delta;
+    this.lastUpdate = currentUpdate;
+    this.model.update(this.currentTime, delta);
   }
 
   void pause() {
-    lock.lock();
-    paused = true;
+    this.lock.lock();
+    this.paused = true;
   }
 
   void resume() {
-    lastUpdate = System.nanoTime();
-    paused = false;
-    lock.unlock();
+    this.lastUpdate = System.nanoTime();
+    this.paused = false;
+    this.lock.unlock();
   }
 
   boolean isPaused() {
-    return paused;
+    return this.paused;
   }
 
   void stop() {
-    timer.interrupt();
+    this.timer.interrupt();
   }
 
   @Override
@@ -201,7 +211,7 @@ class MainPanel extends JPanel {
 
     final Graphics2D g2d = (Graphics2D) g;
 
-    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, antialias
+    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, this.antialias
         ? RenderingHints.VALUE_ANTIALIAS_ON
         : RenderingHints.VALUE_ANTIALIAS_OFF);
     g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -215,28 +225,28 @@ class MainPanel extends JPanel {
     g2d.fillRect(0, 0, getWidth(), getHeight());
 
     g2d.setColor(Color.BLACK);
-    g2d.translate(getWidth() / 2 + offsetX, getHeight() / 2 - offsetY);
-    g2d.scale(1 * scale, -1 * scale);
-    model.getPicture().draw(g2d);
+    g2d.translate(getWidth() / 2 + this.offsetX, getHeight() / 2 - this.offsetY);
+    g2d.scale(1 * this.scale, -1 * this.scale);
+    this.model.getPicture().draw(g2d);
 
-    if (doShowDebugOutput) {
+    if (this.doShowDebugOutput) {
       g2d.setTransform(new AffineTransform());
       g2d.setColor(Color.WHITE);
       g2d.drawString(
           Long.toString(
-              Math.round(1000 / (currentRefreshRate / 1000000.0))),
+              Math.round(1000 / (this.currentRefreshRate / 1000000.0))),
           10,
           20);
     }
 
-    final long delta = System.nanoTime() - startUpdate;
-    currentRefreshRate = Math.max(maxRefreshRate, delta);
+    final long delta = System.nanoTime() - this.startUpdate;
+    this.currentRefreshRate = Math.max(this.maxRefreshRate, delta);
 
-    isPainting = false;
+    this.isPainting = false;
   }
 
   int getOffsetX() {
-    return offsetX;
+    return this.offsetX;
   }
 
   void setOffsetX(final int offsetX) {
@@ -244,7 +254,7 @@ class MainPanel extends JPanel {
   }
 
   int getOffsetY() {
-    return offsetY;
+    return this.offsetY;
   }
 
   void setOffsetY(final int offsetY) {
@@ -252,7 +262,7 @@ class MainPanel extends JPanel {
   }
 
   boolean isAntialias() {
-    return antialias;
+    return this.antialias;
   }
 
   void setAntialias(final boolean antialias) {
@@ -260,7 +270,7 @@ class MainPanel extends JPanel {
   }
 
   int getMaxFramesPerSecond() {
-    return maxFramesPerSecond;
+    return this.maxFramesPerSecond;
   }
 
   void setMaxFramesPerSecond(final int maxFramesPerSecond) {
@@ -269,7 +279,7 @@ class MainPanel extends JPanel {
   }
 
   double getAcceleration() {
-    return acceleration;
+    return this.acceleration;
   }
 
   void setAcceleration(final double acceleration) {
@@ -277,7 +287,7 @@ class MainPanel extends JPanel {
   }
 
   double getScale() {
-    return scale;
+    return this.scale;
   }
 
   void setScale(final double scale) {
@@ -285,7 +295,7 @@ class MainPanel extends JPanel {
   }
 
   boolean isDoShowDebugOutput() {
-    return doShowDebugOutput;
+    return this.doShowDebugOutput;
   }
 
   void setDoShowDebugOutput(final boolean doShowDebugOutput) {

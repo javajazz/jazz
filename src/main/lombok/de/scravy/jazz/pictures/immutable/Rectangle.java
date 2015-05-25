@@ -8,6 +8,8 @@ import de.scravy.jazz.pictures.ImmutableAbstractPicture;
 public final class Rectangle extends
     ImmutableAbstractPicture<Rectangle> {
 
+  private static final long serialVersionUID = 1L;
+
   public Rectangle(final double width, final double height) {
     super(new Rectangle2D.Double(0, 0, width, height));
   }
@@ -18,7 +20,7 @@ public final class Rectangle extends
 
   @Override
   public Rectangle clone() {
-    return doClone(new Rectangle(shape));
+    return doClone(new Rectangle(this.shape));
   }
 
 }

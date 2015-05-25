@@ -12,8 +12,10 @@ import java.util.Deque;
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Picture;
 
-public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
-    Picture {
+public abstract class AbstractPicture<P extends AbstractPicture<P>>
+    implements Picture {
+
+  private static final long serialVersionUID = 1L;
 
   protected final java.awt.Shape shape;
   protected final Deque<AffineTransform> transforms = new ArrayDeque<>();
@@ -30,8 +32,8 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   @SuppressWarnings("unchecked")
   @Override
   public P remove() {
-    if (!transforms.isEmpty()) {
-      transforms.removeFirst();
+    if (!this.transforms.isEmpty()) {
+      this.transforms.removeFirst();
     }
     return (P) this;
   }
@@ -39,21 +41,21 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   @SuppressWarnings("unchecked")
   @Override
   public P reset() {
-    transforms.clear();
+    this.transforms.clear();
     return (P) this;
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public P translate(final double x, final double y) {
-    transforms.addFirst(AffineTransform.getTranslateInstance(x, y));
+    this.transforms.addFirst(AffineTransform.getTranslateInstance(x, y));
     return (P) this;
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public P rotate(final double angle) {
-    transforms.addFirst(AffineTransform.getRotateInstance(angle / 180
+    this.transforms.addFirst(AffineTransform.getRotateInstance(angle / 180
         * Math.PI, 0, 0));
     return (P) this;
   }
@@ -61,21 +63,21 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   @SuppressWarnings("unchecked")
   @Override
   public P scale(final double x, final double y) {
-    transforms.addFirst(AffineTransform.getScaleInstance(x, y));
+    this.transforms.addFirst(AffineTransform.getScaleInstance(x, y));
     return (P) this;
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public P shear(final double x, final double y) {
-    transforms.addFirst(AffineTransform.getShearInstance(x, y));
+    this.transforms.addFirst(AffineTransform.getShearInstance(x, y));
     return (P) this;
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public P transform(final AffineTransform transform) {
-    transforms.addFirst(transform);
+    this.transforms.addFirst(transform);
     return (P) this;
   }
 
@@ -84,7 +86,7 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   public P transform(final double m00, final double m10, final double m01,
       final double m11,
       final double m02, final double m12) {
-    transforms.addFirst(new AffineTransform(m00, m10, m01, m11, m02, m12));
+    this.transforms.addFirst(new AffineTransform(m00, m10, m01, m11, m02, m12));
     return (P) this;
   }
 
@@ -158,7 +160,7 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   protected final AffineTransform getTransform(
       final AffineTransform finalTransform) {
     final AffineTransform transform = new AffineTransform(finalTransform);
-    for (final AffineTransform t : transforms) {
+    for (final AffineTransform t : this.transforms) {
       transform.concatenate(t);
     }
     return transform;
@@ -171,7 +173,7 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   }
 
   protected void doDraw(final Graphics2D g2d) {
-    final Rectangle2D bounds = shape.getBounds2D();
+    final Rectangle2D bounds = this.shape.getBounds2D();
     final AffineTransform transform = getTransform(g2d.getTransform());
 
     transform.concatenate(AffineTransform.getTranslateInstance(
@@ -182,19 +184,19 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   }
 
   protected void doRender(final Graphics2D g2d) {
-    if (color != null) {
-      g2d.setColor(color);
+    if (this.color != null) {
+      g2d.setColor(this.color);
     }
-    if (stroke != null) {
-      g2d.setStroke(stroke);
+    if (this.stroke != null) {
+      g2d.setStroke(this.stroke);
     }
-    if (alpha != null) {
-      g2d.setComposite(alpha);
+    if (this.alpha != null) {
+      g2d.setComposite(this.alpha);
     }
-    if (filled) {
-      g2d.fill(shape);
+    if (this.filled) {
+      g2d.fill(this.shape);
     } else {
-      g2d.draw(shape);
+      g2d.draw(this.shape);
     }
   }
 
@@ -206,16 +208,16 @@ public abstract class AbstractPicture<P extends AbstractPicture<P>> implements
   @Override
   public String toString() {
     final Point2D.Double pos = getCenter();
-    final Rectangle2D bounds = shape.getBounds2D();
+    final Rectangle2D bounds = this.shape.getBounds2D();
     return String.format("%s(x=%.3f,y=%.3f,a=%.3f,b=%.3f)", getClass()
         .getSimpleName(), pos.x, pos.y, bounds.getWidth(), bounds
         .getHeight());
   }
 
   protected P doClone(final P object) {
-    object.transforms.addAll(transforms);
-    object.color = color;
-    object.filled = filled;
+    object.transforms.addAll(this.transforms);
+    object.color = this.color;
+    object.filled = this.filled;
     return object;
   }
 

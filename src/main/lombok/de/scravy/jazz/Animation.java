@@ -1,8 +1,11 @@
 package de.scravy.jazz;
 
-import de.scravy.jazz.Event;
-import de.scravy.jazz.Model;
 
+/**
+ *
+ * @since 1.0.0
+ * @author Julian Fleischer
+ */
 public abstract class Animation implements Model {
 
   private int startDragX = 0;
@@ -16,29 +19,29 @@ public abstract class Animation implements Model {
     switch (e.getType()) {
 
     case MOUSE_DOWN: {
-      initialOffsetX = e.getWindow().originX();
-      initialOffsetY = e.getWindow().originY();
-      startDragX = e.getWindowX();
-      startDragY = e.getWindowY();
-      mouseDown = true;
+      this.initialOffsetX = e.getWindow().originX();
+      this.initialOffsetY = e.getWindow().originY();
+      this.startDragX = e.getWindowX();
+      this.startDragY = e.getWindowY();
+      this.mouseDown = true;
       break;
     }
 
     case MOUSE_UP: {
-      mouseDown = false;
-      final int deltaX = e.getWindowX() - startDragX;
-      final int deltaY = e.getWindowY() - startDragY;
-      e.getWindow().originX(initialOffsetX + deltaX);
-      e.getWindow().originY(initialOffsetY + deltaY);
+      this.mouseDown = false;
+      final int deltaX = e.getWindowX() - this.startDragX;
+      final int deltaY = e.getWindowY() - this.startDragY;
+      e.getWindow().originX(this.initialOffsetX + deltaX);
+      e.getWindow().originY(this.initialOffsetY + deltaY);
       break;
     }
 
     case MOUSE_MOVE: {
-      if (mouseDown) {
-        final int deltaX = e.getWindowX() - startDragX;
-        final int deltaY = e.getWindowY() - startDragY;
-        e.getWindow().originX(initialOffsetX + deltaX);
-        e.getWindow().originY(initialOffsetY + deltaY);
+      if (this.mouseDown) {
+        final int deltaX = e.getWindowX() - this.startDragX;
+        final int deltaY = e.getWindowY() - this.startDragY;
+        e.getWindow().originX(this.initialOffsetX + deltaX);
+        e.getWindow().originY(this.initialOffsetY + deltaY);
       }
       break;
     }

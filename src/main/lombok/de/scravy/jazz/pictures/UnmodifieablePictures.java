@@ -10,6 +10,8 @@ import de.scravy.jazz.pictures.mutable.Pictures;
 
 public class UnmodifieablePictures implements Picture {
 
+  private static final long serialVersionUID = 1L;
+
   private final Pictures p;
 
   public UnmodifieablePictures(final Pictures p) {
@@ -17,45 +19,45 @@ public class UnmodifieablePictures implements Picture {
   }
 
   public <P extends Picture> P get(final int index, final Class<P> clazz) {
-    return p.get(index, clazz);
+    return this.p.get(index, clazz);
   }
 
   public Picture get(final int index) {
-    return p.get(index);
+    return this.p.get(index);
   }
 
   @Override
   public int hashCode() {
-    return p.hashCode();
+    return this.p.hashCode();
   }
 
   @Override
   public String toString() {
-    return p.toString();
+    return this.p.toString();
   }
 
   public Iterator<Picture> iterator() {
-    return p.iterator();
+    return this.p.iterator();
   }
 
   @Override
   public boolean equals(final Object obj) {
-    return p.equals(obj);
+    return this.p.equals(obj);
   }
 
   @Override
   public final AffineTransform getTransform() {
-    return p.getTransform();
+    return this.p.getTransform();
   }
 
   @Override
   public final void draw(final Graphics2D g2d) {
-    p.draw(g2d);
+    this.p.draw(g2d);
   }
 
   @Override
   public UnmodifieablePictures clone() {
-    return new UnmodifieablePictures(p);
+    return new UnmodifieablePictures(this.p);
   }
 
   @Override

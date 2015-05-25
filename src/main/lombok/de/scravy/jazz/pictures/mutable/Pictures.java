@@ -18,6 +18,8 @@ import de.scravy.jazz.pictures.UnmodifieablePictures;
 public final class Pictures extends MutableAbstractPicture<Pictures> implements
     Iterable<Picture> {
 
+  private static final long serialVersionUID = 1L;
+
   private final List<Picture> pictures = new ArrayList<>();
 
   private Pictures() {
@@ -50,7 +52,7 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
   @SuppressWarnings("unchecked")
   public <P extends Picture> P get(final int index, final Class<P> clazz) {
     try {
-      final Picture p = pictures.get(index);
+      final Picture p = this.pictures.get(index);
       if (p == null) {
         return null;
       }
@@ -65,7 +67,7 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 
   public Picture get(final int index) {
     try {
-      return pictures.get(index);
+      return this.pictures.get(index);
     } catch (final IndexOutOfBoundsException exc) {
       return null;
     }
@@ -78,11 +80,11 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 
   @Override
   protected void doDraw(final Graphics2D g2d) {
-    if (color != null) {
-      g2d.setColor(color);
+    if (this.color != null) {
+      g2d.setColor(this.color);
     }
     g2d.setTransform(getTransform(g2d.getTransform()));
-    for (final Picture picture : pictures) {
+    for (final Picture picture : this.pictures) {
       if (picture != null) {
         final AffineTransform savedTransform = g2d.getTransform();
         final Composite alpha = g2d.getComposite();
@@ -99,7 +101,7 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 
   @Override
   public String toString() {
-    return pictures.toString();
+    return this.pictures.toString();
   }
 
   @Override
@@ -110,6 +112,6 @@ public final class Pictures extends MutableAbstractPicture<Pictures> implements
 
   @Override
   public Iterator<Picture> iterator() {
-    return pictures.iterator();
+    return this.pictures.iterator();
   }
 }

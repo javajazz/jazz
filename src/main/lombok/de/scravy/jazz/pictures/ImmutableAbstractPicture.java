@@ -8,6 +8,8 @@ import de.scravy.jazz.Color;
 public abstract class ImmutableAbstractPicture<P extends ImmutableAbstractPicture<P>>
     extends AbstractPicture<P> {
 
+  private static final long serialVersionUID = 1L;
+
   public ImmutableAbstractPicture(final Shape shape) {
     super(shape);
   }

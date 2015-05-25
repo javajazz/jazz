@@ -9,6 +9,8 @@ import de.scravy.jazz.pictures.ImmutableAbstractPicture;
 
 public final class Line extends ImmutableAbstractPicture<Line> {
 
+  private static final long serialVersionUID = 1L;
+
   public Line(final Vector from, final Vector to) {
     super(new Line2D.Double(from.getX(), from.getY(), to.getX(), to.getY()));
   }

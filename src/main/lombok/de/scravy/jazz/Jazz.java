@@ -10,13 +10,22 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
+import lombok.experimental.UtilityClass;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Jazz main class, used to create Jazz windows and adjust the global Jazz
  * configuration.
  *
  * @author Julian Fleischer
+ * @since 1.0.0
  */
-public final class Jazz {
+@UtilityClass
+public class Jazz {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(Jazz.class);
 
   /**
    * Jazz does have a global random generator which is seeded with a specific
@@ -37,13 +46,8 @@ public final class Jazz {
    */
   static {
     System.setProperty("sun.java2d.opengl", "true");
-  }
-
-  /**
-   * Prevent instantiation of this class, as it features only static methods.
-   */
-  private Jazz() {
-
+    LOGGER.debug("System Property sun.java2d.opengl set to {}",
+        System.getProperty("sun.java2d.opengl"));
   }
 
   /**
@@ -56,10 +60,13 @@ public final class Jazz {
    *
    * @param seed
    *          The new seed value.
+   *
+   * @since 1.0.0
    */
   public static void seed(final long seed) {
     synchronized (random) {
       random.setSeed(seed);
+      LOGGER.info("Random Seed set to {}", seed);
     }
   }
 
@@ -72,6 +79,7 @@ public final class Jazz {
    *
    * This method is thread-safe.
    *
+   * @since 1.0.0
    * @return The seed set so you have a chance to reproduce.
    */
   public static long seed() {
@@ -85,6 +93,7 @@ public final class Jazz {
    *
    * This method is thread-safe.
    *
+   * @since 1.0.0
    * @return A random integer value (any integer value is possible).
    */
   public static int randomInt() {
@@ -102,6 +111,7 @@ public final class Jazz {
    *
    * This method is thread-safe.
    *
+   * @since 1.0.0
    * @param upto
    *          The maximum number (exclusive).
    * @return An integer value between 0 (inclusive) and <code>upto</code>
@@ -118,12 +128,18 @@ public final class Jazz {
   }
 
   /**
+   * Generates a random integer value between <code>from</code> (inclusive) and
+   * <code>to</code> (exclusive).
    *
    * This method is thread-safe.
    *
+   * @since 1.0.0
    * @param from
+   *          The lower bound (inclusive)
    * @param upto
-   * @return
+   *          The upper bound (exclusive)
+   * @return A random integer value between <code>from</code> (inclusive) and
+   *         <code>to</code> (exclusive).
    */
   public static int randomInt(final int from, final int upto) {
     return randomInt(upto - from) + from;
@@ -134,9 +150,12 @@ public final class Jazz {
    *
    * The list is shuffled using the global random generator offered by Jazz.
    *
+   * @since 1.0.0
    * @param list
    *          The list to shuffle. Note that the list needs to be modifiable
    *          since it is shuffled in-place.
+   * @throws IllegalArgumentException
+   *           If the given <code>list</code> was null.
    */
   public static void shuffle(final List<?> list) {
     if (list == null) {
@@ -152,6 +171,7 @@ public final class Jazz {
    *
    * The array is shuffled using the global random generator offered by Jazz.
    *
+   * @since 1.0.0
    * @param array
    *          The array to shuffle.
    */
@@ -168,13 +188,16 @@ public final class Jazz {
    *
    * The array is shuffled using the global random generator offered by Jazz.
    *
+   * @since 1.0.0
    * @param array
    *          The array to shuffle.
    */
   public static void shuffle(final int[] array) {
     // asList uses the backing array as store,
     // therefore changes to the list are reflected by the array.
-    Collections.shuffle(Arrays.asList(array), random);
+    synchronized (array) {
+      Collections.shuffle(Arrays.asList(array), random);
+    }
   }
 
   /**
@@ -182,11 +205,14 @@ public final class Jazz {
    *
    * The array is shuffled using the global random generator offered by Jazz.
    *
+   * @since 1.0.0
    * @param array
    *          The array to shuffle.
    */
   public static void shuffle(final double[] array) {
-    Collections.shuffle(Arrays.asList(array), random);
+    synchronized (array) {
+      Collections.shuffle(Arrays.asList(array), random);
+    }
   }
 
   /**
@@ -194,6 +220,9 @@ public final class Jazz {
    *
    * You can open multiple windows using this method.
    *
+   * This method used an {@link Animation} and allows for zooming and panning.
+   *
+   * @since 1.0.0
    * @param title
    *          The title of the displayed window.
    * @param width
@@ -207,8 +236,7 @@ public final class Jazz {
   public static Window display(final String title, final int width,
       final int height,
       final Picture picture) {
-    // Use an animation object to display, as it allows for zooming and
-    // panning.
+
     return play(title, width, height, new Animation() {
 
       @Override
@@ -224,20 +252,26 @@ public final class Jazz {
   }
 
   /**
+   * Displays a {@link Picture} in a fullscreen window.
+   *
+   * @since 1.0.0
    * @param title
+   *          The title of the fullscreen window.
    * @param picture
-   * @return
+   *          The picture do display in the fullscreen window.
+   * @return The fullscreen window.
    */
-  public static Window displayFullscreen(final String title,
-      final Picture picture) {
+  public static Window displayFullscreen(
+      final String title, final Picture picture) {
     return display(title, 0, 0, picture);
   }
 
   /**
-   * Displays an animation in a single window.
+   * Displays an {@link Animation} in a single window.
    *
    * You can open multiple windows using this method.
    *
+   * @since 1.0.0
    * @param title
    *          The title of the displayed window.
    * @param width
@@ -260,6 +294,7 @@ public final class Jazz {
    * You can open multiple windows using this method.
    *
    * @see Renderer
+   * @since 1.0.0
    * @param title
    *          The title of the displayed window.
    * @param width
@@ -292,7 +327,15 @@ public final class Jazz {
     });
   }
 
-  public static Window animateFullscreen(final String title,
+  /**
+   *
+   * @since 1.0.0
+   * @param title
+   * @param animation
+   * @return The fullscreen window.
+   */
+  public static Window animateFullscreen(
+      final String title,
       final Animation animation) {
     return play(title, 0, 0, animation);
   }
@@ -333,17 +376,19 @@ public final class Jazz {
    *          handler, and event handler).
    * @return A reference to the newly created window.
    */
-  static DefaultWorld play(final String title, final int width,
-      final int height,
-      final Model model) {
+  static DefaultWorld play(
+      final String title, final int width, final int height, final Model model) {
+
     final DefaultWorld window = new DefaultWorld();
 
     try {
       SwingUtilities.invokeAndWait(new Runnable() {
         @Override
         public void run() {
-          final MainWindow mainWindow = new MainWindow(title, model,
-              window, width, height);
+          LOGGER.info("Initializing window on Thread `{}'",
+              Thread.currentThread().getName());
+          final MainWindow mainWindow = new MainWindow(
+              title, model, window, width, height);
           final GraphicsDevice device = GraphicsEnvironment
               .getLocalGraphicsEnvironment()
               .getDefaultScreenDevice();
@@ -351,12 +396,15 @@ public final class Jazz {
               && device.isFullScreenSupported()) {
             device.setFullScreenWindow(mainWindow);
           } else {
+            LOGGER.info(
+                "Fullscreen is not supported."
+                    + " Showing ordinary window instead.");
             mainWindow.setVisible(true);
           }
         }
       });
     } catch (InvocationTargetException | InterruptedException exc) {
-
+      LOGGER.warn("Unexpected exception", exc);
     }
     return window;
   };

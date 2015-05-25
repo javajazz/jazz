@@ -1,4 +1,4 @@
-package jazz.examples.pong;
+package de.scravy.jazz.examples.pong;
 
 import de.scravy.jazz.Event;
 import de.scravy.jazz.EventHandler;

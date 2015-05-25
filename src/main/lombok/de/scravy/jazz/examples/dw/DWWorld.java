@@ -1,4 +1,4 @@
-package jazz.examples.dw;
+package de.scravy.jazz.examples.dw;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

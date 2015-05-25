@@ -9,6 +9,8 @@ import de.scravy.jazz.pictures.ImmutableAbstractPicture;
 
 public final class Polygon extends ImmutableAbstractPicture<Polygon> {
 
+  private static final long serialVersionUID = 1L;
+
   public Polygon(final Vector... points) {
     super(makePath(points));
   }

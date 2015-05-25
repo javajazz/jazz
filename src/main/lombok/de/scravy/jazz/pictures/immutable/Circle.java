@@ -7,6 +7,8 @@ import de.scravy.jazz.pictures.ImmutableAbstractPicture;
 
 public final class Circle extends ImmutableAbstractPicture<Circle> {
 
+  private static final long serialVersionUID = 1L;
+
   public Circle(final double radius) {
     super(new Ellipse2D.Double(0, 0, radius * 2, radius * 2));
   }
@@ -17,7 +19,7 @@ public final class Circle extends ImmutableAbstractPicture<Circle> {
 
   @Override
   public Circle clone() {
-    return doClone(new Circle(shape));
+    return doClone(new Circle(this.shape));
   }
 
 }

@@ -14,6 +14,8 @@ import de.scravy.jazz.util.ImageLoader;
 
 public final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
 
+  private static final long serialVersionUID = 1L;
+
   private final BufferedImage bufferedImage;
 
   public Bitmap(final Class<?> clazz, final String resource)
@@ -36,7 +38,7 @@ public final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
   @Override
   protected void doRender(final Graphics2D g2d) {
 
-    g2d.drawImage(bufferedImage, new AffineTransform(),
+    g2d.drawImage(this.bufferedImage, new AffineTransform(),
         new ImageObserver() {
           @Override
           public boolean imageUpdate(
@@ -50,7 +52,7 @@ public final class Bitmap extends ImmutableAbstractPicture<Bitmap> {
 
   @Override
   public Bitmap clone() {
-    return doClone(new Bitmap(bufferedImage));
+    return doClone(new Bitmap(this.bufferedImage));
   }
 
 }

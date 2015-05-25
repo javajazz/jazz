@@ -6,7 +6,9 @@ import java.awt.geom.Arc2D;
 
 import de.scravy.jazz.pictures.ImmutableAbstractPicture;
 
-public class Pie extends ImmutableAbstractPicture<Pie> {
+public final class Pie extends ImmutableAbstractPicture<Pie> {
+
+  private static final long serialVersionUID = 1L;
 
   public Pie(final double w, final double h, final double start,
       final double extent) {
@@ -26,7 +28,7 @@ public class Pie extends ImmutableAbstractPicture<Pie> {
 
   @Override
   public Pie clone() {
-    return doClone(new Pie(shape));
+    return doClone(new Pie(this.shape));
   }
 
 }
