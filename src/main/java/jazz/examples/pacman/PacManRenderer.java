@@ -3,9 +3,9 @@ package jazz.examples.pacman;
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Picture;
 import de.scravy.jazz.Renderer;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Pie;
-import jazz.pictures.mutable.Square;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Pie;
+import de.scravy.jazz.pictures.mutable.Square;
 
 public class PacManRenderer implements Renderer<PacManWorld> {
 

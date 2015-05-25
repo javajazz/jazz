@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Jazz;
-import jazz.pictures.mutable.Bitmap;
-import jazz.pictures.mutable.Circle;
-import jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Bitmap;
+import de.scravy.jazz.pictures.mutable.Circle;
+import de.scravy.jazz.pictures.mutable.Pictures;
 
 /**
  * An example that shows a single translucent image on top of a circle.

@@ -7,9 +7,9 @@ import de.scravy.jazz.Animation;
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Jazz;
 import de.scravy.jazz.Picture;
-import jazz.pictures.mutable.Bitmap;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Rectangle;
+import de.scravy.jazz.pictures.mutable.Bitmap;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Rectangle;
 
 public class Images {
 

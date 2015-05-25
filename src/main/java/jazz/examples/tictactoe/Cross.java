@@ -1,8 +1,8 @@
 package jazz.examples.tictactoe;
 
 import de.scravy.jazz.Vector;
-import jazz.pictures.DelegatingPicture;
-import jazz.pictures.mutable.Polygon;
+import de.scravy.jazz.pictures.DelegatingPicture;
+import de.scravy.jazz.pictures.mutable.Polygon;
 
 public class Cross extends DelegatingPicture<Cross> {
 

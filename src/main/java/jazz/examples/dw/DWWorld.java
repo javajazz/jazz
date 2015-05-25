@@ -12,12 +12,12 @@ import de.scravy.jazz.Jazz;
 import de.scravy.jazz.Picture;
 import de.scravy.jazz.World;
 import de.scravy.jazz.Event.Type;
+import de.scravy.jazz.grids.DefaultTileFactory;
+import de.scravy.jazz.grids.HexagonGrid;
 import de.scravy.jazz.grids.TileDecorator;
 import de.scravy.jazz.grids.TileEventHandler;
 import de.scravy.jazz.grids.TilePos;
-import jazz.grids.DefaultTileFactory;
-import jazz.grids.HexagonGrid;
-import jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Pictures;
 
 public class DWWorld extends World {
 

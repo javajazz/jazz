@@ -1,11 +1,11 @@
 package jazz.examples.basic;
 
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Rectangle;
 import de.scravy.jazz.Animation;
 import de.scravy.jazz.Colors;
 import de.scravy.jazz.Jazz;
 import de.scravy.jazz.Picture;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Rectangle;
 
 public class Funky extends Animation {
 

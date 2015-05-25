@@ -3,10 +3,10 @@ package jazz.examples.pong;
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Picture;
 import de.scravy.jazz.Renderer;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Rectangle;
-import jazz.pictures.mutable.Square;
-import jazz.pictures.mutable.Text;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Rectangle;
+import de.scravy.jazz.pictures.mutable.Square;
+import de.scravy.jazz.pictures.mutable.Text;
 
 public class PongRenderer implements Renderer<PongWorld> {
 

@@ -4,9 +4,9 @@ import de.scravy.jazz.Animation;
 import de.scravy.jazz.Jazz;
 import de.scravy.jazz.Picture;
 import de.scravy.jazz.Vector;
-import jazz.pictures.mutable.Circle;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Polygon;
+import de.scravy.jazz.pictures.mutable.Circle;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Polygon;
 
 public class Polygons {
 

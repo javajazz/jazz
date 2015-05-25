@@ -4,8 +4,8 @@ import de.scravy.jazz.Animation;
 import de.scravy.jazz.Color;
 import de.scravy.jazz.Jazz;
 import de.scravy.jazz.Picture;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Text;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Text;
 
 public class Texts {
 

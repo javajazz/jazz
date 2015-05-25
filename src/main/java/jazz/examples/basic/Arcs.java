@@ -4,8 +4,8 @@ import de.scravy.jazz.Event;
 import de.scravy.jazz.Jazz;
 import de.scravy.jazz.Picture;
 import de.scravy.jazz.World;
-import jazz.pictures.mutable.Pictures;
-import jazz.pictures.mutable.Pie;
+import de.scravy.jazz.pictures.mutable.Pictures;
+import de.scravy.jazz.pictures.mutable.Pie;
 
 public class Arcs {
 

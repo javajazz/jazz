@@ -10,13 +10,6 @@ import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
-import de.scravy.jazz.EventHandler;
-import de.scravy.jazz.Model;
-import de.scravy.jazz.Picture;
-import de.scravy.jazz.Renderer;
-import de.scravy.jazz.UpdateHandler;
-import de.scravy.jazz.Window;
-
 /**
  * The Jazz main class, used to create Jazz windows and adjust the global Jazz
  * configuration.
@@ -36,7 +29,7 @@ public final class Jazz {
    * methods generating random values provided by this class (i.e. use this
    * global random generator).
    */
-  static private final Random r = new Random(4711337);
+  static private final Random random = new Random(4711337);
 
   /**
    * Always use OpenGL (this is a hint, i.e. if open gl is not available Java
@@ -65,8 +58,8 @@ public final class Jazz {
    *          The new seed value.
    */
   public static void seed(final long seed) {
-    synchronized (r) {
-      r.setSeed(seed);
+    synchronized (random) {
+      random.setSeed(seed);
     }
   }
 
@@ -78,9 +71,13 @@ public final class Jazz {
    * using a specific seed. Use this function to randomize the initial setup.
    *
    * This method is thread-safe.
+   *
+   * @return The seed set so you have a chance to reproduce.
    */
-  public static void seed() {
-    seed(System.nanoTime());
+  public static long seed() {
+    final long time = System.nanoTime();
+    seed(time);
+    return time;
   }
 
   /**
@@ -91,8 +88,8 @@ public final class Jazz {
    * @return A random integer value (any integer value is possible).
    */
   public static int randomInt() {
-    synchronized (r) {
-      return r.nextInt();
+    synchronized (random) {
+      return random.nextInt();
     }
   }
 
@@ -112,8 +109,8 @@ public final class Jazz {
    */
   public static int randomInt(final int upto) {
     if (upto >= 1) {
-      synchronized (r) {
-        return r.nextInt(upto);
+      synchronized (random) {
+        return random.nextInt(upto);
       }
     } else {
       return 0;
@@ -142,7 +139,12 @@ public final class Jazz {
    *          since it is shuffled in-place.
    */
   public static void shuffle(final List<?> list) {
-    Collections.shuffle(list, r);
+    if (list == null) {
+      throw new IllegalArgumentException("list");
+    }
+    synchronized (list) {
+      Collections.shuffle(list, random);
+    }
   }
 
   /**
@@ -154,9 +156,11 @@ public final class Jazz {
    *          The array to shuffle.
    */
   public static void shuffle(final Object[] array) {
-    // asList uses the backing array as store,
-    // therefore changes to the list are reflected by the array.
-    Collections.shuffle(Arrays.asList(array), r);
+    synchronized (array) {
+      // asList uses the backing array as store,
+      // therefore changes to the list are reflected by the array.
+      Collections.shuffle(Arrays.asList(array), random);
+    }
   }
 
   /**
@@ -170,7 +174,7 @@ public final class Jazz {
   public static void shuffle(final int[] array) {
     // asList uses the backing array as store,
     // therefore changes to the list are reflected by the array.
-    Collections.shuffle(Arrays.asList(array), r);
+    Collections.shuffle(Arrays.asList(array), random);
   }
 
   /**
@@ -182,7 +186,7 @@ public final class Jazz {
    *          The array to shuffle.
    */
   public static void shuffle(final double[] array) {
-    Collections.shuffle(Arrays.asList(array), r);
+    Collections.shuffle(Arrays.asList(array), random);
   }
 
   /**
