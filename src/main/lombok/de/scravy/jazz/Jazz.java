@@ -360,13 +360,16 @@ public class Jazz {
           final GraphicsDevice device = GraphicsEnvironment
               .getLocalGraphicsEnvironment()
               .getDefaultScreenDevice();
-          if ((width <= 0 || height <= 0)
-              && device.isFullScreenSupported()) {
-            device.setFullScreenWindow(mainWindow);
+          if (width <= 0 || height <= 0) {
+            if (device.isFullScreenSupported()) {
+              device.setFullScreenWindow(mainWindow);
+            } else {
+              LOGGER.info(
+                  "Fullscreen is not supported."
+                      + " Showing ordinary window instead.");
+              mainWindow.setVisible(true);
+            }
           } else {
-            LOGGER.info(
-                "Fullscreen is not supported."
-                    + " Showing ordinary window instead.");
             mainWindow.setVisible(true);
           }
         }

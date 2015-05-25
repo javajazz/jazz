@@ -1,7 +1,6 @@
 package de.scravy.jazz;
 
-
 public interface EventHandler<M> {
 
-  void on(final M m, final Event e);
+  M on(final M m, final Event e);
 }
